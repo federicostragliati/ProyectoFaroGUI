@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicReference;
-
 import dao.implementaciones.*;
 import dominio.*;
 import dominio.enums.Unidad;
@@ -92,7 +91,6 @@ public class SistemaDeGestion extends JFrame {
         return panel;
     }
 
-
     // Método para crear el panel de productos con botones
     private JPanel createProductPanel() {
         JPanel panel = new JPanel();
@@ -127,13 +125,66 @@ public class SistemaDeGestion extends JFrame {
         // Agregar acciones a los botones
         createButton.addActionListener(e -> showCreateProductDialog());
         modifyButton.addActionListener(e -> showModifyProductDialog());
-        consultButton.addActionListener(e -> infoArea.setText("Acción: Consultar Producto"));
-        listButton.addActionListener(e -> infoArea.setText("Acción: Consultar Listado"));
+        consultButton.addActionListener(e -> showGetProductDialog());
+        listButton.addActionListener(e -> showProductList(panel));  // Mostrar listado de productos
         deleteButton.addActionListener(e -> infoArea.setText("Acción: Baja Producto"));
 
         return panel;
     }
 
+    // Método para mostrar el listado de productos en una JTable
+    private void showProductList(JPanel panel) {
+        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+
+        try {
+            java.util.List<Producto> productos = productoDAOImpMySQL.getProductos();
+
+            // Crear columnas y datos para la JTable
+            String[] columnNames = {"ID", "Detalle", "Cantidad", "Precio Unitario", "Unidad", "Activo"};
+            Object[][] data = new Object[productos.size()][columnNames.length];
+
+            for (int i = 0; i < productos.size(); i++) {
+                Producto producto = productos.get(i);
+                data[i][0] = producto.getId();
+                data[i][1] = producto.getDetalle();
+                data[i][2] = producto.getCantidad();
+                data[i][3] = producto.getPrecioUnitario();
+                data[i][4] = producto.getUnidad();
+                data[i][5] = producto.isActivo();
+            }
+
+            // Crear la JTable con los datos
+            JTable table = new JTable(data, columnNames);
+            JScrollPane tableScrollPane = new JScrollPane(table);
+
+            // Remover cualquier componente previo y agregar la JTable al panel
+            panel.removeAll();
+            panel.setLayout(new BorderLayout());
+            panel.add(tableScrollPane, BorderLayout.CENTER);
+
+            // Volver a agregar el panel de botones al lado izquierdo
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new GridLayout(5, 1));
+            JButton createButton = new JButton("Crear Producto");
+            JButton modifyButton = new JButton("Modificar Producto");
+            JButton consultButton = new JButton("Consultar Producto");
+            JButton listButton = new JButton("Consultar Listado");
+            JButton deleteButton = new JButton("Baja Producto");
+
+            buttonPanel.add(createButton);
+            buttonPanel.add(modifyButton);
+            buttonPanel.add(consultButton);
+            buttonPanel.add(listButton);
+            buttonPanel.add(deleteButton);
+
+            panel.add(buttonPanel, BorderLayout.WEST);
+
+            panel.revalidate();
+            panel.repaint();
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al obtener el listado de productos: " + ex.getMessage());
+        }
+    }
 
     private void showModifyProductDialog () {
 
@@ -227,7 +278,7 @@ public class SistemaDeGestion extends JFrame {
 
         dialog.setVisible(true); // Muestra el diálogo
     }
-    // Método para mostrar el diálogo de creación de producto
+
     private void showCreateProductDialog() {
         JDialog dialog = new JDialog(this, "Crear Producto", true);
         dialog.setSize(400, 300);
@@ -302,8 +353,8 @@ public class SistemaDeGestion extends JFrame {
 
     private void showGetProductDialog() {
         JDialog dialog = new JDialog(this, "Consultar Producto", true);
-        dialog.setSize(400, 300);
-        dialog.setLayout(new GridLayout(8, 2));
+        dialog.setSize(400, 500);
+        dialog.setLayout(new GridLayout(7, 2));
         dialog.setLocationRelativeTo(this);
 
         dialog.add(new JLabel("ID del Producto:"));
@@ -312,29 +363,80 @@ public class SistemaDeGestion extends JFrame {
 
         dialog.add(new JLabel("Detalle:"));
         JTextArea detalleField = new JTextArea();
+        detalleField.setEditable(false);
+        dialog.add(detalleField);
+
+        dialog.add(new JLabel("Cantidad:"));
+        JTextArea cantidadField = new JTextArea();
+        cantidadField.setEditable(false);
+        dialog.add(cantidadField);
+
+        dialog.add(new JLabel("Precio Unitario:"));
+        JTextArea precioField = new JTextArea();
+        precioField.setEditable(false);
+        dialog.add(precioField);
+
+        dialog.add(new JLabel("Unidad de Venta:"));
+        JTextArea unidadField = new JTextArea();
+        unidadField.setEditable(false);
+        dialog.add(unidadField);
+
+        dialog.add(new JLabel("Activo: "));
+        JTextArea activoField = new JTextArea();
+        activoField.setEditable(false);
+        dialog.add(activoField);
+
+        JPanel buttonPanel = new JPanel();
+        JButton buscarButton = new JButton("Buscar");
+        JButton cancelButton = new JButton("Cancelar");
+        buttonPanel.add(buscarButton);
+        buttonPanel.add(cancelButton);
+        dialog.add(buttonPanel);
+
+        buscarButton.addActionListener(e -> {
+
+            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+            Producto producto = null;
+            try {
+                producto = productoDAOImpMySQL.getProducto(Integer.parseInt(idField.getText()));
+            } catch (SQLException | ClassNotFoundException | IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            detalleField.setText(producto.getDetalle());
+            cantidadField.setText(String.valueOf(producto.getCantidad()));
+            precioField.setText(String.valueOf(producto.getPrecioUnitario()));
+            unidadField.setText(String.valueOf(producto.getUnidad()));
+            activoField.setText(String.valueOf(producto.isActivo()));
 
 
 
+        });
+
+        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
+
+        dialog.setVisible(true);
     }
 
-    // ActionListener para manejar los clics en los botones del menú
+    // ActionListener para cambiar entre vistas
     private class MenuActionListener implements ActionListener {
-        private String panelName;
+        private String itemName;
 
-        public MenuActionListener(String panelName) {
-            this.panelName = panelName;
+        public MenuActionListener(String itemName) {
+            this.itemName = itemName;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            cardLayout.show(mainPanel, panelName);
+            cardLayout.show(mainPanel, itemName);
         }
     }
 
+    // Método principal para ejecutar la aplicación
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            SistemaDeGestion frame = new SistemaDeGestion();
-            frame.setVisible(true);
+            SistemaDeGestion app = new SistemaDeGestion();
+            app.setVisible(true);
         });
     }
 }
