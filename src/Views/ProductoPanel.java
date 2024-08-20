@@ -380,6 +380,7 @@ public class ProductoPanel extends JPanel {
         });
 
         // Reemplazar el panel con la tabla de productos y el botón de cerrar
+
         parentPanel.removeAll();
         parentPanel.setLayout(new BorderLayout());
         parentPanel.add(scrollPane, BorderLayout.CENTER);
@@ -387,12 +388,6 @@ public class ProductoPanel extends JPanel {
         parentPanel.revalidate();
         parentPanel.repaint();
     }
-
-
-
-
-
-
 
     private void showBajaProducto() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Producto", true);
