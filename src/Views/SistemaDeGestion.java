@@ -1,442 +1,58 @@
 package Views;
 
+import Views.ProductoPanel;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.concurrent.atomic.AtomicReference;
-import dao.implementaciones.*;
-import dominio.*;
-import dominio.enums.Unidad;
 
 public class SistemaDeGestion extends JFrame {
-    private CardLayout cardLayout;
+
     private JPanel mainPanel;
 
     public SistemaDeGestion() {
-        // Configuración básica del JFrame
-        setTitle("Sistema de Gestión Faro");
-        setSize(800, 600);
+        setTitle("Sistema de Gestión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600); // Establece un tamaño inicial, pero se maximizará al abrir
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
 
-        // Crear el panel de menú lateral
-        JPanel sideMenu = new JPanel();
-        sideMenu.setLayout(new GridLayout(8, 1)); // 8 botones en una columna
-        String[] menuItems = {"Inicio", "Ventas", "Compras", "Productos", "Proveedores", "Contabilidad", "Clientes", "Reportes"};
-        for (String item : menuItems) {
-            JButton button = new JButton(item);
-            button.addActionListener(new MenuActionListener(item));
-            sideMenu.add(button);
-        }
+        // Maximizar la ventana al abrir
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // Crear el panel principal con CardLayout
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        // Panel de menú lateral
+        JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new GridLayout(8, 1)); // 8 botones en una columna
 
-        // Agregar las diferentes vistas al panel principal
-        mainPanel.add(createPanel("Vista de Inicio"), "Inicio");
-        mainPanel.add(createPanel("Vista de Ventas"), "Ventas");
-        mainPanel.add(createPanel("Vista de Compras"), "Compras");
-        mainPanel.add(createProductPanel(), "Productos"); // Vista de Productos con botones
-        mainPanel.add(createPanel("Vista de Proveedores"), "Proveedores");
-        mainPanel.add(createPanel("Vista de Contabilidad"), "Contabilidad");
-        mainPanel.add(createPanel("Vista de Clientes"), "Clientes");
-        mainPanel.add(createPanel("Vista de Reportes"), "Reportes");
+        // Crear los botones del menú lateral
+        JButton productosButton = new JButton("Productos");
+        // Agregar otros botones para otras funcionalidades
 
-        // Agregar los paneles al JFrame
-        add(sideMenu, BorderLayout.WEST);
-        add(mainPanel, BorderLayout.CENTER);
+        menuPanel.add(productosButton);
+        // Agregar otros botones al menú
 
-        // Mostrar la vista inicial
-        cardLayout.show(mainPanel, "Inicio");
-    }
+        // Panel principal con CardLayout
+        mainPanel = new JPanel(new CardLayout());
 
-    // Método para crear un panel básico con un título y un buscador
-    private JPanel createPanel(String title) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        // Crear e inicializar las vistas específicas
+        ProductoPanel productoPanel = new ProductoPanel();
 
-        // Crear el panel para el buscador
-        JPanel searchPanel = new JPanel();
-        JTextField searchField = new JTextField(20);
-        JButton searchButton = new JButton("Buscar");
-        searchPanel.add(new JLabel("Buscar:"));
-        searchPanel.add(searchField);
-        searchPanel.add(searchButton);
+        mainPanel.add(productoPanel, "productosPanel");
 
-        // Crear el área para mostrar los resultados (se puede personalizar más adelante)
-        JTextArea resultsArea = new JTextArea();
-        resultsArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(resultsArea);
-
-        // Agregar componentes al panel principal
-        panel.add(searchPanel, BorderLayout.NORTH);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        // Agregar acción al botón de búsqueda
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String query = searchField.getText();
-                // Aquí puedes agregar la lógica para realizar la búsqueda y mostrar resultados
-                resultsArea.setText("Resultados de búsqueda para: " + query);
-            }
+        // Agregar listeners para cambiar la vista cuando se hace clic en un botón
+        productosButton.addActionListener(e -> {
+            CardLayout cl = (CardLayout) (mainPanel.getLayout());
+            cl.show(mainPanel, "productosPanel");
         });
 
-        return panel;
+        // Agregar otros listeners para otros botones
+
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(menuPanel, BorderLayout.WEST);
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
     }
 
-    // Método para crear el panel de productos con botones
-    private JPanel createProductPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        // Crear el panel para los botones de productos
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5, 1)); // 5 botones en una columna
-
-        // Crear y agregar botones
-        JButton createButton = new JButton("Crear Producto");
-        JButton modifyButton = new JButton("Modificar Producto");
-        JButton consultButton = new JButton("Consultar Producto");
-        JButton listButton = new JButton("Consultar Listado");
-        JButton deleteButton = new JButton("Baja Producto");
-
-        buttonPanel.add(createButton);
-        buttonPanel.add(modifyButton);
-        buttonPanel.add(consultButton);
-        buttonPanel.add(listButton);
-        buttonPanel.add(deleteButton);
-
-        // Agregar el panel de botones al panel principal
-        panel.add(buttonPanel, BorderLayout.WEST);
-
-        // Crear el área para mostrar la información relacionada
-        JTextArea infoArea = new JTextArea();
-        infoArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(infoArea);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        // Agregar acciones a los botones
-        createButton.addActionListener(e -> showCreateProductDialog());
-        modifyButton.addActionListener(e -> showModifyProductDialog());
-        consultButton.addActionListener(e -> showGetProductDialog());
-        listButton.addActionListener(e -> showProductList(panel));  // Mostrar listado de productos
-        deleteButton.addActionListener(e -> infoArea.setText("Acción: Baja Producto"));
-
-        return panel;
-    }
-
-    // Método para mostrar el listado de productos en una JTable
-    private void showProductList(JPanel panel) {
-        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-
-        try {
-            java.util.List<Producto> productos = productoDAOImpMySQL.getProductos();
-
-            // Crear columnas y datos para la JTable
-            String[] columnNames = {"ID", "Detalle", "Cantidad", "Precio Unitario", "Unidad", "Activo"};
-            Object[][] data = new Object[productos.size()][columnNames.length];
-
-            for (int i = 0; i < productos.size(); i++) {
-                Producto producto = productos.get(i);
-                data[i][0] = producto.getId();
-                data[i][1] = producto.getDetalle();
-                data[i][2] = producto.getCantidad();
-                data[i][3] = producto.getPrecioUnitario();
-                data[i][4] = producto.getUnidad();
-                data[i][5] = producto.isActivo();
-            }
-
-            // Crear la JTable con los datos
-            JTable table = new JTable(data, columnNames);
-            JScrollPane tableScrollPane = new JScrollPane(table);
-
-            // Remover cualquier componente previo y agregar la JTable al panel
-            panel.removeAll();
-            panel.setLayout(new BorderLayout());
-            panel.add(tableScrollPane, BorderLayout.CENTER);
-
-            // Volver a agregar el panel de botones al lado izquierdo
-            JPanel buttonPanel = new JPanel();
-            buttonPanel.setLayout(new GridLayout(5, 1));
-            JButton createButton = new JButton("Crear Producto");
-            JButton modifyButton = new JButton("Modificar Producto");
-            JButton consultButton = new JButton("Consultar Producto");
-            JButton listButton = new JButton("Consultar Listado");
-            JButton deleteButton = new JButton("Baja Producto");
-
-            buttonPanel.add(createButton);
-            buttonPanel.add(modifyButton);
-            buttonPanel.add(consultButton);
-            buttonPanel.add(listButton);
-            buttonPanel.add(deleteButton);
-
-            panel.add(buttonPanel, BorderLayout.WEST);
-
-            panel.revalidate();
-            panel.repaint();
-        } catch (SQLException | ClassNotFoundException | IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error al obtener el listado de productos: " + ex.getMessage());
-        }
-    }
-
-    private void showModifyProductDialog () {
-
-        AtomicReference<Integer> idOriginal = new AtomicReference<>(new Integer(0));
-
-        JDialog dialog = new JDialog(this, "Modificar Producto", true);
-        dialog.setSize(400, 400);
-        dialog.setLayout(new GridLayout(7, 2));
-        dialog.setLocationRelativeTo(this);
-
-        dialog.add(new JLabel("ID del producto a Modificar:"));
-        JTextField idField = new JTextField();
-        dialog.add(idField);
-
-        dialog.add(new JLabel("Detalle:"));
-        JTextField detailField = new JTextField();
-        dialog.add(detailField);
-
-        dialog.add(new JLabel("Cantidad:"));
-        JTextField quantityField = new JTextField();
-        dialog.add(quantityField);
-
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextField priceField = new JTextField();
-        dialog.add(priceField);
-
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField unitField = new JTextField();
-        dialog.add(unitField);
-
-        JPanel buttonPanel = new JPanel();
-        JButton buscarButton = new JButton("Buscar");
-        JButton acceptButton = new JButton("Aceptar");
-        JButton cancelButton = new JButton("Cancelar");
-        buttonPanel.add(buscarButton);
-        buttonPanel.add(acceptButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel);
-
-        buscarButton.addActionListener(e -> {
-
-
-            String id = idField.getText();
-
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            Producto producto = null;
-            try {
-                producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            idOriginal.set(producto.getId());
-
-            detailField.setText(producto.getDetalle());
-            quantityField.setText(String.valueOf(producto.getCantidad()));
-            priceField.setText(String.valueOf(producto.getPrecioUnitario()));
-            unitField.setText(String.valueOf(producto.getUnidad()));
-
-        });
-
-        acceptButton.addActionListener(e -> {
-            String detail = detailField.getText();
-            String quantity = quantityField.getText();
-            String price = priceField.getText();
-            String unit = unitField.getText();
-
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-
-            BigDecimal cantidad = new BigDecimal(quantity);
-            BigDecimal precio = new BigDecimal(price);
-
-            try {
-                productoDAOImpMySQL.updateProducto(new Producto(idOriginal.get(), detail, cantidad,precio, Unidad.valueOf(unit),true));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            // Aquí puedes agregar la lógica para procesar los datos del nuevo producto
-            System.out.println("Detalle: " + detail);
-            System.out.println("Cantidad: " + quantity);
-            System.out.println("Precio Unitario: " + price);
-            System.out.println("Unidad de Venta: " + unit);
-            System.out.println("Activo: " + true);
-            dialog.dispose(); // Cierra el diálogo
-
-
-        });
-
-        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
-
-        dialog.setVisible(true); // Muestra el diálogo
-    }
-
-    private void showCreateProductDialog() {
-        JDialog dialog = new JDialog(this, "Crear Producto", true);
-        dialog.setSize(400, 300);
-        dialog.setLayout(new GridLayout(6, 2));
-        dialog.setLocationRelativeTo(this);
-
-        // Crear los campos de texto y etiquetas
-        dialog.add(new JLabel("Detalle:"));
-        JTextField detailField = new JTextField();
-        dialog.add(detailField);
-
-        dialog.add(new JLabel("Cantidad:"));
-        JTextField quantityField = new JTextField();
-        dialog.add(quantityField);
-
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextField priceField = new JTextField();
-        dialog.add(priceField);
-
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField unitField = new JTextField();
-        dialog.add(unitField);
-
-        dialog.add(new JLabel("Activo:"));
-        JCheckBox activeCheckBox = new JCheckBox();
-        dialog.add(activeCheckBox);
-
-        // Crear botones de aceptar y cancelar
-        JPanel buttonPanel = new JPanel();
-        JButton acceptButton = new JButton("Aceptar");
-        JButton cancelButton = new JButton("Cancelar");
-        buttonPanel.add(acceptButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel);
-
-        // Acción del botón Aceptar
-        acceptButton.addActionListener(e -> {
-            String detail = detailField.getText();
-            String quantity = quantityField.getText();
-            String price = priceField.getText();
-            String unit = unitField.getText();
-            boolean isActive = activeCheckBox.isSelected();
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-
-            BigDecimal cantidad = new BigDecimal(quantity);
-            BigDecimal precio = new BigDecimal(price);
-
-            try {
-                productoDAOImpMySQL.createProducto(new Producto(detail, cantidad,precio, Unidad.valueOf(unit),isActive));
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            // Aquí puedes agregar la lógica para procesar los datos del nuevo producto
-            System.out.println("Detalle: " + detail);
-            System.out.println("Cantidad: " + quantity);
-            System.out.println("Precio Unitario: " + price);
-            System.out.println("Unidad de Venta: " + unit);
-            System.out.println("Activo: " + isActive);
-            dialog.dispose(); // Cierra el diálogo
-        });
-
-        // Acción del botón Cancelar
-        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
-
-        dialog.setVisible(true); // Muestra el diálogo
-    }
-
-    private void showGetProductDialog() {
-        JDialog dialog = new JDialog(this, "Consultar Producto", true);
-        dialog.setSize(400, 500);
-        dialog.setLayout(new GridLayout(7, 2));
-        dialog.setLocationRelativeTo(this);
-
-        dialog.add(new JLabel("ID del Producto:"));
-        JTextField idField = new JTextField();
-        dialog.add(idField);
-
-        dialog.add(new JLabel("Detalle:"));
-        JTextArea detalleField = new JTextArea();
-        detalleField.setEditable(false);
-        dialog.add(detalleField);
-
-        dialog.add(new JLabel("Cantidad:"));
-        JTextArea cantidadField = new JTextArea();
-        cantidadField.setEditable(false);
-        dialog.add(cantidadField);
-
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextArea precioField = new JTextArea();
-        precioField.setEditable(false);
-        dialog.add(precioField);
-
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextArea unidadField = new JTextArea();
-        unidadField.setEditable(false);
-        dialog.add(unidadField);
-
-        dialog.add(new JLabel("Activo: "));
-        JTextArea activoField = new JTextArea();
-        activoField.setEditable(false);
-        dialog.add(activoField);
-
-        JPanel buttonPanel = new JPanel();
-        JButton buscarButton = new JButton("Buscar");
-        JButton cancelButton = new JButton("Cancelar");
-        buttonPanel.add(buscarButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel);
-
-        buscarButton.addActionListener(e -> {
-
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            Producto producto = null;
-            try {
-                producto = productoDAOImpMySQL.getProducto(Integer.parseInt(idField.getText()));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            detalleField.setText(producto.getDetalle());
-            cantidadField.setText(String.valueOf(producto.getCantidad()));
-            precioField.setText(String.valueOf(producto.getPrecioUnitario()));
-            unidadField.setText(String.valueOf(producto.getUnidad()));
-            activoField.setText(String.valueOf(producto.isActivo()));
-
-
-
-        });
-
-        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
-
-        dialog.setVisible(true);
-    }
-
-    // ActionListener para cambiar entre vistas
-    private class MenuActionListener implements ActionListener {
-        private String itemName;
-
-        public MenuActionListener(String itemName) {
-            this.itemName = itemName;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(mainPanel, itemName);
-        }
-    }
-
-    // Método principal para ejecutar la aplicación
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            SistemaDeGestion app = new SistemaDeGestion();
-            app.setVisible(true);
+            SistemaDeGestion sistemaDeGestion = new SistemaDeGestion();
+            sistemaDeGestion.setVisible(true);
         });
     }
 }
