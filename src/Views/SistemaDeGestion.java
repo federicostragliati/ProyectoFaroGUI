@@ -300,6 +300,23 @@ public class SistemaDeGestion extends JFrame {
         dialog.setVisible(true); // Muestra el diálogo
     }
 
+    private void showGetProductDialog() {
+        JDialog dialog = new JDialog(this, "Consultar Producto", true);
+        dialog.setSize(400, 300);
+        dialog.setLayout(new GridLayout(8, 2));
+        dialog.setLocationRelativeTo(this);
+
+        dialog.add(new JLabel("ID del Producto:"));
+        JTextField idField = new JTextField();
+        dialog.add(idField);
+
+        dialog.add(new JLabel("Detalle:"));
+        JTextArea detalleField = new JTextArea();
+
+
+
+    }
+
     // ActionListener para manejar los clics en los botones del menú
     private class MenuActionListener implements ActionListener {
         private String panelName;
