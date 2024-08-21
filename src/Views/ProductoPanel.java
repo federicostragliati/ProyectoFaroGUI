@@ -7,14 +7,10 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicReference;
 
 import Controller.ProductoController;
-import dao.implementaciones.ProductoDAOImpMySQL;
-import dominio.Producto;
-import dominio.enums.Unidad;
 
 public class ProductoPanel extends JPanel {
 
@@ -103,7 +99,6 @@ public class ProductoPanel extends JPanel {
     }
 
     private void showModifyProductDialog() {
-        AtomicReference<Integer> idOriginal = new AtomicReference<>(new Integer(0));
 
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Producto", true);
         dialog.setSize(500, 500);
@@ -115,20 +110,20 @@ public class ProductoPanel extends JPanel {
         dialog.add(idField);
 
         dialog.add(new JLabel("Detalle:"));
-        JTextField detailField = new JTextField();
-        dialog.add(detailField);
+        JTextField detalleField = new JTextField();
+        dialog.add(detalleField);
 
         dialog.add(new JLabel("Cantidad:"));
-        JTextField quantityField = new JTextField();
-        dialog.add(quantityField);
+        JTextField cantidadField = new JTextField();
+        dialog.add(cantidadField);
 
         dialog.add(new JLabel("Precio Unitario:"));
-        JTextField priceField = new JTextField();
-        dialog.add(priceField);
+        JTextField precioField = new JTextField();
+        dialog.add(precioField);
 
         dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField unitField = new JTextField();
-        dialog.add(unitField);
+        JTextField unidadField = new JTextField();
+        dialog.add(unidadField);
 
         JPanel buttonPanel = new JPanel();
         JButton buscarButton = new JButton("Buscar");
@@ -139,39 +134,37 @@ public class ProductoPanel extends JPanel {
         buttonPanel.add(cancelButton);
         dialog.add(buttonPanel);
 
+        String id = idField.getText();
         buscarButton.addActionListener(e -> {
-            String id = idField.getText();
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            Producto producto;
-            try {
-                producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
+            //idOriginal.set(producto.getId());
+            String [] datos = productoController.realizarConsultaValida(idField.getText());
+            if ( datos.length == 1 ) {
+                JOptionPane.showMessageDialog(null,datos[0]);
+            } else {
+                detalleField.setText(datos[0]);
+                cantidadField.setText(datos[1]);
+                precioField.setText(datos[2]);
+                unidadField.setText(datos[3]);
             }
-
-            idOriginal.set(producto.getId());
-            detailField.setText(producto.getDetalle());
-            quantityField.setText(String.valueOf(producto.getCantidad()));
-            priceField.setText(String.valueOf(producto.getPrecioUnitario()));
-            unitField.setText(String.valueOf(producto.getUnidad()));
         });
 
         acceptButton.addActionListener(e -> {
-            String detail = detailField.getText();
-            String quantity = quantityField.getText();
-            String price = priceField.getText();
-            String unit = unitField.getText();
 
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            BigDecimal cantidad = new BigDecimal(quantity);
-            BigDecimal precio = new BigDecimal(price);
+
+            String detail = detalleField.getText();
+            String quantity = cantidadField.getText();
+            String price = precioField.getText();
+            String unit = unidadField.getText();
 
             try {
-                productoDAOImpMySQL.updateProducto(new Producto(idOriginal.get(), detail, cantidad, precio, Unidad.valueOf(unit), true));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
+                JOptionPane.showMessageDialog(null, productoController.modificarProducto(idField.getText(),detail,quantity,price,unit));
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            dialog.dispose(); // Cierra el diálogo
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
@@ -305,28 +298,7 @@ public class ProductoPanel extends JPanel {
                 originalPanel.add(comp);
             }
         }
-
-        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-        String[] columnNames = {"ID", "Detalle", "Cantidad", "Precio Unitario", "Unidad", "Activo"};
-        DefaultTableModel tableModel = new CustomTableModelProducto(new Object[][]{}, columnNames);
-
-        try {
-            java.util.List<Producto> productos = productoDAOImpMySQL.getProductos();
-            for (Producto producto : productos) {
-                Object[] rowData = {
-                        producto.getId(),
-                        producto.getDetalle(),
-                        producto.getCantidad(),
-                        producto.getPrecioUnitario(),
-                        producto.getUnidad(),
-                        producto.isActivo()
-                };
-                tableModel.addRow(rowData);
-            }
-        } catch (SQLException | ClassNotFoundException | IOException ex) {
-            throw new RuntimeException(ex);
-        }
-
+        DefaultTableModel tableModel = productoController.tablaProductos();
         JTable productTable = new JTable(tableModel);
         productTable.setDefaultEditor(Object.class, null); // Hace la tabla no editable
         productTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // Permite selección múltiple de filas y columnas
@@ -397,15 +369,16 @@ public class ProductoPanel extends JPanel {
         dialog.add(cancelButton);
 
         deleteButton.addActionListener(e -> {
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            productoDAOImpMySQL.deleteProducto(Integer.parseInt(idField.getText()));
-            dialog.dispose();
+
+            JOptionPane.showMessageDialog(null,productoController.eliminarProducto(idField.getText()));
+
         });
 
         cancelButton.addActionListener(e -> dialog.dispose());
 
         dialog.setVisible(true);
     }
+
 
 
 }

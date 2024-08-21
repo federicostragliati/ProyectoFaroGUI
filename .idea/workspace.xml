@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="1.5">
-      <change afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Validador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2024_10_32__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2024_10_32__Changes_.xml" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="20/8 - 23:47">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Validacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/ProductoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ProductoPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +36,9 @@
     &quot;accountId&quot;: &quot;5333af24-202c-4fdd-bc44-4d8654c35e0d&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Controller/ProductoController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -102,7 +100,17 @@
       <workItem from="1724093135414" duration="2983000" />
       <workItem from="1724103293908" duration="2177000" />
       <workItem from="1724105795014" duration="67000" />
+      <workItem from="1724265084332" duration="3860000" />
     </task>
+    <task id="LOCAL-00001" summary="20/8 - 23:47">
+      <option name="closed" value="true" />
+      <created>1724208458128</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1724208458128</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,6 +121,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.5" />
+    <MESSAGE value="20/8 - 23:47" />
+    <option name="LAST_COMMIT_MESSAGE" value="20/8 - 23:47" />
   </component>
 </project>

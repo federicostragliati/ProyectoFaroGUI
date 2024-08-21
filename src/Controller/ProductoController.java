@@ -1,14 +1,15 @@
 package Controller;
 
+import Views.CustomTableModelProducto;
 import dao.implementaciones.ProductoDAOImpMySQL;
 import dominio.Producto;
 import dominio.enums.Unidad;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ProductoController {
 
@@ -34,39 +35,6 @@ public class ProductoController {
             throw new RuntimeException(ex);
         }
     }
-
-    /*public String [] realizarConsultaValida (String id) {
-        Producto producto;
-
-        if (Validador.esNumeroEntero(id) != true) {
-            return new String[]{"ID Invalido"};
-        }
-
-        try {
-            producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
-            Field[] campos = producto.getClass().getDeclaredFields();
-            String[] datos = new String[campos.length];
-            System.out.println(datos.length);
-            System.out.println(campos.length);
-            for (int i = 2; i < campos.length ; i++) {
-                campos[i].setAccessible(true); // Permitir el acceso a atributos privados
-                System.out.println(campos[i].getName());
-                try {
-                    Object valor = campos[i].get(producto); // Obtener el valor del atributo
-                    if (valor != null) {
-                        datos[i-2] = valor.toString(); // Convertir valor a String
-                    } else {
-                        datos[i-2] = "null"; // Representar valores nulos como "null"
-                    }
-                } catch (IllegalAccessException e) {
-                    datos[i] = "Acceso no permitido";
-                }
-            }
-            return datos;
-        } catch (SQLException | ClassNotFoundException | IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }*/
 
     public String[] realizarConsultaValida(String id) {
         Producto producto;
@@ -109,5 +77,74 @@ public class ProductoController {
         }
     }
 
+    public DefaultTableModel tablaProductos() {
+
+        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+        String[] columnNames = {"ID", "Detalle", "Cantidad", "Precio Unitario", "Unidad", "Activo"};
+        DefaultTableModel tableModel = new CustomTableModelProducto(new Object[][]{}, columnNames);
+
+        try {
+            java.util.List<Producto> productos = productoDAOImpMySQL.getProductos();
+            for (Producto producto : productos) {
+                Object[] rowData = {
+                        producto.getId(),
+                        producto.getDetalle(),
+                        producto.getCantidad(),
+                        producto.getPrecioUnitario(),
+                        producto.getUnidad(),
+                        producto.isActivo()
+                };
+                tableModel.addRow(rowData);
+            }
+            return tableModel;
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public String eliminarProducto(String id) {
+        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+        // Validar que el ID sea un número entero
+        if (!Validador.esNumeroEntero(id)) {
+            return "ID Invalido";
+        }
+
+        boolean resultado = productoDAOImpMySQL.deleteProducto(Integer.parseInt(id));
+
+        if (resultado) {
+            return "Eliminado";
+        } else {
+            return "Error al eliminar";
+        }
+    }
+
+    public String modificarProducto (String id, String detalle, String cantidad, String precio, String unidad) throws SQLException, IOException, ClassNotFoundException {
+
+        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+
+        Producto producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
+
+        if (producto.isActivo() == false) {
+            return "El producto a modificar no esta activo";
+        } else if (Validador.validarLongitud45(detalle) != true) {
+            return "Error en el detalle";
+        } else if (Validador.validarNumeroDecimal(cantidad) != true) {
+            return "Error en la cantidad";
+        } else if (Validador.validarNumeroDecimal(precio) != true) {
+            return "Error en el precio";
+        }
+
+        BigDecimal cantidadDef = new BigDecimal(cantidad);
+        BigDecimal precioDef = new BigDecimal(precio);
+
+        try {
+            productoDAOImpMySQL.updateProducto(new Producto(Integer.parseInt(id), detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), true));
+            return "Producto modificado";
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
+            return "Error al modificar";
+            //throw new RuntimeException(ex);
+        }
+
+    }
 
 }
