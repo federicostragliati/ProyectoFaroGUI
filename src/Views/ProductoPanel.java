@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicReference;
+
+import Controller.ProductoController;
 import dao.implementaciones.ProductoDAOImpMySQL;
 import dominio.Producto;
 import dominio.enums.Unidad;
@@ -17,6 +19,8 @@ import dominio.enums.Unidad;
 public class ProductoPanel extends JPanel {
 
     private JPanel originalPanel; // Variable para almacenar el panel original
+    private final ProductoController productoController = new ProductoController();
+
 
     public ProductoPanel() {
         setLayout(new BorderLayout());
@@ -53,6 +57,49 @@ public class ProductoPanel extends JPanel {
         consultButton.addActionListener(e -> showGetProductDialog());
         listButton.addActionListener(e -> showListaProductos(this));
         deleteButton.addActionListener(e -> showBajaProducto());
+    }
+
+    private void showCreateProductDialog() {
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Producto", true);
+        dialog.setSize(500, 500);
+        dialog.setLayout(new GridLayout(6, 2));
+        dialog.setLocationRelativeTo(this);
+
+        dialog.add(new JLabel("Detalle:"));
+        JTextField campoDetalle = new JTextField();
+        dialog.add(campoDetalle);
+
+        dialog.add(new JLabel("Cantidad:"));
+        JTextField campoCantidad = new JTextField();
+        dialog.add(campoCantidad);
+
+        dialog.add(new JLabel("Precio Unitario:"));
+        JTextField campoPrecio = new JTextField();
+        dialog.add(campoPrecio);
+
+        dialog.add(new JLabel("Unidad de Venta:"));
+        JTextField campoUnidad = new JTextField();
+        dialog.add(campoUnidad);
+
+        dialog.add(new JLabel("Activo:"));
+        JCheckBox checkBoxActivo = new JCheckBox();
+        dialog.add(checkBoxActivo);
+
+        JPanel buttonPanel = new JPanel();
+        JButton acceptButton = new JButton("Aceptar");
+        JButton cancelButton = new JButton("Cancelar");
+        buttonPanel.add(acceptButton);
+        buttonPanel.add(cancelButton);
+        dialog.add(buttonPanel);
+
+        acceptButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null,productoController.crearProductoValido(campoDetalle.getText(), campoCantidad.getText(),
+                    campoPrecio.getText(), campoUnidad.getText(), checkBoxActivo.isSelected()));
+        });
+
+        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
+
+        dialog.setVisible(true); // Muestra el diálogo
     }
 
     private void showModifyProductDialog() {
@@ -121,63 +168,6 @@ public class ProductoPanel extends JPanel {
 
             try {
                 productoDAOImpMySQL.updateProducto(new Producto(idOriginal.get(), detail, cantidad, precio, Unidad.valueOf(unit), true));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            dialog.dispose(); // Cierra el diálogo
-        });
-
-        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
-
-        dialog.setVisible(true); // Muestra el diálogo
-    }
-
-    private void showCreateProductDialog() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Producto", true);
-        dialog.setSize(500, 500);
-        dialog.setLayout(new GridLayout(6, 2));
-        dialog.setLocationRelativeTo(this);
-
-        dialog.add(new JLabel("Detalle:"));
-        JTextField detailField = new JTextField();
-        dialog.add(detailField);
-
-        dialog.add(new JLabel("Cantidad:"));
-        JTextField quantityField = new JTextField();
-        dialog.add(quantityField);
-
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextField priceField = new JTextField();
-        dialog.add(priceField);
-
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField unitField = new JTextField();
-        dialog.add(unitField);
-
-        dialog.add(new JLabel("Activo:"));
-        JCheckBox activeCheckBox = new JCheckBox();
-        dialog.add(activeCheckBox);
-
-        JPanel buttonPanel = new JPanel();
-        JButton acceptButton = new JButton("Aceptar");
-        JButton cancelButton = new JButton("Cancelar");
-        buttonPanel.add(acceptButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel);
-
-        acceptButton.addActionListener(e -> {
-            String detail = detailField.getText();
-            String quantity = quantityField.getText();
-            String price = priceField.getText();
-            String unit = unitField.getText();
-            boolean isActive = activeCheckBox.isSelected();
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-
-            BigDecimal cantidad = new BigDecimal(quantity);
-            BigDecimal precio = new BigDecimal(price);
-
-            try {
-                productoDAOImpMySQL.createProducto(new Producto(detail, cantidad, precio, Unidad.valueOf(unit), isActive));
             } catch (SQLException | ClassNotFoundException | IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -285,18 +275,20 @@ public class ProductoPanel extends JPanel {
         dialog.add(buttonPanel, gbc);
 
         buscarButton.addActionListener(e -> {
-            ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
-            Producto producto;
-            try {
-                producto = productoDAOImpMySQL.getProducto(Integer.parseInt(idField.getText()));
-                detalleField.setText(producto.getDetalle());
-                cantidadField.setText(String.valueOf(producto.getCantidad()));
-                precioField.setText(String.valueOf(producto.getPrecioUnitario()));
-                unidadField.setText(String.valueOf(producto.getUnidad()));
-                activoField.setText(String.valueOf(producto.isActivo()));
-            } catch (SQLException | ClassNotFoundException | IOException ex) {
-                throw new RuntimeException(ex);
+
+            String [] datos = productoController.realizarConsultaValida(idField.getText());
+
+            if ( datos.length == 1 ) {
+                JOptionPane.showMessageDialog(null,datos[0]);
+            } else {
+                detalleField.setText(datos[0]);
+                cantidadField.setText(datos[1]);
+                precioField.setText(datos[2]);
+                unidadField.setText(datos[3]);
+                activoField.setText(datos[4]);
             }
+
+
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
