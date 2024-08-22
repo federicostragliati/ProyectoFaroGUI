@@ -1,6 +1,7 @@
 package Controller;
 
-import Views.CustomTableModelProducto;
+import Model.Validador;
+import Model.CustomTableModelProducto;
 import dao.implementaciones.ProductoDAOImpMySQL;
 import dominio.Producto;
 import dominio.enums.Unidad;
@@ -15,9 +16,9 @@ public class ProductoController {
 
     private final ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
 
-    public String crearProductoValido(String detalle, String cantidad, String precio, String unidad, boolean activo) {
+    public String crear(String detalle, String cantidad, String precio, String unidad, boolean activo) {
 
-        if (Validador.validarLongitud45(detalle) != true) {
+        if (Validador.validarLongitud(detalle) != true) {
           return "Error en el detalle";
         } else if (Validador.validarNumeroDecimal(cantidad) != true) {
             return "Error en la cantidad";
@@ -36,7 +37,7 @@ public class ProductoController {
         }
     }
 
-    public String[] realizarConsultaValida(String id) {
+    public String[] consultar(String id) {
         Producto producto;
 
         // Validar que el ID sea un número entero
@@ -77,9 +78,8 @@ public class ProductoController {
         }
     }
 
-    public DefaultTableModel tablaProductos() {
+    public DefaultTableModel listar() {
 
-        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
         String[] columnNames = {"ID", "Detalle", "Cantidad", "Precio Unitario", "Unidad", "Activo"};
         DefaultTableModel tableModel = new CustomTableModelProducto(new Object[][]{}, columnNames);
 
@@ -102,8 +102,7 @@ public class ProductoController {
         }
     }
 
-    public String eliminarProducto(String id) {
-        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+    public String eliminar(String id) {
         // Validar que el ID sea un número entero
         if (!Validador.esNumeroEntero(id)) {
             return "ID Invalido";
@@ -118,15 +117,19 @@ public class ProductoController {
         }
     }
 
-    public String modificarProducto (String id, String detalle, String cantidad, String precio, String unidad) throws SQLException, IOException, ClassNotFoundException {
+    public String modificar(String id, String detalle, String cantidad, String precio, String unidad) {
 
-        ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+        Producto producto;
 
-        Producto producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
+        try {
+            producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
 
         if (producto.isActivo() == false) {
             return "El producto a modificar no esta activo";
-        } else if (Validador.validarLongitud45(detalle) != true) {
+        } else if (Validador.validarLongitud(detalle) != true) {
             return "Error en el detalle";
         } else if (Validador.validarNumeroDecimal(cantidad) != true) {
             return "Error en la cantidad";

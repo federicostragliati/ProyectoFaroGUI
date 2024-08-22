@@ -1,5 +1,8 @@
 package Views;
 
+import Controller.ClienteController;
+import Views.Interfaces.PanelInterface;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -7,27 +10,23 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 
+public class ClientePanel extends JPanel implements PanelInterface {
 
-import Controller.ProductoController;
-import Views.Interfaces.PanelInterface;
+    private JPanel originalPanel;
+    private final ClienteController clienteController = new ClienteController();
 
-public class ProductoPanel extends JPanel implements PanelInterface {
-
-    private JPanel originalPanel; // Variable para almacenar el panel original
-    private final ProductoController productoController = new ProductoController();
-
-    public ProductoPanel () {
+    public ClientePanel () {
 
         setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(5, 1));
 
-        JButton createButton = new JButton("Crear Producto");
-        JButton consultButton = new JButton("Consultar Producto");
-        JButton modifyButton = new JButton("Modificar Producto");
+        JButton createButton = new JButton("Crear Cliente");
+        JButton consultButton = new JButton("Consultar Cliente");
+        JButton modifyButton = new JButton("Modificar Cliente");
         JButton listButton = new JButton("Consultar Listado");
-        JButton deleteButton = new JButton("Baja Producto");
+        JButton deleteButton = new JButton("Baja Cliente");
 
         buttonPanel.add(createButton);
         buttonPanel.add(consultButton);
@@ -49,30 +48,30 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         consultButton.addActionListener(e -> showGet());
         listButton.addActionListener(e -> showList(this));
         deleteButton.addActionListener(e -> showDelete());
-
     }
 
+    @Override
     public void showCreate() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Producto", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Cliente", true);
         dialog.setSize(500, 500);
         dialog.setLayout(new GridLayout(6, 2));
         dialog.setLocationRelativeTo(this);
 
-        dialog.add(new JLabel("Detalle:"));
-        JTextField campoDetalle = new JTextField();
-        dialog.add(campoDetalle);
+        dialog.add(new JLabel("CUIT:"));
+        JTextField campoCuit = new JTextField();
+        dialog.add(campoCuit);
 
-        dialog.add(new JLabel("Cantidad:"));
-        JTextField campoCantidad = new JTextField();
-        dialog.add(campoCantidad);
+        dialog.add(new JLabel("Nombre:"));
+        JTextField campoNombre = new JTextField();
+        dialog.add(campoNombre);
 
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextField campoPrecio = new JTextField();
-        dialog.add(campoPrecio);
+        dialog.add(new JLabel("Email:"));
+        JTextField campoEmail = new JTextField();
+        dialog.add(campoEmail);
 
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField campoUnidad = new JTextField();
-        dialog.add(campoUnidad);
+        dialog.add(new JLabel("Teléfono:"));
+        JTextField campoTelefono = new JTextField();
+        dialog.add(campoTelefono);
 
         dialog.add(new JLabel("Activo:"));
         JCheckBox checkBoxActivo = new JCheckBox();
@@ -85,81 +84,17 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         buttonPanel.add(cancelButton);
         dialog.add(buttonPanel);
 
-        acceptButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null,productoController.crear(campoDetalle.getText(), campoCantidad.getText(),
-                    campoPrecio.getText(), campoUnidad.getText(), checkBoxActivo.isSelected()));
+        acceptButton.addActionListener( e -> {
+            JOptionPane.showMessageDialog(null, clienteController.crear(campoCuit.getText(), campoNombre.getText(), campoEmail.getText(),campoTelefono.getText(),checkBoxActivo.isSelected()));
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
 
         dialog.setVisible(true); // Muestra el diálogo
+
     }
 
-
-    public void showModify() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Producto", true);
-        dialog.setSize(500, 500);
-        dialog.setLayout(new GridLayout(7, 2));
-        dialog.setLocationRelativeTo(this);
-
-        dialog.add(new JLabel("ID del producto a Modificar:"));
-        JTextField idField = new JTextField();
-        dialog.add(idField);
-
-        dialog.add(new JLabel("Detalle:"));
-        JTextField detalleField = new JTextField();
-        dialog.add(detalleField);
-
-        dialog.add(new JLabel("Cantidad:"));
-        JTextField cantidadField = new JTextField();
-        dialog.add(cantidadField);
-
-        dialog.add(new JLabel("Precio Unitario:"));
-        JTextField precioField = new JTextField();
-        dialog.add(precioField);
-
-        dialog.add(new JLabel("Unidad de Venta:"));
-        JTextField unidadField = new JTextField();
-        dialog.add(unidadField);
-
-        JPanel buttonPanel = new JPanel();
-        JButton buscarButton = new JButton("Buscar");
-        JButton acceptButton = new JButton("Aceptar");
-        JButton cancelButton = new JButton("Cancelar");
-        buttonPanel.add(buscarButton);
-        buttonPanel.add(acceptButton);
-        buttonPanel.add(cancelButton);
-        dialog.add(buttonPanel);
-
-        String id = idField.getText();
-        buscarButton.addActionListener(e -> {
-            //idOriginal.set(producto.getId());
-            String [] datos = productoController.consultar(idField.getText());
-            if ( datos.length == 1 ) {
-                JOptionPane.showMessageDialog(null,datos[0]);
-            } else {
-                detalleField.setText(datos[0]);
-                cantidadField.setText(datos[1]);
-                precioField.setText(datos[2]);
-                unidadField.setText(datos[3]);
-            }
-        });
-
-        acceptButton.addActionListener(e -> {
-            String detail = detalleField.getText();
-            String quantity = cantidadField.getText();
-            String price = precioField.getText();
-            String unit = unidadField.getText();
-
-            JOptionPane.showMessageDialog(null, productoController.modificar(idField.getText(),detail,quantity,price,unit));
-        });
-
-        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
-
-        dialog.setVisible(true); // Muestra el diálogo
-    }
-
-
+    @Override
     public void showGet() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Producto", true);
         dialog.setSize(400, 400); // Tamaño ajustado
@@ -171,7 +106,7 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
-        dialog.add(new JLabel("ID del Producto:"), gbc);
+        dialog.add(new JLabel("ID del Cliente:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -182,52 +117,52 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.NONE;
-        dialog.add(new JLabel("Detalle:"), gbc);
+        dialog.add(new JLabel("CUIT:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea detalleField = new JTextArea(2, 20); // Ajustado el tamaño
-        detalleField.setEditable(false);
-        JScrollPane detalleScroll = new JScrollPane(detalleField); // Añadido JScrollPane para el texto
+        JTextArea cuitField = new JTextArea(2, 20); // Ajustado el tamaño
+        cuitField.setEditable(false);
+        JScrollPane detalleScroll = new JScrollPane(cuitField); // Añadido JScrollPane para el texto
         dialog.add(detalleScroll, gbc);
 
         // Fila 2
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.NONE;
-        dialog.add(new JLabel("Cantidad:"), gbc);
+        dialog.add(new JLabel("Nombre:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea cantidadField = new JTextArea(2, 20); // Ajustado el tamaño
-        cantidadField.setEditable(false);
-        JScrollPane cantidadScroll = new JScrollPane(cantidadField); // Añadido JScrollPane para el texto
+        JTextArea nombreField = new JTextArea(2, 20); // Ajustado el tamaño
+        nombreField.setEditable(false);
+        JScrollPane cantidadScroll = new JScrollPane(nombreField); // Añadido JScrollPane para el texto
         dialog.add(cantidadScroll, gbc);
 
         // Fila 3
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.NONE;
-        dialog.add(new JLabel("Precio Unitario:"), gbc);
+        dialog.add(new JLabel("E-Mail:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea precioField = new JTextArea(2, 20); // Ajustado el tamaño
-        precioField.setEditable(false);
-        JScrollPane precioScroll = new JScrollPane(precioField); // Añadido JScrollPane para el texto
+        JTextArea eMailField = new JTextArea(2, 20); // Ajustado el tamaño
+        eMailField.setEditable(false);
+        JScrollPane precioScroll = new JScrollPane(eMailField); // Añadido JScrollPane para el texto
         dialog.add(precioScroll, gbc);
 
         // Fila 4
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.fill = GridBagConstraints.NONE;
-        dialog.add(new JLabel("Unidad de Venta:"), gbc);
+        dialog.add(new JLabel("Teléfono:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JTextArea unidadField = new JTextArea(2, 20); // Ajustado el tamaño
-        unidadField.setEditable(false);
-        JScrollPane unidadScroll = new JScrollPane(unidadField); // Añadido JScrollPane para el texto
+        JTextArea telefonoField = new JTextArea(2, 20); // Ajustado el tamaño
+        telefonoField.setEditable(false);
+        JScrollPane unidadScroll = new JScrollPane(telefonoField); // Añadido JScrollPane para el texto
         dialog.add(unidadScroll, gbc);
 
         // Fila 5
@@ -255,21 +190,17 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         buttonPanel.add(cancelButton);
         dialog.add(buttonPanel, gbc);
 
-        buscarButton.addActionListener(e -> {
-
-            String [] datos = productoController.consultar(idField.getText());
-
+        buscarButton.addActionListener( e -> {
+            String datos [] = clienteController.consultar(idField.getText());
             if ( datos.length == 1 ) {
                 JOptionPane.showMessageDialog(null,datos[0]);
             } else {
-                detalleField.setText(datos[0]);
-                cantidadField.setText(datos[1]);
-                precioField.setText(datos[2]);
-                unidadField.setText(datos[3]);
+                cuitField.setText(datos[0]);
+                nombreField.setText(datos[1]);
+                eMailField.setText(datos[2]);
+                telefonoField.setText(datos[3]);
                 activoField.setText(datos[4]);
             }
-
-
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
@@ -278,7 +209,73 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         dialog.setVisible(true);
     }
 
+    @Override
+    public void showModify() {
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Producto", true);
+        dialog.setSize(500, 500);
+        dialog.setLayout(new GridLayout(7, 2));
+        dialog.setLocationRelativeTo(this);
 
+        dialog.add(new JLabel("ID del Cliente a Modificar:"));
+        JTextField idField = new JTextField();
+        dialog.add(idField);
+
+        dialog.add(new JLabel("CUIT:"));
+        JTextField cuitField = new JTextField();
+        dialog.add(cuitField);
+
+        dialog.add(new JLabel("Nombre:"));
+        JTextField nombreField = new JTextField();
+        dialog.add(nombreField);
+
+        dialog.add(new JLabel("Email:"));
+        JTextField eMailField = new JTextField();
+        dialog.add(eMailField);
+
+        dialog.add(new JLabel("Telefono:"));
+        JTextField telefonoField = new JTextField();
+        dialog.add(telefonoField);
+
+        JPanel buttonPanel = new JPanel();
+        JButton buscarButton = new JButton("Buscar");
+        JButton acceptButton = new JButton("Aceptar");
+        JButton cancelButton = new JButton("Cancelar");
+        buttonPanel.add(buscarButton);
+        buttonPanel.add(acceptButton);
+        buttonPanel.add(cancelButton);
+        dialog.add(buttonPanel);
+
+        String id = idField.getText();
+
+        buscarButton.addActionListener( e -> {
+            String [] datos = clienteController.consultar(idField.getText());
+            if (datos.length == 1) {
+                JOptionPane.showMessageDialog(null, datos [0]);
+            } else {
+                cuitField.setText(datos [0]);
+                nombreField.setText(datos[1]);
+                eMailField.setText(datos[2]);
+                telefonoField.setText(datos[3]);
+            }
+        });
+
+        acceptButton.addActionListener( e -> {
+
+            String cuit = cuitField.getText();
+            String nombre = nombreField.getText();
+            String email = eMailField.getText();
+            String telefono = telefonoField.getText();
+
+            JOptionPane.showMessageDialog(null, clienteController.modificar(idField.getText(), cuit, nombre, email, telefono));
+
+        });
+
+        cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
+
+        dialog.setVisible(true); // Muestra el diálogo
+    }
+
+    @Override
     public void showList(JPanel parentPanel) {
 
         if (originalPanel == null) {
@@ -288,7 +285,8 @@ public class ProductoPanel extends JPanel implements PanelInterface {
                 originalPanel.add(comp);
             }
         }
-        DefaultTableModel tableModel = productoController.listar();
+
+        DefaultTableModel tableModel = clienteController.listar();
         JTable productTable = new JTable(tableModel);
         productTable.setDefaultEditor(Object.class, null); // Hace la tabla no editable
         productTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // Permite selección múltiple de filas y columnas
@@ -341,9 +339,10 @@ public class ProductoPanel extends JPanel implements PanelInterface {
         parentPanel.add(closeButton, BorderLayout.SOUTH);
         parentPanel.revalidate();
         parentPanel.repaint();
+
     }
 
-
+    @Override
     public void showDelete() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Producto", true);
         dialog.setSize(400, 200);
@@ -361,7 +360,7 @@ public class ProductoPanel extends JPanel implements PanelInterface {
 
         deleteButton.addActionListener(e -> {
 
-            JOptionPane.showMessageDialog(null,productoController.eliminar(idField.getText()));
+            JOptionPane.showMessageDialog(null,clienteController.eliminar(idField.getText()));
 
         });
 

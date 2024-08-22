@@ -1,4 +1,4 @@
-package Controller;
+package Model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class Validador {
 
     public static boolean validarCUIT(String input) {
-        // Expresión regular para el formato "2 dígitos-8 dígitos-2 dígitos"
-        String regex = "^\\d{2}-\\d{8}-\\d{2}$";
+        // Expresión regular para el formato "2 dígitos-8 dígitos-1 dígitos"
+        String regex = "^\\d{2}-\\d{8}-\\d{1}$";
 
         // Compilamos la expresión regular
         Pattern pattern = Pattern.compile(regex);
@@ -18,8 +18,8 @@ public class Validador {
     }
 
     public static boolean validarEmail(String email) {
-        // Expresión regular para un correo electrónico básico
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        // Expresión regular para validar emails con dominios y subdominios opcionales
+        String regex = "^[a-z0-9._-]+@[a-z0-9-]+(\\.[a-z0-9]+)*(\\.[a-zA-Z]{2,4})$";
 
         // Compilamos la expresión regular
         Pattern pattern = Pattern.compile(regex);
@@ -38,24 +38,12 @@ public class Validador {
         return Pattern.matches(regex, numero);
     }
 
-    public static boolean validarLongitud99(String input) {
-        // Verificamos si la longitud del String es menor o igual a 65
-        return input != null && input.length() <= 99;
-    }
-
-    public static boolean validarLongitud65(String input) {
-        // Verificamos si la longitud del String es menor o igual a 65
-        return input != null && input.length() <= 65;
-    }
-
-    public static boolean validarLongitud45(String input) {
-        // Verificamos si la longitud del String es menor o igual a 65
-        return input != null && input.length() <= 45;
-    }
-
-    public static boolean validarLongitud30(String input) {
-        // Verificamos si la longitud del String es menor o igual a 65
-        return input != null && input.length() <= 30;
+    public static boolean validarLongitud(String texto) {
+        if (texto == null) {
+            return false; // Manejo de cadenas nulas
+        }
+        int longitud = texto.length();
+        return longitud > 0 && longitud <= 100;
     }
 
     public static boolean validarPorcentaje(int numero) {
