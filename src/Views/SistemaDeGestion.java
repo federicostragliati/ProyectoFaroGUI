@@ -1,6 +1,7 @@
 package Views;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class SistemaDeGestion extends JFrame {
@@ -10,53 +11,62 @@ public class SistemaDeGestion extends JFrame {
     public SistemaDeGestion() {
         setTitle("Sistema de Gestión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600); // Establece un tamaño inicial, pero se maximizará al abrir
-        setLocationRelativeTo(null);
+        setBounds(100, 100, 1100, 600);
+        setResizable(false);
 
-        // Maximizar la ventana al abrir
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        JPanel contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BorderLayout(0, 0));
+        setContentPane(contentPane);
 
-        // Panel de menú lateral
-        JPanel menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(8, 1)); // 8 botones en una columna
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(7, 1, 5, 5)); // Organizar botones en una columna
+        contentPane.add(buttonPanel, BorderLayout.WEST);
 
-        // Crear los botones del menú lateral
-        JButton productosButton = new JButton("Productos");
-        JButton clientesButton = new JButton("Clientes");
-        // Agregar otros botones para otras funcionalidades
+        JButton botonProductos = new JButton("Productos");
+        buttonPanel.add(botonProductos);
 
-        menuPanel.add(productosButton);
-        menuPanel.add(clientesButton);
-        // Agregar otros botones al menú
+        JButton botonClientes = new JButton("Clientes");
+        buttonPanel.add(botonClientes);
+
+        JButton botonProveedores = new JButton("Proveedores");
+        buttonPanel.add(botonProveedores);
+
+        JButton botonCompras = new JButton("Compras");
+        buttonPanel.add(botonCompras);
+
+        JButton botonVentas = new JButton("Ventas");
+        buttonPanel.add(botonVentas);
+
+        JButton botonContabilidad = new JButton("Contabilidad");
+        buttonPanel.add(botonContabilidad);
+
+        JButton botonReportes = new JButton("Reportes");
+        buttonPanel.add(botonReportes);
 
         // Panel principal con CardLayout
         mainPanel = new JPanel(new CardLayout());
-
-        //ACA ME QUEDE !!!!!!
+        contentPane.add(mainPanel, BorderLayout.CENTER);
 
         // Crear e inicializar las vistas específicas
         ProductoPanel productoPanel = new ProductoPanel();
-        ClientePanel clientePanel = new ClientePanel();
+        ClientePanel clientePanel = new ClientePanel("Crear Cliente","Consultar Cliente", "Modificar Cliente", "Listar Clientes", "Baja Clientes");
 
         mainPanel.add(productoPanel, "productosPanel");
-        mainPanel.add(clientePanel,"clientePanel");
+        mainPanel.add(clientePanel, "clientePanel");
 
         // Agregar listeners para cambiar la vista cuando se hace clic en un botón
-        productosButton.addActionListener(e -> {
+        botonProductos.addActionListener(e -> {
             CardLayout cl = (CardLayout) (mainPanel.getLayout());
             cl.show(mainPanel, "productosPanel");
         });
 
-        clientesButton.addActionListener(e -> {
+        botonClientes.addActionListener(e -> {
             CardLayout cl = (CardLayout) (mainPanel.getLayout());
             cl.show(mainPanel, "clientePanel");
         });
 
-        // Agregar otros listeners para otros botones
-
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(menuPanel, BorderLayout.WEST);
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
+        // Agregar otros listeners para otros botones (aún no implementados)
     }
 
     public static void main(String[] args) {

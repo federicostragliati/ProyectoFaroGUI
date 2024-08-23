@@ -135,7 +135,7 @@ public class ClienteController {
 
         boolean resultado = clienteDAOImpMySQL.deleteCliente(Integer.parseInt(id));
 
-        if (resultado) {
+        if (!resultado) {
             return "Eliminado";
         } else {
             return "Error al eliminar";
