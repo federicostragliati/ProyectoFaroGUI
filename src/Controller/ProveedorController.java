@@ -2,10 +2,7 @@ package Controller;
 
 import Model.CustomTableModelId;
 import Model.Validador;
-import dao.implementaciones.ClienteDAO;
 import dao.implementaciones.ProveedorDAO;
-import dominio.Cliente;
-import dominio.Producto;
 import dominio.Proveedor;
 
 import javax.swing.table.DefaultTableModel;
@@ -77,7 +74,7 @@ public class ProveedorController {
         }
     }
 
-    public String modificar (String id, String cuit, String nombre, String email,String direccion, String telefono) {
+    public String modificar (String id, String cuit, String nombre, String email, String telefono, String direccion) {
 
         Proveedor proveedor;
 
@@ -89,11 +86,12 @@ public class ProveedorController {
 
         if (proveedor.isActivo() == false) {
             return "El proveedor a modificar no esta activo";
-        } else if (Validador.validarLongitud(nombre) != true) {
+        } else if (!Validador.validarLongitud(nombre)) {
             return "Error en el nombre";
-        } else if (Validador.validarEmail(email) != true) {
+        } else if (!Validador.validarEmail(email)) {
             return "Error en el mail";
-        } else if (Validador.esNumeroEntero(telefono) != true) {
+        } else if (!Validador.esNumeroEntero(telefono)) {
+            System.out.println(telefono);
             return "Error en el teléfono";
         } else if (!Validador.validarLongitud(direccion)) {
             return "Error en Dirección";
@@ -151,7 +149,7 @@ public class ProveedorController {
         }
 
 
-        if (!resultado) {
+        if (resultado) {
             return "Eliminado";
         } else {
             return "Error al eliminar";
