@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="22/08 - 17:06">
-      <change afterPath="$PROJECT_DIR$/src/Views/GeneralPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9ed3cadf-2f5a-4696-9467-cf94db73f435.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/ClientePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ClientePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/SistemaDeGestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/SistemaDeGestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Interfaces/PanelInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Interfaces/PanelInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ProductoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ProductoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/SistemaDeGestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -54,11 +56,12 @@
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.SistemaDeGestion.executor&quot;: &quot;Run&quot;,
     &quot;Application.VentanaPrincipal.executor&quot;: &quot;Run&quot;,
+    &quot;Application.VistaPrincipalAdministrador.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaro&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaro/out/artifacts/ProyectoFaro_jar/ProyectoFaro.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,8 +81,8 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="SistemaDeGestion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Views.SistemaDeGestion" />
+    <configuration name="VistaPrincipalAdministrador" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.VistaPrincipalAdministrador" />
       <module name="ProyectoFaroGUI" />
       <extension name="coverage">
         <pattern>
@@ -93,7 +96,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SistemaDeGestion" />
+        <item itemvalue="Application.VistaPrincipalAdministrador" />
       </list>
     </recent_temporary>
   </component>
@@ -119,7 +122,11 @@
       <workItem from="1724091659858" duration="485000" />
       <workItem from="1724093135414" duration="2983000" />
       <workItem from="1724185834835" duration="91000" />
-      <workItem from="1724415907253" duration="10929000" />
+      <workItem from="1724415907253" duration="11377000" />
+      <workItem from="1724430213972" duration="6103000" />
+      <workItem from="1724436545646" duration="1526000" />
+      <workItem from="1724438201301" duration="486000" />
+      <workItem from="1724438799274" duration="952000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -161,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724357185652</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724427654909</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724427654909</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

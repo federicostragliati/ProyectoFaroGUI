@@ -2,7 +2,7 @@ package Controller;
 
 import Model.CustomTableModelCliente;
 import Model.Validador;
-import dao.implementaciones.ClienteDAOImpMySQL;
+import dao.implementaciones.ClienteDAO;
 import dominio.Cliente;
 
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class ClienteController {
 
-    private final ClienteDAOImpMySQL clienteDAOImpMySQL = new ClienteDAOImpMySQL();
+    private final ClienteDAO clienteDAO = new ClienteDAO();
 
     public String crear(String cuit, String nombre, String email, String telefono, boolean activo) {
 
@@ -29,7 +29,7 @@ public class ClienteController {
         }
 
         try {
-            clienteDAOImpMySQL.addCliente(new Cliente(cuit, nombre, email, telefono, activo));
+            clienteDAO.addCliente(new Cliente(cuit, nombre, email, telefono, activo));
             return "Creacion Correcta";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
@@ -44,7 +44,7 @@ public class ClienteController {
         }
 
         try {
-            cliente = clienteDAOImpMySQL.getCliente(Integer.parseInt(id));
+            cliente = clienteDAO.getCliente(Integer.parseInt(id));
 
             if (cliente == null ) {
                 return new String[] {"ID no existe"};
@@ -52,17 +52,17 @@ public class ClienteController {
             Field[] campos = cliente.getClass().getDeclaredFields();
             String[] datos = new String[campos.length];
 
-            for (int i = 2; i < campos.length; i++) {
+            for (int i = 1; i < campos.length; i++) {
                 campos[i].setAccessible(true); // Permitir el acceso a atributos privados
                 try {
                     Object valor = campos[i].get(cliente); // Obtener el valor del atributo
                     if (valor != null) {
-                        datos[i - 2] = valor.toString(); // Convertir valor a String
+                        datos[i - 1] = valor.toString(); // Convertir valor a String
                     } else {
-                        datos[i - 2] = "null"; // Representar valores nulos como "null"
+                        datos[i - 1] = "null"; // Representar valores nulos como "null"
                     }
                 } catch (IllegalAccessException e) {
-                    datos[i - 2] = "Acceso no permitido";
+                    datos[i - 1] = "Acceso no permitido";
                 }
             }
             return datos;
@@ -77,7 +77,7 @@ public class ClienteController {
         Cliente cliente;
 
         try {
-            cliente = clienteDAOImpMySQL.getCliente(Integer.parseInt(id));
+            cliente = clienteDAO.getCliente(Integer.parseInt(id));
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -93,7 +93,7 @@ public class ClienteController {
         }
 
         try {
-            clienteDAOImpMySQL.updateCliente(new Cliente(Integer.parseInt(id),cuit,nombre,email,telefono,true));
+            clienteDAO.updateCliente(new Cliente(Integer.parseInt(id),cuit,nombre,email,telefono,true));
             return "Cliente Modificado";
         } catch (SQLException | IOException | ClassNotFoundException e) {
             return "Error al modificar";
@@ -108,7 +108,7 @@ public class ClienteController {
         DefaultTableModel tableModel = new CustomTableModelCliente(new Object[][]{}, columnNames);
 
         try {
-            java.util.List<Cliente> Clientes = clienteDAOImpMySQL.getClientes();
+            java.util.List<Cliente> Clientes = clienteDAO.getClientes();
             for (Cliente cliente : Clientes) {
                 Object[] rowData = {
                         cliente.getId(),
@@ -133,7 +133,14 @@ public class ClienteController {
             return "ID Invalido";
         }
 
-        boolean resultado = clienteDAOImpMySQL.deleteCliente(Integer.parseInt(id));
+        boolean resultado;
+
+        try {
+            resultado = clienteDAO.deleteCliente(Integer.parseInt(id));
+        } catch (SQLException | IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
 
         if (!resultado) {
             return "Eliminado";

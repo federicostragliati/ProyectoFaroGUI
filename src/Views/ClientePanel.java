@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ClientePanel extends GeneralPanel implements PanelInterface {
 
@@ -20,17 +19,16 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
         super(boton1, boton2, boton3,  boton4,  boton5);
 
 
-        // Crear el área para mostrar la información relacionada // ¿Que es esto? Comentarlo para probar
+        /* // Crear el área para mostrar la información relacionada // ¿Que es esto? Comentarlo para probar
         JTextArea infoArea = new JTextArea();
         infoArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(infoArea);
-        add(scrollPane, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER); */
 
-        // Por el momento hasta que cree las funciones
         super.getCreateButton().addActionListener(e -> showCreate());
         super.getModifyButton().addActionListener(e -> showModify());
         super.consultButton.addActionListener(e -> showGet());
-        super.getListButton().addActionListener(e -> showList(this));
+        super.getListButton().addActionListener(e -> showList());
         super.deleteButton.addActionListener(e -> showDelete());
     }
 
@@ -170,10 +168,15 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
         activoLabel.setBounds(10, 160, 100, 20);
         dialog.add(activoLabel);
 
-        JTextField activoField = new JTextField();
+        JCheckBox checkBoxActivo = new JCheckBox();
+        checkBoxActivo.setBounds(120, 160, 20, 20);
+        checkBoxActivo.setEnabled(false);
+        dialog.add(checkBoxActivo);
+
+       /* JTextField activoField = new JTextField();
         activoField.setBounds(120, 160, 250, 20);
         activoField.setEditable(false);
-        dialog.add(activoField);
+        dialog.add(activoField);*/
 
         JButton buscarButton = new JButton("Buscar");
         buscarButton.setBounds(120, 200, 100, 25);
@@ -192,7 +195,7 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
                 nombreField.setText(datos[1]);
                 eMailField.setText(datos[2]);
                 telefonoField.setText(datos[3]);
-                activoField.setText(datos[4]);
+                checkBoxActivo.setSelected(Boolean.parseBoolean(datos[4]));
             }
         });
 
@@ -296,9 +299,9 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
     }
 
     @Override
-    public void showList(JPanel parentPanel) {
+    public void showList() {
         // Crear un nuevo JDialog para mostrar la lista
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(parentPanel), "Lista de Clientes", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Clientes", true);
         dialog.setBounds(100, 100, 800, 600);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
@@ -353,25 +356,25 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
     @Override
     public void showDelete() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Cliente", true);
-        dialog.setBounds(100, 100, 400, 150);
+        dialog.setBounds(100, 100, 267, 144);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
 
-        JLabel idLabel = new JLabel("ID del Cliente:");
+        JLabel idLabel = new JLabel("ID Cliente:");
         idLabel.setBounds(10, 20, 150, 20);
         dialog.add(idLabel);
 
         JTextField idField = new JTextField();
-        idField.setBounds(160, 20, 200, 20);
+        idField.setBounds(80, 20, 151, 20);
         dialog.add(idField);
 
         JButton deleteButton = new JButton("Eliminar");
-        deleteButton.setBounds(80, 60, 100, 30);
+        deleteButton.setBounds(10, 51, 100, 30);
         dialog.add(deleteButton);
 
         JButton cancelButton = new JButton("Cancelar");
-        cancelButton.setBounds(220, 60, 100, 30);
+        cancelButton.setBounds(131, 51, 100, 30);
         dialog.add(cancelButton);
 
         deleteButton.addActionListener(e -> {

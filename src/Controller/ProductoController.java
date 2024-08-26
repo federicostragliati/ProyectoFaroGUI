@@ -1,8 +1,9 @@
 package Controller;
 
+import Controller.Interface.ControllerInterface;
 import Model.Validador;
 import Model.CustomTableModelProducto;
-import dao.implementaciones.ProductoDAOImpMySQL;
+import dao.implementaciones.ProductoDAO;
 import dominio.Producto;
 import dominio.enums.Unidad;
 
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 
 public class ProductoController {
 
-    private final ProductoDAOImpMySQL productoDAOImpMySQL = new ProductoDAOImpMySQL();
+    private final ProductoDAO productoDAO = new ProductoDAO();
 
     public String crear(String detalle, String cantidad, String precio, String unidad, boolean activo) {
 
@@ -30,7 +31,7 @@ public class ProductoController {
         BigDecimal precioDef = new BigDecimal(precio);
 
         try {
-            productoDAOImpMySQL.createProducto(new Producto(detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), activo));
+            productoDAO.createProducto(new Producto(detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), activo));
             return "Creación Correcta";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
@@ -47,7 +48,7 @@ public class ProductoController {
 
         try {
             // Obtener el producto por ID
-            producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
+            producto = productoDAO.getProducto(Integer.parseInt(id));
 
             if (producto == null) {
                 return new String[]{"ID no Existe"};
@@ -57,14 +58,14 @@ public class ProductoController {
             Field[] campos = producto.getClass().getDeclaredFields();
             String[] datos = new String[campos.length];
 
-            for (int i = 2; i < campos.length; i++) {
+            for (int i = 1; i < campos.length; i++) {
                 campos[i].setAccessible(true); // Permitir el acceso a atributos privados
                 try {
                     Object valor = campos[i].get(producto); // Obtener el valor del atributo
                     if (valor != null) {
-                        datos[i - 2] = valor.toString(); // Convertir valor a String
+                        datos[i - 1] = valor.toString(); // Convertir valor a String
                     } else {
-                        datos[i - 2] = "null"; // Representar valores nulos como "null"
+                        datos[i - 1] = "null"; // Representar valores nulos como "null"
                     }
                 } catch (IllegalAccessException e) {
                     return new String[]{"ID no Existe"};
@@ -84,7 +85,7 @@ public class ProductoController {
         DefaultTableModel tableModel = new CustomTableModelProducto(new Object[][]{}, columnNames);
 
         try {
-            java.util.List<Producto> productos = productoDAOImpMySQL.getProductos();
+            java.util.List<Producto> productos = productoDAO.getProductos();
             for (Producto producto : productos) {
                 Object[] rowData = {
                         producto.getId(),
@@ -108,9 +109,14 @@ public class ProductoController {
             return "ID Invalido";
         }
 
-        boolean resultado = productoDAOImpMySQL.deleteProducto(Integer.parseInt(id));
+        boolean resultado = false;
+        try {
+            resultado = productoDAO.deleteProducto(Integer.parseInt(id));
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        if (resultado) {
+        if (!resultado) {
             return "Eliminado";
         } else {
             return "Error al eliminar";
@@ -122,7 +128,7 @@ public class ProductoController {
         Producto producto;
 
         try {
-            producto = productoDAOImpMySQL.getProducto(Integer.parseInt(id));
+            producto = productoDAO.getProducto(Integer.parseInt(id));
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,7 +147,7 @@ public class ProductoController {
         BigDecimal precioDef = new BigDecimal(precio);
 
         try {
-            productoDAOImpMySQL.updateProducto(new Producto(Integer.parseInt(id), detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), true));
+            productoDAO.updateProducto(new Producto(Integer.parseInt(id), detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), true));
             return "Producto modificado";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             return "Error al modificar";

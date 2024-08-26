@@ -4,11 +4,11 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class SistemaDeGestion extends JFrame {
+public class VistaPrincipalAdministrador extends JFrame {
 
     private JPanel mainPanel;
 
-    public SistemaDeGestion() {
+    public VistaPrincipalAdministrador() {
         setTitle("Sistema de Gestión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1100, 600);
@@ -49,7 +49,7 @@ public class SistemaDeGestion extends JFrame {
         contentPane.add(mainPanel, BorderLayout.CENTER);
 
         // Crear e inicializar las vistas específicas
-        ProductoPanel productoPanel = new ProductoPanel();
+        ProductoPanel productoPanel = new ProductoPanel("Crear Producto","Consultar Producto", "Modificar Producto", "Listar Producto", "Baja Producto");
         ClientePanel clientePanel = new ClientePanel("Crear Cliente","Consultar Cliente", "Modificar Cliente", "Listar Clientes", "Baja Clientes");
 
         mainPanel.add(productoPanel, "productosPanel");
@@ -71,8 +71,8 @@ public class SistemaDeGestion extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            SistemaDeGestion sistemaDeGestion = new SistemaDeGestion();
-            sistemaDeGestion.setVisible(true);
+            VistaPrincipalAdministrador vistaPrincipalAdministrador = new VistaPrincipalAdministrador();
+            vistaPrincipalAdministrador.setVisible(true);
         });
     }
 }
