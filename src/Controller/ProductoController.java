@@ -115,7 +115,7 @@ public class ProductoController {
             throw new RuntimeException(e);
         }
 
-        if (!resultado) {
+        if (resultado) {
             return "Eliminado";
         } else {
             return "Error al eliminar";

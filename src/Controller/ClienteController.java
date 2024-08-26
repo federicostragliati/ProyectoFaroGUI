@@ -142,7 +142,7 @@ public class ClienteController {
         }
 
 
-        if (!resultado) {
+        if (resultado) {
             return "Eliminado";
         } else {
             return "Error al eliminar";
