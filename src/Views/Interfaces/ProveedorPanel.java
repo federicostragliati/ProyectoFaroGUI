@@ -98,12 +98,24 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
 
         dialog.add(buttonPanel);
 
+        acceptButton.addActionListener( e -> {
+            JOptionPane.showMessageDialog(null, proveedorController.crear(
+                    campoRazon.getText(),
+                    campoEmail.getText(),
+                    campoEmail.getText(),
+                    campoTelefono.getText(),
+                    campoDireccion.getText(),
+                    checkBoxActivo.isSelected()));
+        });
+
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
 
         dialog.setVisible(true);
 
 
     }
+
+    // Modificar tamaño ShowGet
 
     @Override
     public void showGet() {
@@ -176,6 +188,10 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
         buttonPanel.add(cancelButton);
 
         dialog.add(buttonPanel);
+
+        buscarButton.addActionListener(e -> {
+            String[] datos = proveedorController.consultar()
+        });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo
 
@@ -264,7 +280,7 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showList() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Clientes", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Proveedores", true);
         dialog.setBounds(100, 100, 800, 600);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
