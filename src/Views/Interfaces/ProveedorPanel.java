@@ -24,7 +24,7 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
         super.getDeleteButton().addActionListener(e -> showDelete());
     }
 
-    // Agregar Action Listeners en Create, Get y Modify
+    // Agregar Action Listeners en Create, Get y Modify //
 
     @Override
     public void showCreate() {
