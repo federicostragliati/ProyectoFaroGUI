@@ -1,6 +1,5 @@
 package Controller;
 
-import Controller.Interface.ControllerInterface;
 import Model.Validador;
 import Model.CustomTableModelProducto;
 import dao.implementaciones.ProductoDAO;
