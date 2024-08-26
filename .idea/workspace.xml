@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="22/08 - 17:06">
+      <change afterPath="$PROJECT_DIR$/src/Views/Interfaces/ProveedorPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/ClientePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ClientePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Interfaces/PanelInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Interfaces/PanelInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/ProductoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ProductoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/SistemaDeGestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -127,6 +123,7 @@
       <workItem from="1724436545646" duration="1526000" />
       <workItem from="1724438201301" duration="486000" />
       <workItem from="1724438799274" duration="952000" />
+      <workItem from="1724671330376" duration="3117000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -176,7 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724427654909</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724671385547</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724671385547</updated>
+    </task>
+    <task id="LOCAL-00008" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724671432204</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724671432204</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

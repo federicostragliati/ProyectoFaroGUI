@@ -21,9 +21,9 @@ public class ProductoPanel extends GeneralPanel implements PanelInterface {
 
         super.getCreateButton().addActionListener(e -> showCreate());
         super.getModifyButton().addActionListener(e -> showModify());
-        super.consultButton.addActionListener(e -> showGet());
+        super.getConsultButton().addActionListener(e -> showGet());
         super.getListButton().addActionListener(e -> showList());
-        super.deleteButton.addActionListener(e -> showDelete());
+        super.getDeleteButton().addActionListener(e -> showDelete());
 
     }
 
