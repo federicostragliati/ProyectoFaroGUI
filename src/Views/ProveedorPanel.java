@@ -1,7 +1,7 @@
-package Views.Interfaces;
+package Views;
 
 import Controller.ProveedorController;
-import Views.GeneralPanel;
+import Views.Interfaces.PanelInterface;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

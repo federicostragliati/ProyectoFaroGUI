@@ -1,7 +1,5 @@
 package Views;
 
-import Views.Interfaces.ProveedorPanel;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -54,10 +52,12 @@ public class VistaPrincipalAdministrador extends JFrame {
         ProductoPanel productoPanel = new ProductoPanel("Crear Producto","Consultar Producto", "Modificar Producto", "Listar Productos", "Baja Producto");
         ClientePanel clientePanel = new ClientePanel("Crear Cliente","Consultar Cliente", "Modificar Cliente", "Listar Clientes", "Baja Clientes");
         ProveedorPanel proveedorPanel = new ProveedorPanel("Crear Proveedor", "Consultar Proveedor", "Modificar Proveedor", "Listar Proveedores", "Baja Proveedor");
+        DetalleVentaPanel detalleVentaPanel = new DetalleVentaPanel();
 
         mainPanel.add(productoPanel, "productosPanel");
         mainPanel.add(clientePanel, "clientePanel");
         mainPanel.add(proveedorPanel, "proveedorPanel");
+        mainPanel.add(detalleVentaPanel,"detalleVentaPanel");
 
         // Agregar listeners para cambiar la vista cuando se hace clic en un botón
         botonProductos.addActionListener(e -> {
@@ -73,6 +73,11 @@ public class VistaPrincipalAdministrador extends JFrame {
         botonProveedores.addActionListener(e -> {
             CardLayout cl = (CardLayout) (mainPanel.getLayout());
             cl.show(mainPanel,"proveedorPanel");
+        });
+
+        botonVentas.addActionListener(e -> {
+            CardLayout cl = (CardLayout) (mainPanel.getLayout());
+            cl.show(mainPanel,"detalleVentaPanel");
         });
 
         // Agregar otros listeners para otros botones (aún no implementados)
