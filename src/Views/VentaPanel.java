@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 
 public class VentaPanel extends GeneralPanel implements PanelInterface {
 
-    DetalleVentaPanel detalle = new DetalleVentaPanel();
+    //DetalleVentaPanel detalle = new DetalleVentaPanel();
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_3;
@@ -69,8 +69,12 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         JButton btnDetalleVenta = new JButton("Productos");
         btnDetalleVenta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Crear e invocar el JDialog
+                DetalleVentaPanel detalleDialog = new DetalleVentaPanel((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this));
+                detalleDialog.setVisible(true);
             }
         });
+
         btnDetalleVenta.setBounds(10, 186, 138, 23);
         dialog.add(btnDetalleVenta);
 

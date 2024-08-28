@@ -11,16 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class DetalleVentaPanel extends JPanel {
+public class DetalleVentaPanel extends JDialog {
 
     private JTable table;
     private DefaultTableModel tableModel;
     private final DetalleVentaController controller = new DetalleVentaController();
 
-    public DetalleVentaPanel() {
+    public DetalleVentaPanel(Frame owner) {
+        super(owner, "Detalle de Venta", true);
+
+        // Configurar el JDialog
+        setSize(600, 400);
+        setLocationRelativeTo(owner);
+        setLayout(new BorderLayout());
+
         // Crear el modelo de la tabla con columnas específicas
         tableModel = new DefaultTableModel(new Object[]{"ID Producto", "Nombre", "Unidad de Venta", "Cantidad", "Precio Unitario", "Precio por Cantidad"}, 0);
         table = new JTable(tableModel) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return column == 0 || column == 3; // Solo permite editar ID Producto y Cantidad
             }
@@ -92,6 +100,7 @@ public class DetalleVentaPanel extends JPanel {
             }
         });
 
+
         // Botón para confirmar y procesar los productos seleccionados
         JButton confirmarButton = new JButton("Confirmar");
         confirmarButton.addActionListener(e -> {
@@ -103,7 +112,7 @@ public class DetalleVentaPanel extends JPanel {
         buttonPanel.add(agregarFilaButton);
         buttonPanel.add(confirmarButton);
 
-        setLayout(new BorderLayout());
+        // Añadir componentes al JDialog
         add(new JScrollPane(table), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
