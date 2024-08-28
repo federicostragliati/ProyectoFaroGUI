@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="26/08 - 15:58">
-      <change afterPath="$PROJECT_DIR$/src/Controller/DetalleVentaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/VentaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2024_10_32_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_08_2024_10_32__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_8_2024_20_54_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_8_2024_20_54__Changes_.xml" beforeDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="28/08 - 16:24">
+      <change afterPath="$PROJECT_DIR$/src/Views/VentaPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Interfaces/ProveedorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/ProveedorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +124,8 @@
       <workItem from="1724438201301" duration="486000" />
       <workItem from="1724438799274" duration="952000" />
       <workItem from="1724671330376" duration="11908000" />
-      <workItem from="1724853850364" duration="12619000" />
+      <workItem from="1724853850364" duration="12697000" />
+      <workItem from="1724875393070" duration="2683000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -238,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724698712227</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="28/08 - 16:24">
+      <option name="closed" value="true" />
+      <created>1724873092779</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724873092780</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +253,22 @@
     <MESSAGE value="22/08 - 17:06" />
     <MESSAGE value="26/08 - 9:32" />
     <MESSAGE value="26/08 - 15:58" />
-    <option name="LAST_COMMIT_MESSAGE" value="26/08 - 15:58" />
+    <MESSAGE value="28/08 - 16:24" />
+    <option name="LAST_COMMIT_MESSAGE" value="28/08 - 16:24" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Views/ClientePanel.java</url>
+          <line>116</line>
+          <properties class="Views.ClientePanel" method="showGet">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

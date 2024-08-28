@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class DetalleVentaPanel extends JPanel {
+
     private JTable table;
     private DefaultTableModel tableModel;
     private final DetalleVentaController controller = new DetalleVentaController();
