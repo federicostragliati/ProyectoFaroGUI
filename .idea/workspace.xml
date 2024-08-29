@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="20/8 - 23:47">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_08_2024_9_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_08_2024_9_05__Changes_.xml" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="28/8 - 18:43">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/VentaPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +100,7 @@
       <workItem from="1724103293908" duration="2177000" />
       <workItem from="1724105795014" duration="67000" />
       <workItem from="1724265084332" duration="3860000" />
-      <workItem from="1724880547421" duration="730000" />
+      <workItem from="1724880547421" duration="2261000" />
     </task>
     <task id="LOCAL-00001" summary="20/8 - 23:47">
       <option name="closed" value="true" />
@@ -115,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724208458128</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="28/8 - 18:43">
+      <option name="closed" value="true" />
+      <created>1724881436918</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724881436918</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +130,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.5" />
     <MESSAGE value="20/8 - 23:47" />
-    <option name="LAST_COMMIT_MESSAGE" value="20/8 - 23:47" />
+    <MESSAGE value="28/8 - 18:43" />
+    <option name="LAST_COMMIT_MESSAGE" value="28/8 - 18:43" />
   </component>
 </project>
