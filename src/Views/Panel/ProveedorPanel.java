@@ -1,4 +1,4 @@
-package Views;
+package Views.Panel;
 
 import Controller.ProveedorController;
 import Views.Interfaces.PanelInterface;

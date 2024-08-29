@@ -4,8 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="28/8 - 18:43">
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="28/08 - 16:24">
+      <change afterPath="$PROJECT_DIR$/src/Model/Auxiliares/ListadoProductos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_08_2024_9_05__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DetalleVentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DetalleVentaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProveedorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/VentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VentaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/CustomTableModelId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CustomTables/CustomTableModelId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/CustomTableModelProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/CustomTables/CustomTableModelProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Validador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Validaciones/Validador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ClientePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ClientePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/DetalleVentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/DetalleVentaDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/GeneralPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/GeneralPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ProductoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ProductoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/ProveedorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ProveedorPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +33,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -31,12 +50,9 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
-    &quot;accountId&quot;: &quot;5333af24-202c-4fdd-bc44-4d8654c35e0d&quot;
+    &quot;accountId&quot;: &quot;a66264e6-2080-4fcc-9362-d07282d99d73&quot;
   }
 }</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/Controller/ProductoController.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -55,9 +71,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaro&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaro/out/artifacts/ProyectoFaro_jar/ProyectoFaro.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,22 +80,42 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+      &quot;mysql_aurora&quot;
     ]
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="VistaPrincipalAdministrador" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Views.Frame.VistaPrincipalAdministrador" />
+      <module name="ProyectoFaroGUI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.CustomTables.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.VistaPrincipalAdministrador" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.419" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.419" />
       </set>
     </attachedChunks>
   </component>
@@ -97,28 +132,129 @@
       <workItem from="1724081906328" duration="6059000" />
       <workItem from="1724091659858" duration="485000" />
       <workItem from="1724093135414" duration="2983000" />
-      <workItem from="1724103293908" duration="2177000" />
-      <workItem from="1724105795014" duration="67000" />
-      <workItem from="1724265084332" duration="3860000" />
-      <workItem from="1724880547421" duration="2261000" />
+      <workItem from="1724185834835" duration="91000" />
+      <workItem from="1724415907253" duration="11377000" />
+      <workItem from="1724430213972" duration="6103000" />
+      <workItem from="1724436545646" duration="1526000" />
+      <workItem from="1724438201301" duration="486000" />
+      <workItem from="1724438799274" duration="952000" />
+      <workItem from="1724671330376" duration="11908000" />
+      <workItem from="1724853850364" duration="12697000" />
+      <workItem from="1724875393070" duration="2683000" />
     </task>
-    <task id="LOCAL-00001" summary="20/8 - 23:47">
+    <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
-      <created>1724208458128</created>
+      <created>1724165344189</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1724208458128</updated>
+      <updated>1724165344190</updated>
     </task>
-    <task id="LOCAL-00002" summary="28/8 - 18:43">
+    <task id="LOCAL-00002" summary="v1.0">
       <option name="closed" value="true" />
-      <created>1724881436918</created>
+      <created>1724185032974</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1724881436918</updated>
+      <updated>1724185032974</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="v1.0">
+      <option name="closed" value="true" />
+      <created>1724185863248</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724185863248</updated>
+    </task>
+    <task id="LOCAL-00004" summary="v1.0">
+      <option name="closed" value="true" />
+      <created>1724185917621</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724185917622</updated>
+    </task>
+    <task id="LOCAL-00005" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724357185652</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724357185652</updated>
+    </task>
+    <task id="LOCAL-00006" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724427654909</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724427654909</updated>
+    </task>
+    <task id="LOCAL-00007" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724671385547</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1724671385547</updated>
+    </task>
+    <task id="LOCAL-00008" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724671432204</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1724671432204</updated>
+    </task>
+    <task id="LOCAL-00009" summary="22/08 - 17:06">
+      <option name="closed" value="true" />
+      <created>1724675547475</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1724675547475</updated>
+    </task>
+    <task id="LOCAL-00010" summary="26/08 - 9:32">
+      <option name="closed" value="true" />
+      <created>1724675593276</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1724675593276</updated>
+    </task>
+    <task id="LOCAL-00011" summary="26/08 - 9:32">
+      <option name="closed" value="true" />
+      <created>1724676059453</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724676059453</updated>
+    </task>
+    <task id="LOCAL-00012" summary="26/08 - 9:32">
+      <option name="closed" value="true" />
+      <created>1724692955080</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724692955082</updated>
+    </task>
+    <task id="LOCAL-00013" summary="26/08 - 15:58">
+      <option name="closed" value="true" />
+      <created>1724698712227</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724698712227</updated>
+    </task>
+    <task id="LOCAL-00014" summary="28/08 - 16:24">
+      <option name="closed" value="true" />
+      <created>1724873092779</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724873092780</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,9 +264,26 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jfd" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.5" />
-    <MESSAGE value="20/8 - 23:47" />
-    <MESSAGE value="28/8 - 18:43" />
-    <option name="LAST_COMMIT_MESSAGE" value="28/8 - 18:43" />
+    <MESSAGE value="v1.0" />
+    <MESSAGE value="22/08 - 17:06" />
+    <MESSAGE value="26/08 - 9:32" />
+    <MESSAGE value="26/08 - 15:58" />
+    <MESSAGE value="28/08 - 16:24" />
+    <option name="LAST_COMMIT_MESSAGE" value="28/08 - 16:24" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Views/Panel/ClientePanel.java</url>
+          <line>116</line>
+          <properties class="Views.Panel.ClientePanel" method="showGet">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

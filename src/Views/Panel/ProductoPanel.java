@@ -1,4 +1,4 @@
-package Views;
+package Views.Panel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

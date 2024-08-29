@@ -1,6 +1,7 @@
-package Views;
+package Views.Dialog;
 
 import Controller.DetalleVentaController;
+import Model.Auxiliares.ListadoProductos;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -10,20 +11,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DetalleVentaPanel extends JDialog {
+public class DetalleVentaDialog extends JDialog {
 
     private JTable table;
     private DefaultTableModel tableModel;
     private final DetalleVentaController controller = new DetalleVentaController();
+    private List<ListadoProductos> listadoProductos = new ArrayList<>();
 
-    public DetalleVentaPanel(Frame owner) {
+    public DetalleVentaDialog(Frame owner, List<ListadoProductos> listadoProductos) {
         super(owner, "Detalle de Venta", true);
 
         // Configurar el JDialog
         setSize(600, 400);
         setLocationRelativeTo(owner);
         setLayout(new BorderLayout());
+
+        this.listadoProductos = listadoProductos; // Inicializar con los productos existentes si los hay
 
         // Crear el modelo de la tabla con columnas específicas
         tableModel = new DefaultTableModel(new Object[]{"ID Producto", "Nombre", "Unidad de Venta", "Cantidad", "Precio Unitario", "Precio por Cantidad"}, 0);
@@ -33,6 +39,18 @@ public class DetalleVentaPanel extends JDialog {
                 return column == 0 || column == 3; // Solo permite editar ID Producto y Cantidad
             }
         };
+
+        // Cargar productos existentes en la tabla
+        for (ListadoProductos producto : listadoProductos) {
+            tableModel.addRow(new Object[]{
+                    producto.getId(),
+                    producto.getDetalle(),
+                    producto.getUnidad(),
+                    producto.getCantidad(),
+                    producto.getValor(),
+                    producto.getValorPorCantidad()
+            });
+        }
 
         // Agregar un TableModelListener para manejar cambios en la tabla
         tableModel.addTableModelListener(new TableModelListener() {
@@ -100,12 +118,13 @@ public class DetalleVentaPanel extends JDialog {
             }
         });
 
-
         // Botón para confirmar y procesar los productos seleccionados
         JButton confirmarButton = new JButton("Confirmar");
         confirmarButton.addActionListener(e -> {
-            // Aquí puedes procesar los productos seleccionados
+            listadoProductos.clear(); // Limpiar la lista actual
+            listadoProductos.addAll(controller.getListado(tableModel)); // Añadir todos los elementos nuevos
             JOptionPane.showMessageDialog(this, "Productos confirmados");
+            this.dispose(); // Cerrar el diálogo
         });
 
         JPanel buttonPanel = new JPanel();
@@ -119,5 +138,9 @@ public class DetalleVentaPanel extends JDialog {
 
     public DefaultTableModel getTableModel() {
         return tableModel;
+    }
+
+    public List<ListadoProductos> getListadoProductos() {
+        return listadoProductos;
     }
 }

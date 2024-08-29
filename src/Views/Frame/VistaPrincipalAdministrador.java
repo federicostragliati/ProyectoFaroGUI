@@ -1,4 +1,9 @@
-package Views;
+package Views.Frame;
+
+import Views.Panel.ClientePanel;
+import Views.Panel.ProductoPanel;
+import Views.Panel.ProveedorPanel;
+import Views.Panel.VentaPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

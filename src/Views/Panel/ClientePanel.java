@@ -1,4 +1,4 @@
-package Views;
+package Views.Panel;
 
 import Controller.ClienteController;
 import Views.Interfaces.PanelInterface;

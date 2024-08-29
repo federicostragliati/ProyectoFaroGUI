@@ -1,17 +1,8 @@
 package Controller;
 
-import Model.CustomTableModelId;
-import Model.Validador;
-import dao.implementaciones.DetalleVentaDAO;
 import dao.implementaciones.VentaDAO;
-import dominio.DetalleVenta;
-import dominio.Proveedor;
 
 import javax.swing.table.DefaultTableModel;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.sql.SQLException;
-import java.util.List;
 
 public class VentaController {
 

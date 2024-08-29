@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.Validador;
-import Model.CustomTableModelProducto;
+import Model.Validaciones.Validador;
+import Model.CustomTables.CustomTableModelProducto;
 import dao.implementaciones.ProductoDAO;
 import dominio.Producto;
 import dominio.enums.Unidad;

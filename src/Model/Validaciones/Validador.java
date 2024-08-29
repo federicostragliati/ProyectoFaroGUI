@@ -1,4 +1,4 @@
-package Model;
+package Model.Validaciones;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

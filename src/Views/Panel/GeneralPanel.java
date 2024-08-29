@@ -1,7 +1,6 @@
-package Views;
+package Views.Panel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public abstract class GeneralPanel extends JPanel {
 

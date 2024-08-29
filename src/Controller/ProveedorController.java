@@ -1,7 +1,7 @@
 package Controller;
 
-import Model.CustomTableModelId;
-import Model.Validador;
+import Model.CustomTables.CustomTableModelId;
+import Model.Validaciones.Validador;
 import dao.implementaciones.ProveedorDAO;
 import dominio.Proveedor;
 
