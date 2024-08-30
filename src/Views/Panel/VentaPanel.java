@@ -1,25 +1,39 @@
 package Views.Panel;
 
+import Controller.ClienteController;
 import Controller.DetalleVentaController;
+import Controller.MetodoPagoController;
+import Controller.VentaController;
 import Model.Auxiliares.ListadoProductos;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
+import dominio.Cliente;
+import dominio.MetodoDePago;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VentaPanel extends GeneralPanel implements PanelInterface {
 
     private List<ListadoProductos> listadoProductos = new ArrayList<>();
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_3;
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private DetalleVentaController controller = new DetalleVentaController();
+    private JTextField clienteField;
+    private JTextField descuentoField;
+    private JTextField fechaField;
+    private JTextField montoPrimField;
+    private JTextField montoTotalField;
+    private JTextField montoSecField;
+    private DetalleVentaController Detallecontroller = new DetalleVentaController();
+    private MetodoPagoController metodoPagoController = new MetodoPagoController();
+    private ClienteController clienteController = new ClienteController();
+    private VentaController ventaController = new VentaController();
+    private boolean isAdjusting = false;
 
     public VentaPanel(String boton1, String boton2, String boton3, String boton4, String boton5) {
         super(boton1, boton2, boton3, boton4, boton5);
@@ -76,17 +90,17 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         lblNewLabel_7.setBounds(10, 220, 138, 14);
         dialog.add(lblNewLabel_7);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("Pagada");
-        chckbxNewCheckBox.setBounds(6, 241, 97, 23);
-        dialog.add(chckbxNewCheckBox);
+        JCheckBox checkBoxPagada = new JCheckBox("Pagada");
+        checkBoxPagada.setBounds(6, 241, 97, 23);
+        dialog.add(checkBoxPagada);
 
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Completa");
-        chckbxNewCheckBox_1.setBounds(6, 267, 97, 23);
-        dialog.add(chckbxNewCheckBox_1);
+        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
+        checkBoxCompleta.setBounds(6, 267, 97, 23);
+        dialog.add(checkBoxCompleta);
 
-        JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Entregada");
-        chckbxNewCheckBox_2.setBounds(6, 293, 97, 23);
-        dialog.add(chckbxNewCheckBox_2);
+        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        checkBoxEntregada.setBounds(6, 293, 97, 23);
+        dialog.add(checkBoxEntregada);
 
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(10, 333, 89, 23);
@@ -100,43 +114,110 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnCancelar.setBounds(289, 333, 89, 23);
         dialog.add(btnCancelar);
 
+        clienteField = new JTextField();
+        clienteField.setBounds(164, 7, 220, 22);
+        JComboBox clienteBox = new JComboBox();
+        clienteBox.setBounds(164, 29, 220, 22);
+        //clienteBox.setBounds();
+        clienteBox.setVisible(false);
+        dialog.add(clienteBox);
+        dialog.add(clienteField);
 
-        JComboBox comboBox_1 = new JComboBox();
-        comboBox_1.setBounds(164, 7, 220, 22);
-        dialog.add(comboBox_1);
+        clienteField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (!isAdjusting) {
+                    isAdjusting = true;
+                    String busqueda = clienteField.getText().toLowerCase();
+                    clienteBox.removeAllItems();
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(164, 33, 220, 20);
-        dialog.add(textField_1);
-        textField_1.setColumns(10);
+                    List<Cliente> coincidencias = clienteController.listado().stream()
+                            .filter(cliente -> (cliente.getCuitCliente().toLowerCase().contains(busqueda)
+                                    || cliente.getNombre().toLowerCase().contains(busqueda))
+                                    && cliente.isActivo())
+                            .collect(Collectors.toList());
 
-        JTextField textField_2 = new JTextField();
-        textField_2.setBounds(164, 58, 220, 20);
-        dialog.add(textField_2);
-        textField_2.setColumns(10);
+                    if (!coincidencias.isEmpty()) {
+                        for (Cliente cliente : coincidencias) {
+                            clienteBox.addItem(cliente.getId() + " - " + cliente.getNombre() + " - " + cliente.getCuitCliente());
+                        }
+                        clienteBox.setVisible(true);
+                        clienteBox.showPopup();
+                    } else {
+                        clienteBox.setVisible(false);
+                    }
 
-        JComboBox comboBox = new JComboBox();
-        comboBox.setBounds(164, 82, 220, 22);
-        dialog.add(comboBox);
+                    isAdjusting = false;
+                }
 
-        JTextField textField_4 = new JTextField();
-        textField_4.setBounds(164, 108, 220, 20);
-        dialog.add(textField_4);
-        textField_4.setColumns(10);
+                // Capturar la tecla Enter
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && clienteBox.isVisible()) {
+                    if (clienteBox.getSelectedItem() != null) {
+                        String clienteSeleccionado = (String) clienteBox.getSelectedItem();
+                        clienteField.setText(clienteSeleccionado); //
+                        clienteBox.setVisible(false); // Ocultar el comboBox después de seleccionar
+                    }
+                }
+            }
+        });
 
-        JComboBox comboBox_2 = new JComboBox();
-        comboBox_2.setBounds(164, 132, 220, 22);
-        dialog.add(comboBox_2);
+        clienteBox.addActionListener(e -> {
+            if (!isAdjusting && clienteBox.getSelectedItem() != null) {
+                String clienteSeleccionado = (String) clienteBox.getSelectedItem();
+                clienteField.setText(clienteSeleccionado.split(" - ")[1]);
+                clienteBox.setVisible(false);
+            }
+        });
 
-        textField_6 = new JTextField();
-        textField_6.setBounds(164, 158, 220, 20);
-        dialog.add(textField_6);
-        textField_6.setColumns(10);
+        clienteField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                clienteBox.setVisible(false);
+            }
+        });
 
-        JTextField textField_7 = new JTextField();
-        textField_7.setBounds(164, 217, 220, 20);
-        dialog.add(textField_7);
-        textField_7.setColumns(10);
+        fechaField = new JTextField();
+        fechaField.setBounds(164, 33, 220, 20);
+        dialog.add(fechaField);
+        fechaField.setColumns(10);
+
+        descuentoField = new JTextField();
+        descuentoField.setBounds(164, 58, 220, 20);
+        dialog.add(descuentoField);
+        descuentoField.setColumns(10);
+
+        JComboBox metodoPrimBox = new JComboBox();
+        metodoPrimBox.setBounds(164, 82, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoPrimBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoPrimBox);
+
+        montoPrimField = new JTextField();
+        montoPrimField.setBounds(164, 108, 220, 20);
+        dialog.add(montoPrimField);
+        montoPrimField.setColumns(10);
+
+        JComboBox metodoSecBox = new JComboBox();
+        metodoSecBox.setBounds(164, 132, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoSecBox);
+
+        montoSecField = new JTextField();
+        montoSecField.setBounds(164, 158, 220, 20);
+        dialog.add(montoSecField);
+        montoSecField.setColumns(10);
+
+        montoTotalField = new JTextField();
+        montoTotalField.setBounds(164, 217, 220, 20);
+        dialog.add(montoTotalField);
+        montoTotalField.setColumns(10);
 
         // Acción al presionar 'Productos'
         btnDetalleVenta.addActionListener(e -> {
@@ -144,7 +225,24 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             detalleDialog.setVisible(true);
             listadoProductos = detalleDialog.getListadoProductos();
 
+
             //Limpiar listadoProductos una vez que cree la venta o la cancele
+        });
+
+        btnAceptar.addActionListener( e -> {
+            ventaController.crear(clienteField.getText(),
+                    fechaField.getText(),
+                    descuentoField.getText(),
+                    metodoPrimBox.getSelectedItem().toString(),
+                    montoPrimField.getText(),
+                    metodoSecBox.getSelectedItem().toString(),
+                    montoSecField.getText(),
+                    Detallecontroller.totalVenta(listadoProductos),
+                    checkBoxPagada.isSelected(),
+                    checkBoxCompleta.isSelected(),
+                    checkBoxCompleta.isSelected());
+
+            Detallecontroller.crear(listadoProductos,ventaController.ultimaVenta());
         });
 
         // Acción al presionar 'Verificar'
@@ -152,7 +250,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             //DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
             //listadoProductos = detalleDialog.getListadoProductos();
 
-            textField_7.setText("$" + controller.totalVenta(listadoProductos));
+            montoTotalField.setText("$" + Detallecontroller.totalVenta(listadoProductos));
             // Aquí puedes añadir la lógica para procesar la venta con los productos seleccionados
         });
 

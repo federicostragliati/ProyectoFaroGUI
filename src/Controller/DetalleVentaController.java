@@ -3,10 +3,14 @@ package Controller;
 import Model.Auxiliares.ListadoProductos;
 import Views.Dialog.DetalleVentaDialog;
 import dao.implementaciones.DetalleVentaDAO;
+import dominio.DetalleVenta;
+import dominio.enums.Unidad;
 
 import javax.swing.table.TableModel;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +106,18 @@ public class DetalleVentaController {
                 resultado = resultado.add(valor);
             }
         return resultado.setScale(2, RoundingMode.HALF_UP).toString();
+    }
+
+    public void crear (List<ListadoProductos> list, int idVenta) {
+
+        for (int i = 0; i < list.size() ; i++) {
+            try {
+                System.out.println(list.get(i).getValorPorCantidad());
+                detalleVentaDAO.createDetalleVenta(new DetalleVenta(idVenta, Integer.parseInt(list.get(i).getId()),list.get(i).getDetalle(), Unidad.valueOf(list.get(i).getUnidad()),new BigDecimal(list.get(i).getCantidad()),new BigDecimal(list.get(i).getValor()), new BigDecimal(list.get(i).getValorPorCantidad())));
+            } catch (SQLException | ClassNotFoundException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 }

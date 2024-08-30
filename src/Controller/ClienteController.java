@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ClienteController {
 
@@ -146,6 +147,17 @@ public class ClienteController {
             return "Eliminado";
         } else {
             return "Error al eliminar";
+        }
+    }
+
+    public List<Cliente> listado() {
+
+        List<Cliente> listado;
+        try {
+            listado = clienteDAO.getClientes();
+            return listado;
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -1,5 +1,8 @@
 package Model.Validaciones;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,6 +66,28 @@ public class Validador {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    public static Date convertirStringADate(String fechaString) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formato.parse(fechaString);
+        } catch (ParseException e) {
+            System.err.println("Error al convertir la fecha: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static String extraerNumerosInicio(String texto) {
+        String regex = "^\\d{1,5}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(texto);
+
+        if (matcher.find()) {
+            return matcher.group();
+        } else {
+            return null;
         }
     }
 
