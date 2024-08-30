@@ -16,6 +16,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -249,8 +250,23 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnVerificar.addActionListener(e -> {
             //DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
             //listadoProductos = detalleDialog.getListadoProductos();
+            BigDecimal total = new BigDecimal(Detallecontroller.totalVenta(listadoProductos));
+            BigDecimal descuento;
 
-            montoTotalField.setText("$" + Detallecontroller.totalVenta(listadoProductos));
+            if (!descuentoField.getText().isEmpty()) {
+                descuento = new BigDecimal(descuentoField.getText());
+                BigDecimal valor1 = descuento.divide(new BigDecimal(100));
+                BigDecimal valor2 = valor1.subtract(new BigDecimal(1));
+                BigDecimal valor3 = valor2.multiply(new BigDecimal(-1));
+                BigDecimal montoConDescuento = total.multiply(valor3);
+                montoTotalField.setText("$" + montoConDescuento);
+            } else {
+                montoTotalField.setText("$" + total);
+            }
+
+            //Tengo que meter el aceptar en un JOptionPane para recibir los mensajes de alerta y solo agregar los detalle de venta cuando la venta fue creada correctamente.
+
+            // montoTotalField.setText("$" + total);
             // Aquí puedes añadir la lógica para procesar la venta con los productos seleccionados
         });
 

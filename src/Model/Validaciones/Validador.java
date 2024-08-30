@@ -1,5 +1,6 @@
 package Model.Validaciones;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,7 +80,7 @@ public class Validador {
         }
     }
 
-    public static String extraerNumerosInicio(String texto) {
+    public static String extraerID(String texto) {
         String regex = "^\\d{1,5}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(texto);
@@ -91,7 +92,43 @@ public class Validador {
         }
     }
 
+    public static boolean esFormatoFechaValido(String fecha) {
+        // Definir el formato de la fecha
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 
+        // Establecer que no permita fechas inválidas (como 31/02/2024)
+        formatoFecha.setLenient(false);
+
+        try {
+            // Intentar parsear la fecha
+            formatoFecha.parse(fecha);
+            return true; // Si no lanza excepción, el formato es válido
+        } catch (ParseException e) {
+            return false; // Si lanza excepción, el formato no es válido
+        }
+
+    }
+
+    public static String extraerCuit(String input) {
+        // Dividir el string por el carácter guion (-)
+        String[] partes = input.split(" - ");
+
+        if (partes.length >= 3) {
+            // Retornar la segunda parte (entre el primer y cuarto guion)
+            return partes[1];
+        } else {
+            // Retornar una cadena vacía si no tiene el formato esperado
+            return "";
+        }
+    }
+
+    public static boolean sumaDeMontos(BigDecimal num1, BigDecimal num2, BigDecimal resultadoEsperado) {
+        // Sumar los dos primeros BigDecimal
+        BigDecimal suma = num1.add(num2);
+
+        // Comparar la suma con el tercer BigDecimal
+        return suma.compareTo(resultadoEsperado) == 0;
+    }
 
 
 

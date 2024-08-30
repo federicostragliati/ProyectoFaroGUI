@@ -14,44 +14,51 @@ import java.util.Date;
 public class VentaController {
 
     private final VentaDAO ventaDAO = new VentaDAO();
-    private final ClienteDAO clienteDAO = new ClienteDAO();
 
-    public String crear(String idCliente, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean completa, boolean entregada) {
+    public String crear(String cliente, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean completa, boolean entregada) {
 
+        int desc;
         String id;
-        String cuitCliente;
-        BigDecimal montoPrimBig = BigDecimal.ZERO;
-        BigDecimal montoSecBig = BigDecimal.ZERO;
+        BigDecimal montoPrimBig;
+        BigDecimal montoSecBig;
         BigDecimal montoFinal = new BigDecimal(montoTotal);
+        Date fechaFinal;
+        id = Validador.extraerID(cliente);
+        String idMetod1 = Validador.extraerID(idMetodoPrim);
+        String idMetod2 = Validador.extraerID(idMetodoSec);
+        String cuit = Validador.extraerCuit(cliente);
 
-        id = Validador.extraerNumerosInicio(idCliente);
-        String idMetod1 = Validador.extraerNumerosInicio(idMetodoPrim);
-        String idMetod2 = Validador.extraerNumerosInicio(idMetodoSec);
 
-        try {
-            //id = clienteDAO.getCliente(Integer.parseInt(idCliente)).getId();
-            cuitCliente = clienteDAO.getCliente(Integer.parseInt(id)).getCuitCliente();
-        } catch (SQLException | ClassNotFoundException | IOException e) {
-            throw new RuntimeException(e);
-        }
-        int desc = 0;
         if (Validador.esNumeroEntero(descuentos)) {
             desc = Integer.parseInt(descuentos);
+        } else {
+            return "Descuento no valido";
         }
 
         if (Validador.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
+        } else {
+            return "Monto primario no valido";
         }
 
         if (Validador.esNumeroEntero(montoSec)) {
             montoSecBig = new BigDecimal(montoSec);
+        } else {
+            return "Monto secundario no valido";
         }
 
-        Date fechaFinal = Validador.convertirStringADate(fechaVenta);
+        if (Validador.esFormatoFechaValido(fechaVenta)) {
+            fechaFinal = Validador.convertirStringADate(fechaVenta);
+        } else {
+            return "Error en la fecha";
+        }
 
+        if (!Validador.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
+            return "Los montos no coinciden con el monto final";
+        }
 
         try {
-            ventaDAO.createVenta(new Venta(Integer.parseInt(id),cuitCliente,fechaFinal,desc,Integer.parseInt(idMetod1),montoPrimBig,Integer.parseInt(idMetod2),montoSecBig,montoFinal,pagado,completa,entregada,true));
+            ventaDAO.createVenta(new Venta(Integer.parseInt(id),cuit,fechaFinal,desc,Integer.parseInt(idMetod1),montoPrimBig,Integer.parseInt(idMetod2),montoSecBig,montoFinal,pagado,completa,entregada,true));
             return "Venta Generada";
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
@@ -85,7 +92,7 @@ public class VentaController {
 
     public int ultimaVenta () {
 
-        Venta venta = null;
+        Venta venta;
         try {
             venta = ventaDAO.getLastVenta();
         } catch (SQLException | ClassNotFoundException | IOException e) {
