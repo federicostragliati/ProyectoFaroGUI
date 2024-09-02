@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DetalleVentaController {
 
@@ -27,16 +28,14 @@ public class DetalleVentaController {
         // Usar Controller Producto
         if (!idText.isEmpty()) {
             ProductoController productoController = new ProductoController();
-            String[] datos = productoController.consultar(idText);
+            String[] datos = productoController.consultarActivo(idText);
 
-            if (datos != null && datos.length > 0) {
+            if (datos != null && datos.length > 2) { // Mas de dos datos para evitar problemas de indice
                 // Asignar valores a las columnas correspondientes
                 tableModel.setValueAt(datos[0], row, 1); // Nombre
                 tableModel.setValueAt(datos[3], row, 2); // Unidad de Venta
                 tableModel.setValueAt(datos[2], row, 4); // Precio Unitario
             } else {
-                System.out.println("No se encontraron datos para el ID: " + idText);
-
                 // Limpiar columnas si el producto no es encontrado
                 tableModel.setValueAt("", row, 1);
                 tableModel.setValueAt("", row, 2);
@@ -112,12 +111,31 @@ public class DetalleVentaController {
 
         for (int i = 0; i < list.size() ; i++) {
             try {
-                System.out.println(list.get(i).getValorPorCantidad());
                 detalleVentaDAO.createDetalleVenta(new DetalleVenta(idVenta, Integer.parseInt(list.get(i).getId()),list.get(i).getDetalle(), Unidad.valueOf(list.get(i).getUnidad()),new BigDecimal(list.get(i).getCantidad()),new BigDecimal(list.get(i).getValor()), new BigDecimal(list.get(i).getValorPorCantidad())));
             } catch (SQLException | ClassNotFoundException | IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public List<ListadoProductos> getlistado(String id){
+
+        try {
+          List<DetalleVenta> detalleVentas = detalleVentaDAO.getDetalleVentas();
+            return detalleVentas.stream()
+                    .filter(detalle -> detalle.getIdVenta() == Integer.parseInt(id))  // Filtra por idVenta
+                    .map(detalle -> new ListadoProductos(
+                            String.valueOf(detalle.getId()),
+                            detalle.getDetalle(),
+                            detalle.getUnidad().toString(),
+                            detalle.getCantidad().toString(),
+                            detalle.getPrecioUnitario().toString(),
+                            detalle.getPrecioPorCantidad().toString()))
+                    .collect(Collectors.toList());  // Convierte el Stream en una lista
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Faro/Faro.iml" filepath="$PROJECT_DIR$/Faro/Faro.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProyectoFaroGUI.iml" filepath="$PROJECT_DIR$/ProyectoFaroGUI.iml" />
     </modules>
   </component>

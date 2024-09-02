@@ -130,6 +130,21 @@ public class Validador {
         return suma.compareTo(resultadoEsperado) == 0;
     }
 
+    public static String convertirFecha(String fecha) {
+        // Define los formatos de fecha
+        SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoNuevo = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            // Convierte la cadena de texto a un objeto Date
+            Date fechaDate = formatoOriginal.parse(fecha);
+            // Convierte la fecha al nuevo formato
+            return formatoNuevo.format(fechaDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 }

@@ -61,13 +61,17 @@ public class DetalleVentaDialog extends JDialog {
                     int column = e.getColumn();
                     if (column == 0) { // ID Producto
                         controller.actualizarDatosProducto(row, tableModel);
-
+                        if (tableModel.getValueAt(row,2).toString().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,"Producto Invalido");
+                        } else {
+                            SwingUtilities.invokeLater(() -> {
+                                table.editCellAt(row, 3);
+                                table.setColumnSelectionInterval(3, 3);
+                                table.requestFocusInWindow();
+                            });
+                        }
                         // Mover el foco a la columna "Cantidad" (índice 3)
-                        SwingUtilities.invokeLater(() -> {
-                            table.editCellAt(row, 3);
-                            table.setColumnSelectionInterval(3, 3);
-                            table.requestFocusInWindow();
-                        });
+
                     } else if (column == 3) { // Cantidad
                         controller.calcularPrecioPorCantidad(row, tableModel);
                     }
@@ -129,6 +133,104 @@ public class DetalleVentaDialog extends JDialog {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(agregarFilaButton);
+        buttonPanel.add(confirmarButton);
+
+        // Añadir componentes al JDialog
+        add(new JScrollPane(table), BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    public DetalleVentaDialog(Frame owner, String title, List<ListadoProductos> listadoProductos) {
+        super(owner, title, true);  // Establece la modalidad a 'true'
+        this.listadoProductos = listadoProductos;
+
+        // Configurar el JDialog
+        setSize(600, 400);
+        setLocationRelativeTo(owner);
+        setLayout(new BorderLayout());
+
+        this.listadoProductos = listadoProductos; // Inicializar con los productos existentes si los hay
+
+        // Crear el modelo de la tabla con columnas específicas
+        tableModel = new DefaultTableModel(new Object[]{"ID Producto", "Nombre", "Unidad de Venta", "Cantidad", "Precio Unitario", "Precio por Cantidad"}, 0);
+        table = new JTable(tableModel) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return column == 0 || column == 3; // Solo permite editar ID Producto y Cantidad
+            }
+        };
+
+        // Cargar productos existentes en la tabla
+        for (ListadoProductos producto : listadoProductos) {
+            tableModel.addRow(new Object[]{
+                    producto.getId(),
+                    producto.getDetalle(),
+                    producto.getUnidad(),
+                    producto.getCantidad(),
+                    producto.getValor(),
+                    producto.getValorPorCantidad()
+            });
+        }
+
+        // Agregar un TableModelListener para manejar cambios en la tabla
+        tableModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+                    if (column == 0) { // ID Producto
+                        controller.actualizarDatosProducto(row, tableModel);
+                        if (tableModel.getValueAt(row,2).toString().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,"Producto Invalido");
+                        } else {
+                            SwingUtilities.invokeLater(() -> {
+                                table.editCellAt(row, 3);
+                                table.setColumnSelectionInterval(3, 3);
+                                table.requestFocusInWindow();
+                            });
+                        }
+                        // Mover el foco a la columna "Cantidad" (índice 3)
+
+                    } else if (column == 3) { // Cantidad
+                        controller.calcularPrecioPorCantidad(row, tableModel);
+                    }
+                }
+            }
+        });
+
+        // Agregar un KeyListener para mover el foco a la celda de la derecha al presionar Enter
+        table.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    int row = table.getSelectedRow();
+                    int column = table.getSelectedColumn();
+
+                    // Mueve el foco a la celda de la derecha
+                    int newColumn = column + 1;
+                    if (newColumn < table.getColumnCount()) {
+                        table.editCellAt(row, newColumn);
+                        table.setColumnSelectionInterval(newColumn, newColumn);
+                    }
+                    e.consume(); // Consume el evento para evitar que la acción predeterminada se ejecute
+                }
+            }
+        });
+
+
+
+        // Botón para confirmar y procesar los productos seleccionados
+        JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.addActionListener(e -> {
+            listadoProductos.clear(); // Limpiar la lista actual
+            listadoProductos.addAll(controller.getListado(tableModel)); // Añadir todos los elementos nuevos
+            JOptionPane.showMessageDialog(this, "Productos confirmados");
+            this.dispose(); // Cerrar el diálogo
+        });
+
+        JPanel buttonPanel = new JPanel();
+
         buttonPanel.add(confirmarButton);
 
         // Añadir componentes al JDialog

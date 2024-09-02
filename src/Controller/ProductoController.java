@@ -155,4 +155,52 @@ public class ProductoController {
 
     }
 
+    public String[] consultarActivo(String id) {
+        Producto producto;
+
+        // Validar que el ID sea un número entero
+        if (!Validador.esNumeroEntero(id)) {
+            return new String[]{"ID Invalido"};
+        }
+
+        try {
+            // Obtener el producto por ID
+            producto = productoDAO.getProducto(Integer.parseInt(id));
+
+            if (producto == null) {
+                return new String[]{""};
+            }
+
+            // Obtener los atributos del producto
+            Field[] campos = producto.getClass().getDeclaredFields();
+            String[] datos = new String[campos.length];
+
+            if (producto.isActivo()) {
+                for (int i = 1; i < campos.length; i++) {
+                    campos[i].setAccessible(true); // Permitir el acceso a atributos privados
+                    try {
+                        Object valor = campos[i].get(producto); // Obtener el valor del atributo
+                        if (valor != null) {
+                            datos[i - 1] = valor.toString(); // Convertir valor a String
+                        } else {
+                            datos[i - 1] = "null"; // Representar valores nulos como "null"
+                        }
+                    } catch (IllegalAccessException e) {
+                        return new String[]{""};
+                        // datos[i - 2] = "Acceso no permitido";
+                    }
+                }
+            } else {
+                for (int i = 1; i < campos.length; i++) {
+                    datos[i-1] = "";
+                }
+            }
+
+            return datos;
+
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }

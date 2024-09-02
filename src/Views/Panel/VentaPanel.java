@@ -5,17 +5,18 @@ import Controller.DetalleVentaController;
 import Controller.MetodoPagoController;
 import Controller.VentaController;
 import Model.Auxiliares.ListadoProductos;
+import Model.Validaciones.Validador;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
 import dominio.Cliente;
 import dominio.MetodoDePago;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
     private JTextField montoPrimField;
     private JTextField montoTotalField;
     private JTextField montoSecField;
-    private DetalleVentaController Detallecontroller = new DetalleVentaController();
+    private DetalleVentaController detalleController = new DetalleVentaController();
     private MetodoPagoController metodoPagoController = new MetodoPagoController();
     private ClienteController clienteController = new ClienteController();
     private VentaController ventaController = new VentaController();
@@ -231,43 +232,35 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         });
 
         btnAceptar.addActionListener( e -> {
-            ventaController.crear(clienteField.getText(),
+
+            String mensaje = ventaController.crear(clienteField.getText(),
                     fechaField.getText(),
                     descuentoField.getText(),
                     metodoPrimBox.getSelectedItem().toString(),
                     montoPrimField.getText(),
                     metodoSecBox.getSelectedItem().toString(),
                     montoSecField.getText(),
-                    Detallecontroller.totalVenta(listadoProductos),
+                    montoTotalField.getText().substring(1),
                     checkBoxPagada.isSelected(),
                     checkBoxCompleta.isSelected(),
                     checkBoxCompleta.isSelected());
 
-            Detallecontroller.crear(listadoProductos,ventaController.ultimaVenta());
+            JOptionPane.showMessageDialog(null,mensaje);
+
+            if (mensaje.equalsIgnoreCase("Venta Generada")) {
+                detalleController.crear(listadoProductos,ventaController.ultimaVenta());
+                listadoProductos.clear();
+            }
+
+
+
         });
 
         // Acción al presionar 'Verificar'
         btnVerificar.addActionListener(e -> {
-            //DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
-            //listadoProductos = detalleDialog.getListadoProductos();
-            BigDecimal total = new BigDecimal(Detallecontroller.totalVenta(listadoProductos));
-            BigDecimal descuento;
 
-            if (!descuentoField.getText().isEmpty()) {
-                descuento = new BigDecimal(descuentoField.getText());
-                BigDecimal valor1 = descuento.divide(new BigDecimal(100));
-                BigDecimal valor2 = valor1.subtract(new BigDecimal(1));
-                BigDecimal valor3 = valor2.multiply(new BigDecimal(-1));
-                BigDecimal montoConDescuento = total.multiply(valor3);
-                montoTotalField.setText("$" + montoConDescuento);
-            } else {
-                montoTotalField.setText("$" + total);
-            }
+            ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
 
-            //Tengo que meter el aceptar en un JOptionPane para recibir los mensajes de alerta y solo agregar los detalle de venta cuando la venta fue creada correctamente.
-
-            // montoTotalField.setText("$" + total);
-            // Aquí puedes añadir la lógica para procesar la venta con los productos seleccionados
         });
 
         // Acción al presionar 'Cancelar'
@@ -284,21 +277,463 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showModify() {
-        // Lógica para modificar una venta existente
+
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Venta", true);
+        dialog.setBounds(100, 100, 410, 420);
+        dialog.setLayout(null);
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Etiquetas
+        JLabel lblIdVenta = new JLabel("ID Venta:");
+        lblIdVenta.setBounds(10, 11, 150, 14);
+        dialog.add(lblIdVenta);
+
+        JLabel lblCliente = new JLabel("Cliente:");
+        lblCliente.setBounds(10, 36, 150, 14);
+        dialog.add(lblCliente);
+
+        JLabel lblFecha = new JLabel("Fecha:");
+        lblFecha.setBounds(10, 61, 150, 14);
+        dialog.add(lblFecha);
+
+        JLabel lblDescuento = new JLabel("Descuento:");
+        lblDescuento.setBounds(10, 86, 150, 14);
+        dialog.add(lblDescuento);
+
+        JLabel lblMetodoPrim = new JLabel("Metodo de Pago Primario:");
+        lblMetodoPrim.setBounds(10, 111, 150, 14);
+        dialog.add(lblMetodoPrim);
+
+        JLabel lblMontoPrim = new JLabel("Monto de Pago Primario:");
+        lblMontoPrim.setBounds(10, 136, 150, 14);
+        dialog.add(lblMontoPrim);
+
+        JLabel lblMetodoSec = new JLabel("Metodo de Pago Secundario:");
+        lblMetodoSec.setBounds(10, 161, 150, 14);
+        dialog.add(lblMetodoSec);
+
+        JLabel lblMontoSec = new JLabel("Monto de Pago Secundario:");
+        lblMontoSec.setBounds(10, 186, 150, 14);
+        dialog.add(lblMontoSec);
+
+        JLabel lblMontoTotal = new JLabel("Monto Total:");
+        lblMontoTotal.setBounds(10, 241, 150, 14);
+        dialog.add(lblMontoTotal);
+
+        // Campos de texto
+        JTextField idField = new JTextField();
+        idField.setBounds(170, 8, 220, 22);
+        dialog.add(idField);
+
+        JTextField clienteField = new JTextField();
+        clienteField.setBounds(170, 33, 220, 22);
+        dialog.add(clienteField);
+
+        JTextField fechaField = new JTextField();
+        fechaField.setBounds(170, 58, 220, 22);
+        dialog.add(fechaField);
+
+        JTextField descuentoField = new JTextField();
+        descuentoField.setBounds(170, 83, 220, 22);
+        dialog.add(descuentoField);
+
+        // Comboboxes
+        JComboBox<String> metodoPrimBox = new JComboBox<>();
+        metodoPrimBox.setBounds(170, 108, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoPrimBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoPrimBox);
+
+        JTextField montoPrimField = new JTextField();
+        montoPrimField.setBounds(170, 133, 220, 22);
+        dialog.add(montoPrimField);
+
+        JComboBox<String> metodoSecBox = new JComboBox<>();
+        metodoSecBox.setBounds(170, 158, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoSecBox);
+
+        JTextField montoSecField = new JTextField();
+        montoSecField.setBounds(170, 183, 220, 22);
+        dialog.add(montoSecField);
+
+        JTextField montoTotalField = new JTextField();
+        montoTotalField.setBounds(170, 241, 220, 22);
+        dialog.add(montoTotalField);
+
+        // Botones y Checkboxes
+        JButton btnDetalleVenta = new JButton("Productos");
+        btnDetalleVenta.setBounds(10, 210, 120, 23);
+        dialog.add(btnDetalleVenta);
+
+        JCheckBox checkBoxPagada = new JCheckBox("Pagada");
+        checkBoxPagada.setBounds(10, 267, 97, 23);
+        dialog.add(checkBoxPagada);
+
+        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
+        checkBoxCompleta.setBounds(10, 293, 97, 23);
+        dialog.add(checkBoxCompleta);
+
+        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        checkBoxEntregada.setBounds(10, 319, 97, 23);
+        dialog.add(checkBoxEntregada);
+
+// Calcular la posición de los botones para que queden centrados
+        int buttonWidth = 89;
+        int spacing = (410 - 4 * buttonWidth) / 5;
+        int yPosition = 358;
+
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(spacing, yPosition, buttonWidth, 23);
+        dialog.add(btnAceptar);
+
+        JButton btnVerificar = new JButton("Verificar");
+        btnVerificar.setBounds(spacing * 2 + buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnVerificar);
+
+        JButton btnBuscar = new JButton("Buscar");
+        btnBuscar.setBounds(spacing * 3 + 2 * buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnBuscar);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(spacing * 4 + 3 * buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnCancelar);
+
+        // Acción al presionar 'Productos'
+        btnDetalleVenta.addActionListener(e -> {
+            listadoProductos = detalleController.getlistado(idField.getText());
+            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this),"Consulta Detalle", listadoProductos);
+            detalleDialog.setVisible(true);
+
+        });
+
+        btnBuscar.addActionListener(e -> {
+            String datos [] = ventaController.consultar(idField.getText());
+            idField.setEditable(false);
+            clienteField.setText(datos[1]);
+            clienteField.setEditable(false);
+            fechaField.setText(Validador.convertirFecha(datos[2]));
+            descuentoField.setText(datos[3]);
+            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
+            montoPrimField.setText(datos[5]);
+            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
+            montoSecField.setText(datos[7]);
+            montoTotalField.setText("$" + datos[8]);
+            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
+            checkBoxCompleta.setSelected(Boolean.parseBoolean(datos[10]));
+            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[11]));
+        });
+
+        btnAceptar.addActionListener(e -> {
+
+
+
+            String datos [] = ventaController.consultar(idField.getText());
+            JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
+                    datos[0],
+                    datos[1],
+                    fechaField.getText(),
+                    descuentoField.getText(),
+                    metodoPrimBox.getSelectedItem().toString(),
+                    montoPrimField.getText(),
+                    metodoSecBox.getSelectedItem().toString(),
+                    montoSecField.getText(),
+                    montoTotalField.getText().substring(1),
+                    checkBoxPagada.isSelected(),
+                    checkBoxCompleta.isSelected(),
+                    checkBoxEntregada.isSelected()));
+        });
+
+        btnVerificar.addActionListener( e->{
+            BigDecimal descuento  = new BigDecimal(descuentoField.getText());
+            BigDecimal total = new BigDecimal(montoTotalField.getText().substring(1));
+            BigDecimal valor1 = descuento.divide(BigDecimal.valueOf(100));
+            BigDecimal valor2 = BigDecimal.ONE.subtract(valor1);
+            BigDecimal montoConDescuento = total.multiply(valor2);
+            montoTotalField.setText("$" + montoConDescuento);
+        });
+
+        btnCancelar.addActionListener( e -> {
+            dialog.dispose();
+        });
+
+        dialog.setVisible(true);
     }
+
 
     @Override
     public void showGet() {
-        // Lógica para consultar una venta específica
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Venta", true);
+        dialog.setBounds(100, 100, 410, 420);
+        dialog.setLayout(null);
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Etiquetas
+        JLabel lblIdVenta = new JLabel("ID Venta:");
+        lblIdVenta.setBounds(10, 11, 150, 14);
+        dialog.add(lblIdVenta);
+
+        JLabel lblCliente = new JLabel("Cliente:");
+        lblCliente.setBounds(10, 36, 150, 14);
+        dialog.add(lblCliente);
+
+        JLabel lblFecha = new JLabel("Fecha:");
+        lblFecha.setBounds(10, 61, 150, 14);
+        dialog.add(lblFecha);
+
+        JLabel lblDescuento = new JLabel("Descuento:");
+        lblDescuento.setBounds(10, 86, 150, 14);
+        dialog.add(lblDescuento);
+
+        JLabel lblMetodoPrim = new JLabel("Metodo de Pago Primario:");
+        lblMetodoPrim.setBounds(10, 111, 150, 14);
+        dialog.add(lblMetodoPrim);
+
+        JLabel lblMontoPrim = new JLabel("Monto de Pago Primario:");
+        lblMontoPrim.setBounds(10, 136, 150, 14);
+        dialog.add(lblMontoPrim);
+
+        JLabel lblMetodoSec = new JLabel("Metodo de Pago Secundario:");
+        lblMetodoSec.setBounds(10, 161, 150, 14);
+        dialog.add(lblMetodoSec);
+
+        JLabel lblMontoSec = new JLabel("Monto de Pago Secundario:");
+        lblMontoSec.setBounds(10, 186, 150, 14);
+        dialog.add(lblMontoSec);
+
+        JLabel lblMontoTotal = new JLabel("Monto Total:");
+        lblMontoTotal.setBounds(10, 241, 150, 14);
+        dialog.add(lblMontoTotal);
+
+        // Campos de texto
+        JTextField idField = new JTextField();
+        idField.setBounds(170, 8, 220, 22);
+        dialog.add(idField);
+
+        JTextField clienteField = new JTextField();
+        clienteField.setBounds(170, 33, 220, 22);
+        dialog.add(clienteField);
+
+        JTextField fechaField = new JTextField();
+        fechaField.setBounds(170, 58, 220, 22);
+        dialog.add(fechaField);
+
+        JTextField descuentoField = new JTextField();
+        descuentoField.setBounds(170, 83, 220, 22);
+        dialog.add(descuentoField);
+
+        // Comboboxes
+        JComboBox<String> metodoPrimBox = new JComboBox<>();
+        metodoPrimBox.setBounds(170, 108, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoPrimBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoPrimBox);
+
+        JTextField montoPrimField = new JTextField();
+        montoPrimField.setBounds(170, 133, 220, 22);
+        dialog.add(montoPrimField);
+
+        JComboBox<String> metodoSecBox = new JComboBox<>();
+        metodoSecBox.setBounds(170, 158, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoSecBox);
+
+        JTextField montoSecField = new JTextField();
+        montoSecField.setBounds(170, 183, 220, 22);
+        dialog.add(montoSecField);
+
+        JTextField montoTotalField = new JTextField();
+        montoTotalField.setBounds(170, 241, 220, 22);
+        dialog.add(montoTotalField);
+
+        // Botones y Checkboxes
+        JButton btnDetalleVenta = new JButton("Productos");
+        btnDetalleVenta.setBounds(10, 210, 120, 23);
+        dialog.add(btnDetalleVenta);
+
+        JCheckBox checkBoxPagada = new JCheckBox("Pagada");
+        checkBoxPagada.setBounds(10, 267, 97, 23);
+        dialog.add(checkBoxPagada);
+
+        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
+        checkBoxCompleta.setBounds(10, 293, 97, 23);
+        dialog.add(checkBoxCompleta);
+
+        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        checkBoxEntregada.setBounds(10, 319, 97, 23);
+        dialog.add(checkBoxEntregada);
+
+        JCheckBox checkBoxActivo = new JCheckBox("Activa");
+        checkBoxActivo.setBounds(10, 345,97,23);
+        dialog.add(checkBoxActivo);
+
+        int buttonWidth = 89;
+        int dialogWidth = dialog.getWidth();
+        int buttonHeight = 23;
+        int yPosition = 358;
+
+        // Centrar los botones 'Buscar' y 'Cancelar'
+        int totalButtonWidth = buttonWidth * 2 + 10; // 10 es el espacio entre los botones
+        int xStartPosition = (dialogWidth - totalButtonWidth) / 2;
+
+        JButton btnBuscar = new JButton("Buscar");
+        btnBuscar.setBounds(xStartPosition, yPosition, buttonWidth, buttonHeight);
+        dialog.add(btnBuscar);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(xStartPosition + buttonWidth + 10, yPosition, buttonWidth, buttonHeight);
+        dialog.add(btnCancelar);
+
+        // Acción al presionar 'Productos'
+        btnDetalleVenta.addActionListener(e -> {
+            listadoProductos = detalleController.getlistado(idField.getText());
+            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this),"Consulta Detalle", listadoProductos);
+            detalleDialog.setVisible(true);
+
+        });
+
+        btnBuscar.addActionListener(e -> {
+            String datos [] = ventaController.consultar(idField.getText());
+            idField.setEditable(false);
+            clienteField.setText(datos[1]);
+            clienteField.setEditable(false);
+            fechaField.setText(Validador.convertirFecha(datos[2]));
+            fechaField.setEditable(false);
+            descuentoField.setText(datos[3]);
+            descuentoField.setEditable(false);
+            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
+            metodoPrimBox.setEditable(false);
+            montoPrimField.setText(datos[5]);
+            montoPrimField.setEditable(false);
+            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
+            metodoSecBox.setEditable(false);
+            montoSecField.setText(datos[7]);
+            montoSecField.setEditable(false);
+            montoTotalField.setText("$" + datos[8]);
+            montoTotalField.setEditable(false);
+            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
+            checkBoxPagada.setEnabled(false);
+            checkBoxCompleta.setSelected(Boolean.parseBoolean(datos[10]));
+            checkBoxCompleta.setEnabled(false);
+            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[11]));
+            checkBoxEntregada.setEnabled(false);
+            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[12]));
+            checkBoxActivo.setEnabled(false);
+        });
+
+
+
+        btnCancelar.addActionListener( e -> {
+            dialog.dispose();
+        });
+
+        dialog.setVisible(true);
     }
 
     @Override
     public void showList() {
+
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Ventas", true);
+        dialog.setBounds(100, 100, 800, 600);
+        dialog.setLayout(null);
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+
+        DefaultTableModel tableModel = ventaController.listar();
+        JTable productTable = new JTable(tableModel);
+        productTable.setDefaultEditor(Object.class, null); // Hace la tabla no editable
+        productTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION); // Permite selección múltiple de filas y columnas
+        productTable.setAutoCreateRowSorter(true); // Habilita el ordenamiento en todas las columnas
+
+        // Permite copiar los datos al portapapeles
+        Action copyAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTable table = (JTable) e.getSource();
+                StringBuilder sb = new StringBuilder();
+                int[] selectedRows = table.getSelectedRows();
+                int[] selectedColumns = table.getSelectedColumns();
+
+                for (int row : selectedRows) {
+                    for (int col : selectedColumns) {
+                        sb.append(table.getValueAt(row, col)).append("\t");
+                    }
+                    sb.append("\n");
+                }
+
+                StringSelection stringSelection = new StringSelection(sb.toString());
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(stringSelection, stringSelection);
+            }
+        };
+
+        KeyStroke copyKeyStroke = KeyStroke.getKeyStroke("ctrl C");
+        productTable.getInputMap().put(copyKeyStroke, "copy");
+        productTable.getActionMap().put("copy", copyAction);
+
+        JScrollPane scrollPane = new JScrollPane(productTable);
+        scrollPane.setBounds(10, 10, 760, 500);
+
+        // Crear un botón de cerrar
+        JButton closeButton = new JButton("Cerrar");
+        closeButton.setBounds(350, 520, 100, 30);
+        closeButton.addActionListener(e -> dialog.dispose());
+
+        dialog.add(scrollPane);
+        dialog.add(closeButton);
+
+        dialog.setVisible(true);
         // Lógica para listar las ventas existentes
     }
 
     @Override
     public void showDelete() {
-        // Lógica para eliminar una venta
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Cliente", true);
+        dialog.setBounds(100, 100, 267, 144);
+        dialog.setLayout(null);
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+
+        JLabel idLabel = new JLabel("ID Venta:");
+        idLabel.setBounds(10, 20, 150, 20);
+        dialog.add(idLabel);
+
+        JTextField idField = new JTextField();
+        idField.setBounds(80, 20, 151, 20);
+        dialog.add(idField);
+
+        JButton deleteButton = new JButton("Eliminar");
+        deleteButton.setBounds(10, 51, 100, 30);
+        dialog.add(deleteButton);
+
+        JButton cancelButton = new JButton("Cancelar");
+        cancelButton.setBounds(131, 51, 100, 30);
+        dialog.add(cancelButton);
+
+        deleteButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, ventaController.eliminar(idField.getText()));
+        });
+
+        cancelButton.addActionListener(e -> dialog.dispose());
+
+        dialog.setVisible(true);
     }
 }
