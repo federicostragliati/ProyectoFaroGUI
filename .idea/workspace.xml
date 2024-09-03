@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="30/08 - 14:27">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="02/09 - 15:09">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DetalleVentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DetalleVentaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/VentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VentaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Validaciones/Validador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Validaciones/Validador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Dialog/DetalleVentaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/DetalleVentaDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" afterDir="false" />
     </list>
@@ -135,7 +130,8 @@
       <workItem from="1725022056814" duration="17620000" />
       <workItem from="1725045560303" duration="2353000" />
       <workItem from="1725048170551" duration="16351000" />
-      <workItem from="1725296716820" duration="3593000" />
+      <workItem from="1725296716820" duration="3820000" />
+      <workItem from="1725375050096" duration="6481000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -273,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725047878781</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="02/09 - 15:09">
+      <option name="closed" value="true" />
+      <created>1725300569076</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1725300569076</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +294,8 @@
     <MESSAGE value="28/08 - 16:24" />
     <MESSAGE value="29/08 - 17:55" />
     <MESSAGE value="30/08 - 14:27" />
-    <option name="LAST_COMMIT_MESSAGE" value="30/08 - 14:27" />
+    <MESSAGE value="02/09 - 15:09" />
+    <option name="LAST_COMMIT_MESSAGE" value="02/09 - 15:09" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

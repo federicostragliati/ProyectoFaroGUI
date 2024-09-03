@@ -4,9 +4,9 @@ import Model.Auxiliares.ListadoProductos;
 import Model.CustomTables.CustomTableModelId;
 import Model.Validaciones.Validador;
 import dao.implementaciones.ClienteDAO;
+import dao.implementaciones.ProductoDAO;
 import dao.implementaciones.VentaDAO;
-import dominio.Cliente;
-import dominio.DetalleVenta;
+import dominio.Producto;
 import dominio.Venta;
 
 import javax.swing.*;
@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class VentaController {
@@ -23,6 +25,7 @@ public class VentaController {
     private final VentaDAO ventaDAO = new VentaDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final DetalleVentaController detalleVentaController = new DetalleVentaController();
+    private final ProductoDAO productoDAO = new ProductoDAO();
 
     public String crear(String cliente, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean completa, boolean entregada) {
 
@@ -247,4 +250,5 @@ public class VentaController {
             campoMontoTotal.setText("$" + total);
         }
     }
+
 }

@@ -61,8 +61,8 @@ public class DetalleVentaDialog extends JDialog {
                     int column = e.getColumn();
                     if (column == 0) { // ID Producto
                         controller.actualizarDatosProducto(row, tableModel);
-                        if (tableModel.getValueAt(row,2).toString().isEmpty()) {
-                            JOptionPane.showMessageDialog(null,"Producto Invalido");
+                        if (tableModel.getValueAt(row, 2).toString().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Producto Inválido");
                         } else {
                             SwingUtilities.invokeLater(() -> {
                                 table.editCellAt(row, 3);
@@ -73,7 +73,7 @@ public class DetalleVentaDialog extends JDialog {
                         // Mover el foco a la columna "Cantidad" (índice 3)
 
                     } else if (column == 3) { // Cantidad
-                        controller.calcularPrecioPorCantidad(row, tableModel);
+                        JOptionPane.showMessageDialog(null, controller.calcularPrecioPorCantidad(row, tableModel));
                     }
                 }
             }
@@ -109,6 +109,7 @@ public class DetalleVentaDialog extends JDialog {
             table.requestFocusInWindow();
         });
 
+        // Acción para agregar una fila al presionar Ctrl + I
         table.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_DOWN_MASK), "agregarFila");
         table.getActionMap().put("agregarFila", new AbstractAction() {
             @Override
@@ -119,6 +120,31 @@ public class DetalleVentaDialog extends JDialog {
                 table.setRowSelectionInterval(lastRow, lastRow);
                 table.setColumnSelectionInterval(0, 0);
                 table.requestFocusInWindow();
+            }
+        });
+
+        // Botón para eliminar una fila
+        JButton eliminarFilaButton = new JButton("Eliminar Fila");
+        eliminarFilaButton.addActionListener(e -> {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                tableModel.removeRow(selectedRow);
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione una fila para eliminar.");
+            }
+        });
+
+        // Acción para eliminar una fila al presionar Ctrl + D
+        table.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK), "eliminarFila");
+        table.getActionMap().put("eliminarFila", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1) {
+                    tableModel.removeRow(selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(DetalleVentaDialog.this, "Seleccione una fila para eliminar.");
+                }
             }
         });
 
@@ -133,6 +159,7 @@ public class DetalleVentaDialog extends JDialog {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(agregarFilaButton);
+        buttonPanel.add(eliminarFilaButton);
         buttonPanel.add(confirmarButton);
 
         // Añadir componentes al JDialog
@@ -193,7 +220,7 @@ public class DetalleVentaDialog extends JDialog {
                         // Mover el foco a la columna "Cantidad" (índice 3)
 
                     } else if (column == 3) { // Cantidad
-                        controller.calcularPrecioPorCantidad(row, tableModel);
+                        JOptionPane.showMessageDialog(null,controller.calcularPrecioPorCantidad(row, tableModel));
                     }
                 }
             }

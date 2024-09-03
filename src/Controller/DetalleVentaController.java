@@ -3,7 +3,9 @@ package Controller;
 import Model.Auxiliares.ListadoProductos;
 import Views.Dialog.DetalleVentaDialog;
 import dao.implementaciones.DetalleVentaDAO;
+import dao.implementaciones.ProductoDAO;
 import dominio.DetalleVenta;
+import dominio.Producto;
 import dominio.enums.Unidad;
 
 import javax.swing.table.TableModel;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class DetalleVentaController {
 
     private final DetalleVentaDAO detalleVentaDAO = new DetalleVentaDAO();
+
 
     public DetalleVentaController() {
     }
@@ -45,16 +48,30 @@ public class DetalleVentaController {
     }
 
     public String calcularPrecioPorCantidad(int row, TableModel tableModel) {
+
         String cantidadText = (String) tableModel.getValueAt(row, 3);
         String precioUnitarioText = (String) tableModel.getValueAt(row, 4);
+        ProductoDAO productoDAO = new ProductoDAO();
+        Producto producto;
+
+        try {
+             producto = productoDAO.getProducto(Integer.parseInt((String) tableModel.getValueAt(row, 0)));
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             BigDecimal cantidad = new BigDecimal(cantidadText.isEmpty() ? "0" : cantidadText);
-            BigDecimal precioUnitario = new BigDecimal(precioUnitarioText.isEmpty() ? "0" : precioUnitarioText);
-            BigDecimal precioPorCantidad = cantidad.multiply(precioUnitario);
-            // Asignar valores a las columnas correspondientes
-            tableModel.setValueAt(precioPorCantidad.toString(), row, 5);
-            return "Ok";
+            if (cantidad.compareTo(producto.getCantidad()) <= 0) {
+                BigDecimal precioUnitario = new BigDecimal(precioUnitarioText.isEmpty() ? "0" : precioUnitarioText);
+                BigDecimal precioPorCantidad = cantidad.multiply(precioUnitario);
+                // Asignar valores a las columnas correspondientes
+                tableModel.setValueAt(precioPorCantidad.toString(), row, 5);
+                return "Producto Cargado";
+            } else {
+                return "No hay cantidad suficiente para esta venta. Cantidad disponible: " + producto.getCantidad();
+            }
+
         } catch (NumberFormatException ex) {
             tableModel.setValueAt("", row, 5);
             return "Número inválido para cantidad o precio unitario";

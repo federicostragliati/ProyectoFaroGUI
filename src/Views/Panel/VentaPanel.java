@@ -225,7 +225,9 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnDetalleVenta.addActionListener(e -> {
             DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
             detalleDialog.setVisible(true);
+
             listadoProductos = detalleDialog.getListadoProductos();
+
 
 
             //Limpiar listadoProductos una vez que cree la venta o la cancele
@@ -259,7 +261,11 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         // Acción al presionar 'Verificar'
         btnVerificar.addActionListener(e -> {
 
+
+
             ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
+
+
 
         });
 
