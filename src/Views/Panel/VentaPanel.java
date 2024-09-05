@@ -252,6 +252,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             if (mensaje.equalsIgnoreCase("Venta Generada")) {
                 detalleController.crear(listadoProductos,ventaController.ultimaVenta());
                 listadoProductos.clear();
+                dialog.dispose();
             }
 
 
@@ -260,13 +261,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
         // Acción al presionar 'Verificar'
         btnVerificar.addActionListener(e -> {
-
-
-
             ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
-
-
-
         });
 
         // Acción al presionar 'Cancelar'
@@ -274,8 +269,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             //Limpiar listadoProductos una vez que cree la venta o la cancele
             listadoProductos.clear();
             dialog.dispose();
-
-
         });
 
         dialog.setVisible(true);
