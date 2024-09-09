@@ -471,7 +471,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showGet() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Venta", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Venta", true);
         dialog.setBounds(100, 100, 410, 420);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
@@ -705,7 +705,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showDelete() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Cliente", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Venta", true);
         dialog.setBounds(100, 100, 267, 144);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);

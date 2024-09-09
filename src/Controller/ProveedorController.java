@@ -3,12 +3,14 @@ package Controller;
 import Model.CustomTables.CustomTableModelId;
 import Model.Validaciones.Validador;
 import dao.implementaciones.ProveedorDAO;
+import dominio.Cliente;
 import dominio.Proveedor;
 
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProveedorController {
 
@@ -153,6 +155,17 @@ public class ProveedorController {
             return "Eliminado";
         } else {
             return "Error al eliminar";
+        }
+    }
+
+    public List<Proveedor> listado() {
+
+        List<Proveedor> listado;
+        try {
+            listado = proveedorDAO.getProveedores();
+            return listado;
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.Auxiliares.ListadoProductos;
-import dao.implementaciones.DetalleVentaDAO;
+import Views.Dialog.DetalleVentaDialog;
+import dao.implementaciones.DetalleCompraDAO;
 import dao.implementaciones.ProductoDAO;
+import dominio.DetalleCompra;
 import dominio.DetalleVenta;
 import dominio.Producto;
 import dominio.enums.Unidad;
@@ -16,12 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DetalleVentaController {
+public class DetalleCompraController {
 
-    private final DetalleVentaDAO detalleVentaDAO = new DetalleVentaDAO();
+    private DetalleCompraDAO detalleCompraDAO = new DetalleCompraDAO();
 
-
-    public DetalleVentaController() {
+    public DetalleCompraController() {
     }
 
     public void actualizarDatosProducto(int row, TableModel tableModel) {
@@ -32,16 +33,14 @@ public class DetalleVentaController {
             ProductoController productoController = new ProductoController();
             String[] datos = productoController.consultarActivo(idText);
 
-            if (datos != null && datos.length > 2) { // Mas de dos datos para evitar problemas de indice
+            if (datos != null && datos.length > 1) { // Mas de un dato para evitar problemas de indice
                 // Asignar valores a las columnas correspondientes
                 tableModel.setValueAt(datos[0], row, 1); // Nombre
                 tableModel.setValueAt(datos[3], row, 2); // Unidad de Venta
-                tableModel.setValueAt(datos[2], row, 4); // Precio Unitario
             } else {
                 // Limpiar columnas si el producto no es encontrado
                 tableModel.setValueAt("", row, 1);
                 tableModel.setValueAt("", row, 2);
-                tableModel.setValueAt("", row, 4);
             }
         }
     }
@@ -50,35 +49,21 @@ public class DetalleVentaController {
 
         String cantidadText = (String) tableModel.getValueAt(row, 3);
         String precioUnitarioText = (String) tableModel.getValueAt(row, 4);
-        ProductoDAO productoDAO = new ProductoDAO();
-        Producto producto;
-
-        try {
-             producto = productoDAO.getProducto(Integer.parseInt((String) tableModel.getValueAt(row, 0)));
-        } catch (SQLException | ClassNotFoundException | IOException e) {
-            throw new RuntimeException(e);
-        }
-
         try {
             BigDecimal cantidad = new BigDecimal(cantidadText.isEmpty() ? "0" : cantidadText);
-            if (cantidad.compareTo(producto.getCantidad()) <= 0) {
-                BigDecimal precioUnitario = new BigDecimal(precioUnitarioText.isEmpty() ? "0" : precioUnitarioText);
-                BigDecimal precioPorCantidad = cantidad.multiply(precioUnitario);
-                // Asignar valores a las columnas correspondientes
-                tableModel.setValueAt(precioPorCantidad.toString(), row, 5);
-                return "Producto Cargado";
-            } else {
-                return "No hay cantidad suficiente para esta venta. Cantidad disponible: " + producto.getCantidad();
-            }
-
+            BigDecimal precioUnitario = new BigDecimal(precioUnitarioText.isEmpty() ? "0" : precioUnitarioText);
+            BigDecimal precioPorCantidad = cantidad.multiply(precioUnitario);
+            // Asignar valores a las columnas correspondientes
+            tableModel.setValueAt(precioPorCantidad.toString(), row, 5);
+            return "Producto Cargado";
         } catch (NumberFormatException ex) {
             tableModel.setValueAt("", row, 5);
-            return "Número inválido para cantidad o precio unitario";
+            return "Número inválido para cantidad o costo unitario";
         }
 
     }
 
-    public List <ListadoProductos> getListado(TableModel tableModel) {
+    public List<ListadoProductos> getListado(TableModel tableModel) {
 
         List<ListadoProductos> listadoProductos = new ArrayList<>();
 
@@ -97,20 +82,20 @@ public class DetalleVentaController {
 
     }
 
-    public String totalVenta (List<ListadoProductos> list) {
+    public String totalCompra (List<ListadoProductos> list) {
         BigDecimal resultado = BigDecimal.ZERO;
-            for (int i = 0; i < list.size(); i++) {
-                BigDecimal valor = new BigDecimal(list.get(i).getValorPorCantidad());
-                resultado = resultado.add(valor);
-            }
+        for (int i = 0; i < list.size(); i++) {
+            BigDecimal valor = new BigDecimal(list.get(i).getValorPorCantidad());
+            resultado = resultado.add(valor);
+        }
         return resultado.setScale(2, RoundingMode.HALF_UP).toString();
     }
 
-    public void crear (List<ListadoProductos> list, int idVenta) {
+    public void crear(List<ListadoProductos> list, int idCompra) {
 
         for (int i = 0; i < list.size() ; i++) {
             try {
-                detalleVentaDAO.createDetalleVenta(new DetalleVenta(idVenta, Integer.parseInt(list.get(i).getId()),list.get(i).getDetalle(), Unidad.valueOf(list.get(i).getUnidad()),new BigDecimal(list.get(i).getCantidad()),new BigDecimal(list.get(i).getValor()), new BigDecimal(list.get(i).getValorPorCantidad())));
+                detalleCompraDAO.createDetalleCompra(new DetalleCompra(idCompra, Integer.parseInt(list.get(i).getId()),list.get(i).getDetalle(), Unidad.valueOf(list.get(i).getUnidad()),new BigDecimal(list.get(i).getCantidad()),new BigDecimal(list.get(i).getValor()), new BigDecimal(list.get(i).getValorPorCantidad())));
             } catch (SQLException | ClassNotFoundException | IOException e) {
                 throw new RuntimeException(e);
             }
@@ -120,21 +105,20 @@ public class DetalleVentaController {
     public List<ListadoProductos> getlistado(String id){
 
         try {
-          List<DetalleVenta> detalleVentas = detalleVentaDAO.getDetalleVentas();
+            List<DetalleCompra> detalleVentas = detalleCompraDAO.getDetalleCompras();
             return detalleVentas.stream()
-                    .filter(detalle -> detalle.getIdVenta() == Integer.parseInt(id))  // Filtra por idVenta
+                    .filter(detalle -> detalle.getIdCompra() == Integer.parseInt(id))  // Filtra por idVenta
                     .map(detalle -> new ListadoProductos(
                             String.valueOf(detalle.getId()),
                             detalle.getDetalle(),
                             detalle.getUnidad().toString(),
                             detalle.getCantidad().toString(),
-                            detalle.getPrecioUnitario().toString(),
-                            detalle.getPrecioPorCantidad().toString()))
+                            detalle.getCostoUnitario().toString(),
+                            detalle.getCostoPorCantidad().toString()))
                     .collect(Collectors.toList());  // Convierte el Stream en una lista
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-
 }
