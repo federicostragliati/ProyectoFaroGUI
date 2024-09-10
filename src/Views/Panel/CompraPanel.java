@@ -562,6 +562,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
             checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
             checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
             checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
+            checkBoxActivo.setEnabled(false);
         });
 
         // Acción al presionar 'Aceptar'
@@ -577,7 +578,8 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                     montoSecField.getText(),
                     montoTotalField.getText().substring(1),
                     checkBoxPagada.isSelected(),
-                    checkBoxEntregada.isSelected()));
+                    checkBoxEntregada.isSelected(),
+                    checkBoxActivo.isSelected()));
         });
 
         btnCancelar.addActionListener(e -> {

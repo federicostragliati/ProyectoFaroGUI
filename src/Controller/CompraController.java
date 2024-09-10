@@ -107,8 +107,8 @@ public class CompraController {
 
     }
 
-    public String modificar (String idCompra, String idProveedor, String cuit, String fechaVenta, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal, boolean pagado, boolean entregada) {
-
+    public String modificar (String idCompra, String idProveedor, String cuit, String fechaVenta, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal, boolean pagado, boolean entregada, boolean activo) {
+        //Si la compra fue dada de baja no tengo que permitir que la active nuevamente
         String id;
         BigDecimal montoPrimBig;
         BigDecimal montoSecBig;
@@ -118,6 +118,10 @@ public class CompraController {
         String idMetod1 = Validador.extraerID(idMetodoPrim);
         String idMetod2 = Validador.extraerID(idMetodoSec);
         //String cuit;
+
+        if (activo == false) {
+            return "La compra ya fue dada de baja";
+        }
 
         if (Validador.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
@@ -142,7 +146,7 @@ public class CompraController {
         }
 
 
-        Compra compra = new Compra(Integer.parseInt(idCompra), Integer.parseInt(idProveedor), cuit, fechaFinal, Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, entregada,true);
+        Compra compra = new Compra(Integer.parseInt(idCompra), Integer.parseInt(idProveedor), cuit, fechaFinal, Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, entregada,activo);
 
         try {
             compraDAO.updateCompra(compra);
