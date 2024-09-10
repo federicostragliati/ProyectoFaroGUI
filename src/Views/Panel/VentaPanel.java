@@ -96,9 +96,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(6, 241, 97, 23);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
-        checkBoxCompleta.setBounds(6, 267, 97, 23);
-        dialog.add(checkBoxCompleta);
 
         JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
         checkBoxEntregada.setBounds(6, 293, 97, 23);
@@ -244,8 +241,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                     montoSecField.getText(),
                     montoTotalField.getText().substring(1),
                     checkBoxPagada.isSelected(),
-                    checkBoxCompleta.isSelected(),
-                    checkBoxCompleta.isSelected());
+                    checkBoxEntregada.isSelected());
 
             JOptionPane.showMessageDialog(null,mensaje);
 
@@ -378,10 +374,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(10, 267, 97, 23);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
-        checkBoxCompleta.setBounds(10, 293, 97, 23);
-        dialog.add(checkBoxCompleta);
-
         JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
         checkBoxEntregada.setBounds(10, 319, 97, 23);
         dialog.add(checkBoxEntregada);
@@ -428,13 +420,10 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             montoSecField.setText(datos[7]);
             montoTotalField.setText("$" + datos[8]);
             checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
-            checkBoxCompleta.setSelected(Boolean.parseBoolean(datos[10]));
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[11]));
+            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
         });
 
         btnAceptar.addActionListener(e -> {
-
-
 
             String datos [] = ventaController.consultar(idField.getText());
             JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
@@ -448,7 +437,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                     montoSecField.getText(),
                     montoTotalField.getText().substring(1),
                     checkBoxPagada.isSelected(),
-                    checkBoxCompleta.isSelected(),
                     checkBoxEntregada.isSelected()));
         });
 
@@ -572,10 +560,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(10, 267, 97, 23);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxCompleta = new JCheckBox("Completa");
-        checkBoxCompleta.setBounds(10, 293, 97, 23);
-        dialog.add(checkBoxCompleta);
-
         JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
         checkBoxEntregada.setBounds(10, 319, 97, 23);
         dialog.add(checkBoxEntregada);
@@ -630,11 +614,9 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             montoTotalField.setEditable(false);
             checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
             checkBoxPagada.setEnabled(false);
-            checkBoxCompleta.setSelected(Boolean.parseBoolean(datos[10]));
-            checkBoxCompleta.setEnabled(false);
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[11]));
+            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
             checkBoxEntregada.setEnabled(false);
-            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[12]));
+            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[11]));
             checkBoxActivo.setEnabled(false);
         });
 

@@ -27,7 +27,7 @@ public class VentaController {
     private final DetalleVentaController detalleVentaController = new DetalleVentaController();
     private final ProductoDAO productoDAO = new ProductoDAO();
 
-    public String crear(String cliente, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean completa, boolean entregada) {
+    public String crear(String cliente, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean entregada) {
 
         int desc;
         String id;
@@ -76,7 +76,7 @@ public class VentaController {
         }
 
         try {
-            ventaDAO.createVenta(new Venta(Integer.parseInt(id),cuit,fechaFinal,desc,Integer.parseInt(idMetod1),montoPrimBig,Integer.parseInt(idMetod2),montoSecBig,montoFinal,pagado,completa,entregada,true));
+            ventaDAO.createVenta(new Venta(Integer.parseInt(id),cuit,fechaFinal,desc,Integer.parseInt(idMetod1),montoPrimBig,Integer.parseInt(idMetod2),montoSecBig,montoFinal,pagado,entregada,true));
             return "Venta Generada";
         } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
@@ -121,7 +121,7 @@ public class VentaController {
 
     }
 
-    public String modificar (String idVenta, String idCliente, String cuit, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean completa, boolean entregada) {
+    public String modificar (String idVenta, String idCliente, String cuit, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean entregada) {
 
         int desc;
         String id;
@@ -163,7 +163,7 @@ public class VentaController {
         }
 
 
-        Venta venta = new Venta(Integer.parseInt(idVenta), Integer.parseInt(idCliente), cuit, fechaFinal, Integer.parseInt(descuentos), Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, completa, entregada,true);
+        Venta venta = new Venta(Integer.parseInt(idVenta), Integer.parseInt(idCliente), cuit, fechaFinal, Integer.parseInt(descuentos), Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, entregada,true);
 
         try {
             ventaDAO.updateVenta(venta);
@@ -196,7 +196,6 @@ public class VentaController {
                         venta.getMontoDePagoSecundario(),
                         venta.getMontoFinal(),
                         venta.isPagada(),
-                        venta.isCompleta(),
                         venta.isEntregada(),
                         venta.isActivo()
                 };

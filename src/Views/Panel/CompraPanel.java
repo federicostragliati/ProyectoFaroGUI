@@ -227,8 +227,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                     montoSecField.getText(),
                     montoTotalField.getText().substring(1),
                     checkBoxPagada.isSelected(),
-                    checkBoxEntregada.isSelected()
-            );
+                    checkBoxEntregada.isSelected());
 
             JOptionPane.showMessageDialog(null, mensaje);
 
