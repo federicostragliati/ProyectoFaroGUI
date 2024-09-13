@@ -9,6 +9,7 @@ import Model.Validaciones.Validador;
 import Views.Dialog.DetalleCompraDialog;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
+import com.toedter.calendar.JDateChooser;
 import dominio.MetodoDePago;
 import dominio.Proveedor;
 
@@ -18,8 +19,10 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
-import java.math.BigDecimal;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,9 +125,19 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         lblFecha.setBounds(10, 70, 150, 25);
         dialog.add(lblFecha);
 
-        JTextField fechaField = new JTextField();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+
+        JTextField fechaField = new JTextField(dateFormat.format(date));
         fechaField.setBounds(160, 70, 250, 25);
         dialog.add(fechaField);
+
+        fechaField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(fechaField);
+            }
+        });
 
         // Método de pago primario
         JLabel lblMetodoPrim = new JLabel("Método de Pago Primario:");
@@ -145,6 +158,10 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         lblMontoPrim.setBounds(10, 150, 150, 25);
         dialog.add(lblMontoPrim);
 
+
+        JLabel pesosLabel1 = new JLabel("$");
+        pesosLabel1.setBounds(150,150,220,25);
+        dialog.add(pesosLabel1);
         JTextField montoPrimField = new JTextField();
         montoPrimField.setBounds(160, 150, 250, 25);
         dialog.add(montoPrimField);
@@ -169,6 +186,10 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         lblMontoSec.setBounds(10, 230, 150, 25);
         dialog.add(lblMontoSec);
 
+
+        JLabel pesosLabel2 = new JLabel("$");
+        pesosLabel2.setBounds(150,230,220,25);
+        dialog.add(pesosLabel2);
         JTextField montoSecField = new JTextField();
         montoSecField.setBounds(160, 230, 250, 25);
         dialog.add(montoSecField);
@@ -183,6 +204,9 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         lblMontoTotal.setBounds(10, 310, 150, 25);
         dialog.add(lblMontoTotal);
 
+        JLabel pesosLabel3 = new JLabel("$");
+        pesosLabel3.setBounds(150,310,220,25);
+        dialog.add(pesosLabel3);
         JTextField montoTotalField = new JTextField();
         montoTotalField.setBounds(160, 310, 250, 25);
         dialog.add(montoTotalField);
@@ -192,7 +216,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(10, 350, 150, 25);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        JCheckBox checkBoxEntregada = new JCheckBox("Recibida");
         checkBoxEntregada.setBounds(160, 350, 150, 25);
         dialog.add(checkBoxEntregada);
 
@@ -218,6 +242,8 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         // Acción al presionar 'Aceptar'
         btnAceptar.addActionListener(e -> {
+
+            //Controlar que todos los productos aún sigan activos
             String mensaje = compraController.crear(
                     proveedorField.getText(),
                     fechaField.getText(),
@@ -225,7 +251,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                     montoPrimField.getText(),
                     metodoSecBox.getSelectedItem().toString(),
                     montoSecField.getText(),
-                    montoTotalField.getText().substring(1),
+                    montoTotalField.getText(),
                     checkBoxPagada.isSelected(),
                     checkBoxEntregada.isSelected());
 
@@ -240,7 +266,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         // Acción al presionar 'Verificar'
         btnVerificar.addActionListener(e -> {
-            montoTotalField.setText("$" + detalleController.totalCompra(listadoProductos));
+            montoTotalField.setText(detalleController.totalCompra(listadoProductos));
         });
 
         // Acción al presionar 'Cancelar'
@@ -318,6 +344,9 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoPrimBox);
 
+        JLabel pesosLabel1 = new JLabel("$");
+        pesosLabel1.setBounds(160,133,220,22);
+        dialog.add(pesosLabel1);
         JTextField montoPrimField = new JTextField();
         montoPrimField.setBounds(170, 133, 220, 22);
         dialog.add(montoPrimField);
@@ -331,10 +360,17 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoSecBox);
 
+
+        JLabel pesosLabel2 = new JLabel("$");
+        pesosLabel2.setBounds(160,183,220,22);
+        dialog.add(pesosLabel2);
         JTextField montoSecField = new JTextField();
         montoSecField.setBounds(170, 183, 220, 22);
         dialog.add(montoSecField);
 
+        JLabel pesosLabel3 = new JLabel("$");
+        pesosLabel3.setBounds(160,241,220,22);
+        dialog.add(pesosLabel3);
         JTextField montoTotalField = new JTextField();
         montoTotalField.setBounds(170, 241, 220, 22);
         dialog.add(montoTotalField);
@@ -348,7 +384,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(10, 267, 97, 23);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        JCheckBox checkBoxEntregada = new JCheckBox("Recibida");
         checkBoxEntregada.setBounds(10, 293, 97, 23);
         dialog.add(checkBoxEntregada);
 
@@ -383,30 +419,32 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         btnBuscar.addActionListener(e -> {
             String datos [] = compraController.consultar(idField.getText());
-            idField.setEditable(false);
-            proveedorField.setText(datos[1]);
-            proveedorField.setEditable(false);
-            fechaField.setText(Validador.convertirFecha(datos[2]));
-            fechaField.setEditable(false);
-            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
-            metodoPrimBox.setEditable(false);
-            montoPrimField.setText(datos[4]);
-            montoPrimField.setEditable(false);
-            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[5]) - 1);
-            metodoSecBox.setEditable(false);
-            montoSecField.setText(datos[6]);
-            montoSecField.setEditable(false);
-            montoTotalField.setText("$" + datos[7]);
-            montoTotalField.setEditable(false);
-            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
-            checkBoxPagada.setEnabled(false);
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
-            checkBoxEntregada.setEnabled(false);
-            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
-            checkBoxActivo.setEnabled(false);
+            if(datos.length == 1 ) {
+                idField.setText(datos[0]);
+            } else {
+                idField.setEditable(false);
+                proveedorField.setText(datos[1]);
+                proveedorField.setEditable(false);
+                fechaField.setText(Validador.convertirFecha(datos[2]));
+                fechaField.setEditable(false);
+                metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
+                metodoPrimBox.setEditable(false);
+                montoPrimField.setText(datos[4]);
+                montoPrimField.setEditable(false);
+                metodoSecBox.setSelectedIndex(Integer.parseInt(datos[5]) - 1);
+                metodoSecBox.setEditable(false);
+                montoSecField.setText(datos[6]);
+                montoSecField.setEditable(false);
+                montoTotalField.setText(datos[7]);
+                montoTotalField.setEditable(false);
+                checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
+                checkBoxPagada.setEnabled(false);
+                checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
+                checkBoxEntregada.setEnabled(false);
+                checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
+                checkBoxActivo.setEnabled(false);
+            }
         });
-
-
 
         btnCancelar.addActionListener( e -> {
             dialog.dispose();
@@ -470,6 +508,13 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         fechaField.setBounds(170, 75, 250, 22);
         dialog.add(fechaField);
 
+        fechaField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(fechaField);
+            }
+        });
+
         // Comboboxes
         JComboBox<String> metodoPrimBox = new JComboBox<>();
         metodoPrimBox.setBounds(170, 105, 250, 22);
@@ -480,9 +525,13 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoPrimBox);
 
+        JLabel signoPesosLabel1 = new JLabel("$");
+        signoPesosLabel1.setBounds(160,135,250,22);
+        dialog.add(signoPesosLabel1);
         JTextField montoPrimField = new JTextField();
         montoPrimField.setBounds(170, 135, 250, 22);
         dialog.add(montoPrimField);
+
 
         JComboBox<String> metodoSecBox = new JComboBox<>();
         metodoSecBox.setBounds(170, 165, 250, 22);
@@ -493,13 +542,20 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoSecBox);
 
+        JLabel signoPesosLabel2 = new JLabel("$");
+        signoPesosLabel2.setBounds(160,195,250,22);
+        dialog.add(signoPesosLabel2);
         JTextField montoSecField = new JTextField();
         montoSecField.setBounds(170, 195, 250, 22);
         dialog.add(montoSecField);
 
+        JLabel signoPesosLabel3 = new JLabel("$");
+        signoPesosLabel3.setBounds(160,255,250,22);
+        dialog.add(signoPesosLabel3);
         JTextField montoTotalField = new JTextField();
         montoTotalField.setBounds(170, 255, 250, 22);
         dialog.add(montoTotalField);
+
 
         // Botones y Checkboxes
         JButton btnDetalleVenta = new JButton("Productos");
@@ -510,7 +566,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         checkBoxPagada.setBounds(10, 285, 120, 25);
         dialog.add(checkBoxPagada);
 
-        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        JCheckBox checkBoxEntregada = new JCheckBox("Recibida");
         checkBoxEntregada.setBounds(140, 285, 120, 25);
         dialog.add(checkBoxEntregada);
 
@@ -549,19 +605,24 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         // Acción al presionar 'Buscar'
         btnBuscar.addActionListener(e -> {
             String datos[] = compraController.consultar(idField.getText());
-            idField.setEditable(false);
-            proveedorField.setText(datos[1]);
-            proveedorField.setEditable(false);
-            fechaField.setText(Validador.convertirFecha(datos[2]));
-            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
-            montoPrimField.setText(datos[4]);
-            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[5]) - 1);
-            montoSecField.setText(datos[6]);
-            montoTotalField.setText("$" + datos[7]);
-            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
-            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
-            checkBoxActivo.setEnabled(false);
+            if (datos.length == 1) {
+                idField.setText(datos[0]);
+            } else {
+                idField.setEditable(false);
+                proveedorField.setText(datos[1]);
+                proveedorField.setEditable(false);
+                fechaField.setText(Validador.convertirFecha(datos[2]));
+                metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
+                montoPrimField.setText(datos[4]);
+                metodoSecBox.setSelectedIndex(Integer.parseInt(datos[5]) - 1);
+                montoSecField.setText(datos[6]);
+                montoTotalField.setText(datos[7]);
+                checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
+                checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
+                checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
+                checkBoxActivo.setEnabled(false);
+            }
+
         });
 
         // Acción al presionar 'Aceptar'
@@ -575,7 +636,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                     montoPrimField.getText(),
                     metodoSecBox.getSelectedItem().toString(),
                     montoSecField.getText(),
-                    montoTotalField.getText().substring(1),
+                    montoTotalField.getText(),
                     checkBoxPagada.isSelected(),
                     checkBoxEntregada.isSelected(),
                     checkBoxActivo.isSelected()));
@@ -587,7 +648,6 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         dialog.setVisible(true);
     }
-
 
     @Override
     public void showList() {
@@ -675,4 +735,37 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         dialog.setVisible(true);
     }
+
+    private void showDateChooserDialog(JTextField fechaField) {
+        // Crear un JDateChooser y configurar su formato
+        JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setDate(new Date()); // Establecer la fecha actual
+        dateChooser.setDateFormatString("dd/MM/yyyy");
+
+        // Ajustar el tamaño del JDateChooser
+        dateChooser.setPreferredSize(new Dimension(150, 30)); // Cambiar las dimensiones del campo de fecha
+
+        // Crear un JPanel para contener el JDateChooser
+        JPanel panel = new JPanel();
+        panel.add(dateChooser);
+
+        // Mostrar el JOptionPane con el JPanel
+        int option = JOptionPane.showOptionDialog(
+                this,
+                panel,
+                "Seleccionar Fecha",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null
+        );
+
+        // Actualizar el JTextField si se selecciona una fecha y se presiona OK
+        if (option == JOptionPane.OK_OPTION && dateChooser.getDate() != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            fechaField.setText(dateFormat.format(dateChooser.getDate()));
+        }
+    }
+
 }

@@ -73,7 +73,7 @@ public class CompraController {
     public String[] consultar (String id) {
         Compra compra;
 
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Validador.esNumeroEntero(id) || id.isEmpty()) {
             return new String[]{"ID Invalido"};
         }
 

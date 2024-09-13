@@ -8,6 +8,7 @@ import Model.Auxiliares.ListadoProductos;
 import Model.Validaciones.Validador;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
+import com.toedter.calendar.JDateChooser;
 import dominio.Cliente;
 import dominio.MetodoDePago;
 
@@ -18,7 +19,9 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,7 +120,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         clienteField.setBounds(164, 7, 220, 22);
         JComboBox clienteBox = new JComboBox();
         clienteBox.setBounds(164, 29, 220, 22);
-        //clienteBox.setBounds();
         clienteBox.setVisible(false);
         dialog.add(clienteBox);
         dialog.add(clienteField);
@@ -175,10 +177,22 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             }
         });
 
-        fechaField = new JTextField();
-        fechaField.setBounds(164, 33, 220, 20);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+
+        fechaField = new JTextField(dateFormat.format(date));
+        fechaField.setBounds(164, 31, 220, 20); // Ajusta las coordenadas y tamaño según sea necesario
         dialog.add(fechaField);
-        fechaField.setColumns(10);
+
+
+        // Mostrar el JDateChooser cuando se hace clic en el JTextField
+        fechaField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(fechaField);
+            }
+        });
+
 
         descuentoField = new JTextField();
         descuentoField.setBounds(164, 58, 220, 20);
@@ -194,6 +208,9 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoPrimBox);
 
+        JLabel pesosLabel1 = new JLabel("$");
+        pesosLabel1.setBounds(154, 108, 220, 20);
+        dialog.add(pesosLabel1);
         montoPrimField = new JTextField();
         montoPrimField.setBounds(164, 108, 220, 20);
         dialog.add(montoPrimField);
@@ -208,11 +225,19 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoSecBox);
 
+
+        JLabel pesosLabel2 = new JLabel("$");
+        pesosLabel2.setBounds(154, 158, 220, 20);
+        dialog.add(pesosLabel2);
         montoSecField = new JTextField();
         montoSecField.setBounds(164, 158, 220, 20);
         dialog.add(montoSecField);
         montoSecField.setColumns(10);
 
+
+        JLabel pesosLabel3 = new JLabel("$");
+        pesosLabel3.setBounds(154, 217, 220, 20);
+        dialog.add(pesosLabel3);
         montoTotalField = new JTextField();
         montoTotalField.setBounds(164, 217, 220, 20);
         dialog.add(montoTotalField);
@@ -222,11 +247,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnDetalleVenta.addActionListener(e -> {
             DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
             detalleDialog.setVisible(true);
-
             listadoProductos = detalleDialog.getListadoProductos();
-
-
-
             //Limpiar listadoProductos una vez que cree la venta o la cancele
         });
 
@@ -239,16 +260,17 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                     montoPrimField.getText(),
                     metodoSecBox.getSelectedItem().toString(),
                     montoSecField.getText(),
-                    montoTotalField.getText().substring(1),
+                    montoTotalField.getText(),
                     checkBoxPagada.isSelected(),
                     checkBoxEntregada.isSelected());
 
-            JOptionPane.showMessageDialog(null,mensaje);
-
             if (mensaje.equalsIgnoreCase("Venta Generada")) {
+                JOptionPane.showMessageDialog(null,mensaje + " ID Venta: " + ventaController.ultimaVenta());
                 detalleController.crear(listadoProductos,ventaController.ultimaVenta());
                 listadoProductos.clear();
                 dialog.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null,mensaje );
             }
 
 
@@ -269,193 +291,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
         dialog.setVisible(true);
     }
-
-    @Override
-    public void showModify() {
-
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Venta", true);
-        dialog.setBounds(100, 100, 410, 420);
-        dialog.setLayout(null);
-        dialog.setLocationRelativeTo(null);
-        dialog.setResizable(false);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-        // Etiquetas
-        JLabel lblIdVenta = new JLabel("ID Venta:");
-        lblIdVenta.setBounds(10, 11, 150, 14);
-        dialog.add(lblIdVenta);
-
-        JLabel lblCliente = new JLabel("Cliente:");
-        lblCliente.setBounds(10, 36, 150, 14);
-        dialog.add(lblCliente);
-
-        JLabel lblFecha = new JLabel("Fecha:");
-        lblFecha.setBounds(10, 61, 150, 14);
-        dialog.add(lblFecha);
-
-        JLabel lblDescuento = new JLabel("Descuento:");
-        lblDescuento.setBounds(10, 86, 150, 14);
-        dialog.add(lblDescuento);
-
-        JLabel lblMetodoPrim = new JLabel("Metodo de Pago Primario:");
-        lblMetodoPrim.setBounds(10, 111, 150, 14);
-        dialog.add(lblMetodoPrim);
-
-        JLabel lblMontoPrim = new JLabel("Monto de Pago Primario:");
-        lblMontoPrim.setBounds(10, 136, 150, 14);
-        dialog.add(lblMontoPrim);
-
-        JLabel lblMetodoSec = new JLabel("Metodo de Pago Secundario:");
-        lblMetodoSec.setBounds(10, 161, 150, 14);
-        dialog.add(lblMetodoSec);
-
-        JLabel lblMontoSec = new JLabel("Monto de Pago Secundario:");
-        lblMontoSec.setBounds(10, 186, 150, 14);
-        dialog.add(lblMontoSec);
-
-        JLabel lblMontoTotal = new JLabel("Monto Total:");
-        lblMontoTotal.setBounds(10, 241, 150, 14);
-        dialog.add(lblMontoTotal);
-
-        // Campos de texto
-        JTextField idField = new JTextField();
-        idField.setBounds(170, 8, 220, 22);
-        dialog.add(idField);
-
-        JTextField clienteField = new JTextField();
-        clienteField.setBounds(170, 33, 220, 22);
-        dialog.add(clienteField);
-
-        JTextField fechaField = new JTextField();
-        fechaField.setBounds(170, 58, 220, 22);
-        dialog.add(fechaField);
-
-        JTextField descuentoField = new JTextField();
-        descuentoField.setBounds(170, 83, 220, 22);
-        dialog.add(descuentoField);
-
-        // Comboboxes
-        JComboBox<String> metodoPrimBox = new JComboBox<>();
-        metodoPrimBox.setBounds(170, 108, 220, 22);
-        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
-            if (metodoDePago.isActivo()) {
-                metodoPrimBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
-            }
-        }
-        dialog.add(metodoPrimBox);
-
-        JTextField montoPrimField = new JTextField();
-        montoPrimField.setBounds(170, 133, 220, 22);
-        dialog.add(montoPrimField);
-
-        JComboBox<String> metodoSecBox = new JComboBox<>();
-        metodoSecBox.setBounds(170, 158, 220, 22);
-        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
-            if (metodoDePago.isActivo()) {
-                metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
-            }
-        }
-        dialog.add(metodoSecBox);
-
-        JTextField montoSecField = new JTextField();
-        montoSecField.setBounds(170, 183, 220, 22);
-        dialog.add(montoSecField);
-
-        JTextField montoTotalField = new JTextField();
-        montoTotalField.setBounds(170, 241, 220, 22);
-        dialog.add(montoTotalField);
-
-        // Botones y Checkboxes
-        JButton btnDetalleVenta = new JButton("Productos");
-        btnDetalleVenta.setBounds(10, 210, 120, 23);
-        dialog.add(btnDetalleVenta);
-
-        JCheckBox checkBoxPagada = new JCheckBox("Pagada");
-        checkBoxPagada.setBounds(10, 267, 97, 23);
-        dialog.add(checkBoxPagada);
-
-        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
-        checkBoxEntregada.setBounds(10, 319, 97, 23);
-        dialog.add(checkBoxEntregada);
-
-// Calcular la posición de los botones para que queden centrados
-        int buttonWidth = 89;
-        int spacing = (410 - 4 * buttonWidth) / 5;
-        int yPosition = 358;
-
-        JButton btnAceptar = new JButton("Aceptar");
-        btnAceptar.setBounds(spacing, yPosition, buttonWidth, 23);
-        dialog.add(btnAceptar);
-
-        JButton btnVerificar = new JButton("Verificar");
-        btnVerificar.setBounds(spacing * 2 + buttonWidth, yPosition, buttonWidth, 23);
-        dialog.add(btnVerificar);
-
-        JButton btnBuscar = new JButton("Buscar");
-        btnBuscar.setBounds(spacing * 3 + 2 * buttonWidth, yPosition, buttonWidth, 23);
-        dialog.add(btnBuscar);
-
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(spacing * 4 + 3 * buttonWidth, yPosition, buttonWidth, 23);
-        dialog.add(btnCancelar);
-
-        // Acción al presionar 'Productos'
-        btnDetalleVenta.addActionListener(e -> {
-            listadoProductos = detalleController.getlistado(idField.getText());
-            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this),"Consulta Detalle", listadoProductos);
-            detalleDialog.setVisible(true);
-
-        });
-
-        btnBuscar.addActionListener(e -> {
-            String datos [] = ventaController.consultar(idField.getText());
-            idField.setEditable(false);
-            clienteField.setText(datos[1]);
-            clienteField.setEditable(false);
-            fechaField.setText(Validador.convertirFecha(datos[2]));
-            descuentoField.setText(datos[3]);
-            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
-            montoPrimField.setText(datos[5]);
-            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
-            montoSecField.setText(datos[7]);
-            montoTotalField.setText("$" + datos[8]);
-            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
-        });
-
-        btnAceptar.addActionListener(e -> {
-
-            String datos [] = ventaController.consultar(idField.getText());
-            JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
-                    datos[0],
-                    datos[1],
-                    fechaField.getText(),
-                    descuentoField.getText(),
-                    metodoPrimBox.getSelectedItem().toString(),
-                    montoPrimField.getText(),
-                    metodoSecBox.getSelectedItem().toString(),
-                    montoSecField.getText(),
-                    montoTotalField.getText().substring(1),
-                    checkBoxPagada.isSelected(),
-                    checkBoxEntregada.isSelected()));
-        });
-
-        btnVerificar.addActionListener( e->{
-            BigDecimal descuento  = new BigDecimal(descuentoField.getText());
-            BigDecimal total = new BigDecimal(montoTotalField.getText().substring(1));
-            BigDecimal valor1 = descuento.divide(BigDecimal.valueOf(100));
-            BigDecimal valor2 = BigDecimal.ONE.subtract(valor1);
-            BigDecimal montoConDescuento = total.multiply(valor2);
-            montoTotalField.setText("$" + montoConDescuento);
-        });
-
-        btnCancelar.addActionListener( e -> {
-            dialog.dispose();
-        });
-
-        dialog.setVisible(true);
-    }
-
 
     @Override
     public void showGet() {
@@ -530,6 +365,10 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoPrimBox);
 
+        JLabel pesosLabel1 = new JLabel("$");
+        pesosLabel1.setBounds(160, 133, 220, 22);
+        dialog.add(pesosLabel1);
+
         JTextField montoPrimField = new JTextField();
         montoPrimField.setBounds(170, 133, 220, 22);
         dialog.add(montoPrimField);
@@ -543,9 +382,17 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         }
         dialog.add(metodoSecBox);
 
+        JLabel pesosLabel2 = new JLabel("$");
+        pesosLabel2.setBounds(160, 183, 220, 22);
+        dialog.add(pesosLabel2);
+
         JTextField montoSecField = new JTextField();
         montoSecField.setBounds(170, 183, 220, 22);
         dialog.add(montoSecField);
+
+        JLabel pesosLabel3 = new JLabel("$");
+        pesosLabel3.setBounds(160, 241, 220, 22);
+        dialog.add(pesosLabel3);
 
         JTextField montoTotalField = new JTextField();
         montoTotalField.setBounds(170, 241, 220, 22);
@@ -610,7 +457,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             metodoSecBox.setEditable(false);
             montoSecField.setText(datos[7]);
             montoSecField.setEditable(false);
-            montoTotalField.setText("$" + datos[8]);
+            montoTotalField.setText(datos[8]);
             montoTotalField.setEditable(false);
             checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
             checkBoxPagada.setEnabled(false);
@@ -620,7 +467,209 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             checkBoxActivo.setEnabled(false);
         });
 
+        btnCancelar.addActionListener( e -> {
+            dialog.dispose();
+        });
 
+        dialog.setVisible(true);
+    }
+
+    @Override
+    public void showModify() {
+
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Venta", true);
+        dialog.setBounds(100, 100, 410, 420);
+        dialog.setLayout(null);
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Etiquetas
+        JLabel lblIdVenta = new JLabel("ID Venta:");
+        lblIdVenta.setBounds(10, 11, 150, 14);
+        dialog.add(lblIdVenta);
+
+        JLabel lblCliente = new JLabel("Cliente:");
+        lblCliente.setBounds(10, 36, 150, 14);
+        dialog.add(lblCliente);
+
+        JLabel lblFecha = new JLabel("Fecha:");
+        lblFecha.setBounds(10, 61, 150, 14);
+        dialog.add(lblFecha);
+
+        JLabel lblDescuento = new JLabel("Descuento:");
+        lblDescuento.setBounds(10, 86, 150, 14);
+        dialog.add(lblDescuento);
+
+        JLabel lblMetodoPrim = new JLabel("Metodo de Pago Primario:");
+        lblMetodoPrim.setBounds(10, 111, 150, 14);
+        dialog.add(lblMetodoPrim);
+
+        JLabel lblMontoPrim = new JLabel("Monto de Pago Primario:");
+        lblMontoPrim.setBounds(10, 136, 150, 14);
+        dialog.add(lblMontoPrim);
+
+        JLabel lblMetodoSec = new JLabel("Metodo de Pago Secundario:");
+        lblMetodoSec.setBounds(10, 161, 150, 14);
+        dialog.add(lblMetodoSec);
+
+        JLabel lblMontoSec = new JLabel("Monto de Pago Secundario:");
+        lblMontoSec.setBounds(10, 186, 150, 14);
+        dialog.add(lblMontoSec);
+
+        JLabel lblMontoTotal = new JLabel("Monto Total:");
+        lblMontoTotal.setBounds(10, 241, 150, 14);
+        dialog.add(lblMontoTotal);
+
+        // Campos de texto
+        JTextField idField = new JTextField();
+        idField.setBounds(170, 8, 220, 22);
+        dialog.add(idField);
+
+        JTextField clienteField = new JTextField();
+        clienteField.setBounds(170, 33, 220, 22);
+        dialog.add(clienteField);
+
+        JTextField fechaField = new JTextField();
+        fechaField.setBounds(170, 58, 220, 22);
+        dialog.add(fechaField);
+
+        fechaField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(fechaField);
+            }
+        });
+
+        JTextField descuentoField = new JTextField();
+        descuentoField.setBounds(170, 83, 220, 22);
+        dialog.add(descuentoField);
+
+        // Comboboxes
+        JComboBox<String> metodoPrimBox = new JComboBox<>();
+        metodoPrimBox.setBounds(170, 108, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoPrimBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoPrimBox);
+
+        JLabel pesosLabel1 = new JLabel("$");
+        pesosLabel1.setBounds(160, 133, 220, 22);
+        dialog.add(pesosLabel1);
+
+        JTextField montoPrimField = new JTextField();
+        montoPrimField.setBounds(170, 133, 220, 22);
+        dialog.add(montoPrimField);
+
+        JComboBox<String> metodoSecBox = new JComboBox<>();
+        metodoSecBox.setBounds(170, 158, 220, 22);
+        for (MetodoDePago metodoDePago : metodoPagoController.listaMetodos()) {
+            if (metodoDePago.isActivo()) {
+                metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
+            }
+        }
+        dialog.add(metodoSecBox);
+
+        JLabel pesosLabel2 = new JLabel("$");
+        pesosLabel2.setBounds(160, 183, 220, 22);
+        dialog.add(pesosLabel2);
+
+        JTextField montoSecField = new JTextField();
+        montoSecField.setBounds(170, 183, 220, 22);
+        dialog.add(montoSecField);
+
+        JLabel pesosLabel3 = new JLabel("$");
+        pesosLabel3.setBounds(160, 241, 220, 22);
+        dialog.add(pesosLabel3);
+
+        JTextField montoTotalField = new JTextField();
+        montoTotalField.setBounds(170, 241, 220, 22);
+        dialog.add(montoTotalField);
+
+        // Botones y Checkboxes
+        JButton btnDetalleVenta = new JButton("Productos");
+        btnDetalleVenta.setBounds(10, 210, 120, 23);
+        dialog.add(btnDetalleVenta);
+
+        JCheckBox checkBoxPagada = new JCheckBox("Pagada");
+        checkBoxPagada.setBounds(10, 267, 97, 23);
+        dialog.add(checkBoxPagada);
+
+        JCheckBox checkBoxEntregada = new JCheckBox("Entregada");
+        checkBoxEntregada.setBounds(10, 319, 97, 23);
+        dialog.add(checkBoxEntregada);
+
+// Calcular la posición de los botones para que queden centrados
+        int buttonWidth = 89;
+        int spacing = (410 - 4 * buttonWidth) / 5;
+        int yPosition = 358;
+
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(spacing, yPosition, buttonWidth, 23);
+        dialog.add(btnAceptar);
+
+        JButton btnVerificar = new JButton("Verificar");
+        btnVerificar.setBounds(spacing * 2 + buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnVerificar);
+
+        JButton btnBuscar = new JButton("Buscar");
+        btnBuscar.setBounds(spacing * 3 + 2 * buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnBuscar);
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(spacing * 4 + 3 * buttonWidth, yPosition, buttonWidth, 23);
+        dialog.add(btnCancelar);
+
+        // Acción al presionar 'Productos'
+        btnDetalleVenta.addActionListener(e -> {
+            listadoProductos = detalleController.getlistado(idField.getText());
+            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this),"Consulta Detalle", listadoProductos);
+            detalleDialog.setVisible(true);
+
+        });
+
+        btnBuscar.addActionListener(e -> {
+            String datos [] = ventaController.consultar(idField.getText());
+            if (datos.length == 1) {
+                idField.setText(datos[0]);
+            } else {
+                idField.setEditable(false);
+                clienteField.setText(datos[1]);
+                clienteField.setEditable(false);
+                fechaField.setText(Validador.convertirFecha(datos[2]));
+                descuentoField.setText(datos[3]);
+                metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
+                montoPrimField.setText(datos[5]);
+                metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
+                montoSecField.setText(datos[7]);
+                montoTotalField.setText(datos[8]);
+                checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
+                checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
+            }
+        });
+
+        btnAceptar.addActionListener(e -> {
+
+            String datos [] = ventaController.consultar(idField.getText());
+            JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
+                    datos[0],
+                    datos[1],
+                    fechaField.getText(),
+                    descuentoField.getText(),
+                    metodoPrimBox.getSelectedItem().toString(),
+                    montoPrimField.getText(),
+                    metodoSecBox.getSelectedItem().toString(),
+                    montoSecField.getText(),
+                    montoTotalField.getText(),
+                    checkBoxPagada.isSelected(),
+                    checkBoxEntregada.isSelected()));
+        });
+
+        btnVerificar.addActionListener( e->{
+            ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
+        });
 
         btnCancelar.addActionListener( e -> {
             dialog.dispose();
@@ -717,4 +766,39 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
         dialog.setVisible(true);
     }
+
+    private void showDateChooserDialog(JTextField fechaField) {
+        // Crear un JDateChooser y configurar su formato
+        JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setDate(new Date()); // Establecer la fecha actual
+        dateChooser.setDateFormatString("dd/MM/yyyy");
+
+        // Ajustar el tamaño del JDateChooser
+        dateChooser.setPreferredSize(new Dimension(150, 30)); // Cambiar las dimensiones del campo de fecha
+
+        // Crear un JPanel para contener el JDateChooser
+        JPanel panel = new JPanel();
+        panel.add(dateChooser);
+
+        // Mostrar el JOptionPane con el JPanel
+        int option = JOptionPane.showOptionDialog(
+                this,
+                panel,
+                "Seleccionar Fecha",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null
+        );
+
+        // Actualizar el JTextField si se selecciona una fecha y se presiona OK
+        if (option == JOptionPane.OK_OPTION && dateChooser.getDate() != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            fechaField.setText(dateFormat.format(dateChooser.getDate()));
+        }
+    }
+
+
+
 }

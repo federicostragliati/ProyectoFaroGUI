@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,8 +60,10 @@ public class VentaController {
             return "Monto primario no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoSec)) {
+        if (Validador.validarNumeroDecimal(montoSec) && !montoSec.isEmpty()) {
             montoSecBig = new BigDecimal(montoSec);
+        } else if (montoSec.isEmpty()) {
+            montoSecBig = BigDecimal.ZERO;
         } else {
             return "Monto secundario no valido";
         }
@@ -244,9 +247,9 @@ public class VentaController {
             BigDecimal valor1 = descuento.divide(new BigDecimal(100));
             BigDecimal valor2 = BigDecimal.ONE.subtract(valor1);
             BigDecimal montoConDescuento = total.multiply(valor2);
-            campoMontoTotal.setText("$" + montoConDescuento);
+            campoMontoTotal.setText(String.valueOf(montoConDescuento.setScale(2, RoundingMode.HALF_UP)));
         } else {
-            campoMontoTotal.setText("$" + total);
+            campoMontoTotal.setText(String.valueOf(total));
         }
     }
 
