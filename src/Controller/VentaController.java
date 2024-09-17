@@ -2,11 +2,10 @@ package Controller;
 
 import Model.Auxiliares.ListadoProductos;
 import Model.CustomTables.CustomTableModelId;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import dao.implementaciones.ClienteDAO;
 import dao.implementaciones.ProductoDAO;
 import dao.implementaciones.VentaDAO;
-import dominio.Producto;
 import dominio.Venta;
 
 import javax.swing.*;
@@ -16,9 +15,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class VentaController {
@@ -36,9 +33,9 @@ public class VentaController {
         BigDecimal montoSecBig;
         BigDecimal montoFinal = new BigDecimal(montoTotal);
         Date fechaFinal;
-        id = Validador.extraerID(cliente);
-        String idMetod1 = Validador.extraerID(idMetodoPrim);
-        String idMetod2 = Validador.extraerID(idMetodoSec);
+        id = Herramientas.extraerID(cliente);
+        String idMetod1 = Herramientas.extraerID(idMetodoPrim);
+        String idMetod2 = Herramientas.extraerID(idMetodoSec);
         String cuit;
 
         try {
@@ -48,19 +45,19 @@ public class VentaController {
         }
 
 
-        if (Validador.esNumeroEntero(descuentos)) {
+        if (Herramientas.esNumeroEntero(descuentos)) {
             desc = Integer.parseInt(descuentos);
         } else {
             return "Descuento no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoPrim)){
+        if (Herramientas.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
         } else {
             return "Monto primario no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoSec) && !montoSec.isEmpty()) {
+        if (Herramientas.validarNumeroDecimal(montoSec) && !montoSec.isEmpty()) {
             montoSecBig = new BigDecimal(montoSec);
         } else if (montoSec.isEmpty()) {
             montoSecBig = BigDecimal.ZERO;
@@ -68,13 +65,13 @@ public class VentaController {
             return "Monto secundario no valido";
         }
 
-        if (Validador.esFormatoFechaValido(fechaVenta)) {
-            fechaFinal = Validador.convertirStringADate(fechaVenta);
+        if (Herramientas.esFormatoFechaValido(fechaVenta)) {
+            fechaFinal = Herramientas.convertirStringADate(fechaVenta);
         } else {
             return "Error en la fecha";
         }
 
-        if (!Validador.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
+        if (!Herramientas.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
             return "Los montos no coinciden con el monto final";
         }
 
@@ -90,7 +87,7 @@ public class VentaController {
     public String[] consultar (String id) {
         Venta venta;
 
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return new String[]{"ID Invalido"};
         }
 
@@ -124,52 +121,61 @@ public class VentaController {
 
     }
 
-    public String modificar (String idVenta, String idCliente, String cuit, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean entregada) {
+    public String modificar (String idVenta, String fechaVenta, String descuentos, String idMetodoPrim, String montoPrim, String idMetodoSec, String montoSec, String montoTotal,  boolean pagado, boolean entregada) {
 
         int desc;
-        String id;
         BigDecimal montoPrimBig;
         BigDecimal montoSecBig;
         BigDecimal montoFinal = new BigDecimal(montoTotal);
         Date fechaFinal;
-        // id = Validador.extraerID(cliente);
-        String idMetod1 = Validador.extraerID(idMetodoPrim);
-        String idMetod2 = Validador.extraerID(idMetodoSec);
-        //String cuit;
+        String idMetod1 = Herramientas.extraerID(idMetodoPrim);
+        String idMetod2 = Herramientas.extraerID(idMetodoSec);
 
-        if (Validador.esNumeroEntero(descuentos)) {
+        Venta venta;
+
+        try {
+            venta = ventaDAO.getVenta(Integer.parseInt(idVenta));
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!venta.isActivo()) {
+            return "La venta no esta activa";
+        }
+
+        if (Herramientas.esNumeroEntero(descuentos)) {
             desc = Integer.parseInt(descuentos);
         } else {
             return "Descuento no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoPrim)){
+        if (Herramientas.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
         } else {
             return "Monto primario no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoSec)) {
+        if (Herramientas.validarNumeroDecimal(montoSec)) {
             montoSecBig = new BigDecimal(montoSec);
         } else {
             return "Monto secundario no valido";
         }
 
-        if (Validador.esFormatoFechaValido(fechaVenta)) {
-            fechaFinal = Validador.convertirStringADate(fechaVenta);
+        if (Herramientas.esFormatoFechaValido(fechaVenta)) {
+            fechaFinal = Herramientas.convertirStringADate(fechaVenta);
         } else {
             return "Error en la fecha";
         }
 
-        if (!Validador.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
+        if (!Herramientas.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
             return "Los montos no coinciden con el monto final";
         }
 
 
-        Venta venta = new Venta(Integer.parseInt(idVenta), Integer.parseInt(idCliente), cuit, fechaFinal, Integer.parseInt(descuentos), Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, entregada,true);
+        Venta ventaMod = new Venta(Integer.parseInt(idVenta), venta.getIdCliente(), venta.getCuitCliente(), fechaFinal, desc, Integer.parseInt(idMetod1), montoPrimBig, Integer.parseInt(idMetod2), montoSecBig,  montoFinal, pagado, entregada,venta.isActivo());
 
         try {
-            ventaDAO.updateVenta(venta);
+            ventaDAO.updateVenta(ventaMod);
         } catch (SQLException | ClassNotFoundException | IOException  e) {
             throw new RuntimeException(e);
         }
@@ -240,14 +246,17 @@ public class VentaController {
 
     public void calcularMontoTotal (JTextField campoDescuento, JTextField campoMontoTotal, List<ListadoProductos> listado) {
 
+
         BigDecimal total = new BigDecimal(detalleVentaController.totalVenta(listado));
 
-        if (!campoDescuento.getText().isEmpty()) {
+        if (!campoDescuento.getText().isEmpty() ) {
             BigDecimal descuento = new BigDecimal(campoDescuento.getText());
             BigDecimal valor1 = descuento.divide(new BigDecimal(100));
             BigDecimal valor2 = BigDecimal.ONE.subtract(valor1);
             BigDecimal montoConDescuento = total.multiply(valor2);
             campoMontoTotal.setText(String.valueOf(montoConDescuento.setScale(2, RoundingMode.HALF_UP)));
+        } else if (campoDescuento.getText().equalsIgnoreCase("0")){
+            campoMontoTotal.setText(String.valueOf(total));
         } else {
             campoMontoTotal.setText(String.valueOf(total));
         }

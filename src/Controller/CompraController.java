@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.CustomTables.CustomTableModelId;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import dao.implementaciones.*;
 import dominio.Compra;
 
@@ -26,9 +26,9 @@ public class CompraController {
         BigDecimal montoSecBig;
         BigDecimal montoFinal = new BigDecimal(montoTotal);
         Date fechaFinal;
-        id = Validador.extraerID(proveedor);
-        String idMetod1 = Validador.extraerID(idMetodoPrim);
-        String idMetod2 = Validador.extraerID(idMetodoSec);
+        id = Herramientas.extraerID(proveedor);
+        String idMetod1 = Herramientas.extraerID(idMetodoPrim);
+        String idMetod2 = Herramientas.extraerID(idMetodoSec);
         String cuit;
 
         try {
@@ -37,13 +37,13 @@ public class CompraController {
             throw new RuntimeException(e);
         }
 
-        if (Validador.validarNumeroDecimal(montoPrim)){
+        if (Herramientas.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
         } else {
             return "Monto primario no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoSec) && !montoSec.isEmpty()) {
+        if (Herramientas.validarNumeroDecimal(montoSec) && !montoSec.isEmpty()) {
             montoSecBig = new BigDecimal(montoSec);
         } else if (montoSec.isEmpty()) {
             montoSecBig = BigDecimal.ZERO;
@@ -51,13 +51,13 @@ public class CompraController {
             return "Monto secundario no valido";
         }
 
-        if (Validador.esFormatoFechaValido(fechaCompra)) {
-            fechaFinal = Validador.convertirStringADate(fechaCompra);
+        if (Herramientas.esFormatoFechaValido(fechaCompra)) {
+            fechaFinal = Herramientas.convertirStringADate(fechaCompra);
         } else {
             return "Error en la fecha";
         }
 
-        if (!Validador.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
+        if (!Herramientas.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
             return "Los montos no coinciden con el monto final";
         }
 
@@ -73,7 +73,7 @@ public class CompraController {
     public String[] consultar (String id) {
         Compra compra;
 
-        if (!Validador.esNumeroEntero(id) || id.isEmpty()) {
+        if (!Herramientas.esNumeroEntero(id) || id.isEmpty()) {
             return new String[]{"ID Invalido"};
         }
 
@@ -115,33 +115,33 @@ public class CompraController {
         BigDecimal montoFinal = new BigDecimal(montoTotal);
         Date fechaFinal;
         // id = Validador.extraerID(cliente);
-        String idMetod1 = Validador.extraerID(idMetodoPrim);
-        String idMetod2 = Validador.extraerID(idMetodoSec);
+        String idMetod1 = Herramientas.extraerID(idMetodoPrim);
+        String idMetod2 = Herramientas.extraerID(idMetodoSec);
         //String cuit;
 
         if (activo == false) {
             return "La compra ya fue dada de baja";
         }
 
-        if (Validador.validarNumeroDecimal(montoPrim)){
+        if (Herramientas.validarNumeroDecimal(montoPrim)){
             montoPrimBig = new BigDecimal(montoPrim);
         } else {
             return "Monto primario no valido";
         }
 
-        if (Validador.validarNumeroDecimal(montoSec)) {
+        if (Herramientas.validarNumeroDecimal(montoSec)) {
             montoSecBig = new BigDecimal(montoSec);
         } else {
             return "Monto secundario no valido";
         }
 
-        if (Validador.esFormatoFechaValido(fechaVenta)) {
-            fechaFinal = Validador.convertirStringADate(fechaVenta);
+        if (Herramientas.esFormatoFechaValido(fechaVenta)) {
+            fechaFinal = Herramientas.convertirStringADate(fechaVenta);
         } else {
             return "Error en la fecha";
         }
 
-        if (!Validador.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
+        if (!Herramientas.sumaDeMontos(montoPrimBig,montoSecBig,montoFinal)) {
             return "Los montos no coinciden con el monto final";
         }
 

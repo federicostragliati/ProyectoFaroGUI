@@ -1,11 +1,8 @@
 package Views.Panel;
 
-import Controller.ClienteController;
-import Controller.DetalleVentaController;
-import Controller.MetodoPagoController;
-import Controller.VentaController;
+import Controller.*;
 import Model.Auxiliares.ListadoProductos;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
 import com.toedter.calendar.JDateChooser;
@@ -18,7 +15,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +34,9 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
     private MetodoPagoController metodoPagoController = new MetodoPagoController();
     private ClienteController clienteController = new ClienteController();
     private VentaController ventaController = new VentaController();
+    private ProductoController productoController = new ProductoController();
     private boolean isAdjusting = false;
+
 
     public VentaPanel(String boton1, String boton2, String boton3, String boton4, String boton5) {
         super(boton1, boton2, boton3, boton4, boton5);
@@ -108,7 +106,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnAceptar.setBounds(10, 333, 89, 23);
         dialog.add(btnAceptar);
 
-        JButton btnVerificar = new JButton("Verificar");
+        JButton btnVerificar = new JButton("Actualizar");
         btnVerificar.setBounds(109, 333, 89, 23);
         dialog.add(btnVerificar);
 
@@ -133,7 +131,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                     clienteBox.removeAllItems();
 
                     List<Cliente> coincidencias = clienteController.listado().stream()
-                            .filter(cliente -> (cliente.getCuitCliente().toLowerCase().contains(busqueda)
+                            .filter(cliente -> (String.valueOf(cliente.getId()).contains(busqueda)|| cliente.getCuitCliente().toLowerCase().contains(busqueda)
                                     || cliente.getNombre().toLowerCase().contains(busqueda))
                                     && cliente.isActivo())
                             .collect(Collectors.toList());
@@ -165,7 +163,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         clienteBox.addActionListener(e -> {
             if (!isAdjusting && clienteBox.getSelectedItem() != null) {
                 String clienteSeleccionado = (String) clienteBox.getSelectedItem();
-                clienteField.setText(clienteSeleccionado.split(" - ")[1]);
+                clienteField.setText(clienteSeleccionado);
                 clienteBox.setVisible(false);
             }
         });
@@ -194,6 +192,10 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         });
 
 
+
+        JLabel porcentajeLabel = new JLabel("%");
+        porcentajeLabel.setBounds(154,58,220,20);
+        dialog.add(porcentajeLabel);
         descuentoField = new JTextField();
         descuentoField.setBounds(164, 58, 220, 20);
         dialog.add(descuentoField);
@@ -248,30 +250,42 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), listadoProductos);
             detalleDialog.setVisible(true);
             listadoProductos = detalleDialog.getListadoProductos();
+            ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
             //Limpiar listadoProductos una vez que cree la venta o la cancele
         });
 
         btnAceptar.addActionListener( e -> {
 
-            String mensaje = ventaController.crear(clienteField.getText(),
-                    fechaField.getText(),
-                    descuentoField.getText(),
-                    metodoPrimBox.getSelectedItem().toString(),
-                    montoPrimField.getText(),
-                    metodoSecBox.getSelectedItem().toString(),
-                    montoSecField.getText(),
-                    montoTotalField.getText(),
-                    checkBoxPagada.isSelected(),
-                    checkBoxEntregada.isSelected());
 
-            if (mensaje.equalsIgnoreCase("Venta Generada")) {
-                JOptionPane.showMessageDialog(null,mensaje + " ID Venta: " + ventaController.ultimaVenta());
-                detalleController.crear(listadoProductos,ventaController.ultimaVenta());
-                listadoProductos.clear();
-                dialog.dispose();
+
+            List<String> listadoVerificado = productoController.checkActivos(listadoProductos);
+
+            if (listadoVerificado.get(0).equalsIgnoreCase("Productos Verificados Correctamente")) {
+
+                String mensaje = ventaController.crear(clienteField.getText(),
+                        fechaField.getText(),
+                        descuentoField.getText(),
+                        metodoPrimBox.getSelectedItem().toString(),
+                        montoPrimField.getText(),
+                        metodoSecBox.getSelectedItem().toString(),
+                        montoSecField.getText(),
+                        montoTotalField.getText(),
+                        checkBoxPagada.isSelected(),
+                        checkBoxEntregada.isSelected());
+
+                if (mensaje.equalsIgnoreCase("Venta Generada")) {
+                    JOptionPane.showMessageDialog(null,mensaje + " ID Venta: " + ventaController.ultimaVenta());
+                    detalleController.crear(listadoProductos,ventaController.ultimaVenta());
+                    listadoProductos.clear();
+                    dialog.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null,mensaje );
+                }
             } else {
-                JOptionPane.showMessageDialog(null,mensaje );
+                JOptionPane.showMessageDialog(null, "Productos no activos: " + listadoVerificado);
             }
+
+
 
 
 
@@ -350,6 +364,10 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         JTextField fechaField = new JTextField();
         fechaField.setBounds(170, 58, 220, 22);
         dialog.add(fechaField);
+
+        JLabel porcentajeLabel = new JLabel("%");
+        porcentajeLabel.setBounds(160,83,220,20);
+        dialog.add(porcentajeLabel);
 
         JTextField descuentoField = new JTextField();
         descuentoField.setBounds(170, 83, 220, 22);
@@ -445,7 +463,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             idField.setEditable(false);
             clienteField.setText(datos[1]);
             clienteField.setEditable(false);
-            fechaField.setText(Validador.convertirFecha(datos[2]));
+            fechaField.setText(Herramientas.convertirFecha(datos[2]));
             fechaField.setEditable(false);
             descuentoField.setText(datos[3]);
             descuentoField.setEditable(false);
@@ -541,6 +559,10 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             }
         });
 
+        JLabel porcentajeLabel = new JLabel("%");
+        porcentajeLabel.setBounds(160,83,220,20);
+        dialog.add(porcentajeLabel);
+
         JTextField descuentoField = new JTextField();
         descuentoField.setBounds(170, 83, 220, 22);
         dialog.add(descuentoField);
@@ -610,7 +632,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnAceptar.setBounds(spacing, yPosition, buttonWidth, 23);
         dialog.add(btnAceptar);
 
-        JButton btnVerificar = new JButton("Verificar");
+        JButton btnVerificar = new JButton("Actualizar");
         btnVerificar.setBounds(spacing * 2 + buttonWidth, yPosition, buttonWidth, 23);
         dialog.add(btnVerificar);
 
@@ -638,7 +660,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                 idField.setEditable(false);
                 clienteField.setText(datos[1]);
                 clienteField.setEditable(false);
-                fechaField.setText(Validador.convertirFecha(datos[2]));
+                fechaField.setText(Herramientas.convertirFecha(datos[2]));
                 descuentoField.setText(datos[3]);
                 metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
                 montoPrimField.setText(datos[5]);
@@ -654,8 +676,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
             String datos [] = ventaController.consultar(idField.getText());
             JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
-                    datos[0],
-                    datos[1],
                     fechaField.getText(),
                     descuentoField.getText(),
                     metodoPrimBox.getSelectedItem().toString(),
@@ -665,9 +685,12 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                     montoTotalField.getText(),
                     checkBoxPagada.isSelected(),
                     checkBoxEntregada.isSelected()));
+
+            idField.setEditable(true);
         });
 
         btnVerificar.addActionListener( e->{
+            listadoProductos = detalleController.getlistado(idField.getText());
             ventaController.calcularMontoTotal(descuentoField,montoTotalField,listadoProductos);
         });
 

@@ -1,12 +1,8 @@
 package Controller;
 
 import Model.Auxiliares.ListadoProductos;
-import Views.Dialog.DetalleVentaDialog;
 import dao.implementaciones.DetalleCompraDAO;
-import dao.implementaciones.ProductoDAO;
 import dominio.DetalleCompra;
-import dominio.DetalleVenta;
-import dominio.Producto;
 import dominio.enums.Unidad;
 
 import javax.swing.table.TableModel;
@@ -31,7 +27,7 @@ public class DetalleCompraController {
         // Usar Controller Producto
         if (!idText.isEmpty()) {
             ProductoController productoController = new ProductoController();
-            String[] datos = productoController.consultarActivo(idText);
+            String[] datos = productoController.consultarActivos(idText);
 
             if (datos != null && datos.length > 1) { // Mas de un dato para evitar problemas de indice
                 // Asignar valores a las columnas correspondientes

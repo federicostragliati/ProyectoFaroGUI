@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.Validaciones.Validador;
+import Model.Auxiliares.ListadoProductos;
+import Model.Validaciones.Herramientas;
 import Model.CustomTables.CustomTableModelProducto;
 import dao.implementaciones.ProductoDAO;
 import dominio.Producto;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoController {
 
@@ -18,11 +21,11 @@ public class ProductoController {
 
     public String crear(String detalle, String cantidad, String precio, String unidad, boolean activo) {
 
-        if (Validador.validarLongitud(detalle) != true) {
+        if (Herramientas.validarLongitud(detalle) != true) {
           return "Error en el detalle";
-        } else if (Validador.validarNumeroDecimal(cantidad) != true) {
+        } else if (Herramientas.validarNumeroDecimal(cantidad) != true) {
             return "Error en la cantidad";
-        } else if (Validador.validarNumeroDecimal(precio) != true) {
+        } else if (Herramientas.validarNumeroDecimal(precio) != true) {
             return "Error en el precio";
         }
 
@@ -41,7 +44,7 @@ public class ProductoController {
         Producto producto;
 
         // Validar que el ID sea un número entero
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return new String[]{"ID Invalido"};
         }
 
@@ -104,7 +107,7 @@ public class ProductoController {
 
     public String eliminar(String id) {
         // Validar que el ID sea un número entero
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return "ID Invalido";
         }
 
@@ -134,11 +137,11 @@ public class ProductoController {
 
         if (producto.isActivo() == false) {
             return "El producto a modificar no esta activo";
-        } else if (Validador.validarLongitud(detalle) != true) {
+        } else if (Herramientas.validarLongitud(detalle) != true) {
             return "Error en el detalle";
-        } else if (Validador.validarNumeroDecimal(cantidad) != true) {
+        } else if (Herramientas.validarNumeroDecimal(cantidad) != true) {
             return "Error en la cantidad";
-        } else if (Validador.validarNumeroDecimal(precio) != true) {
+        } else if (Herramientas.validarNumeroDecimal(precio) != true) {
             return "Error en el precio";
         }
 
@@ -155,11 +158,11 @@ public class ProductoController {
 
     }
 
-    public String[] consultarActivo(String id) {
+    public String[] consultarActivos(String id) {
         Producto producto;
 
         // Validar que el ID sea un número entero
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return new String[]{"ID Invalido"};
         }
 
@@ -200,6 +203,29 @@ public class ProductoController {
 
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    public List<String> checkActivos(List<ListadoProductos> list) {
+
+        List<String> listadoError = new ArrayList<String>();
+        boolean activo;
+        for (int i = 0; i < list.size(); i++) {
+            try {
+                activo  = productoDAO.getProducto(Integer.parseInt(list.get(i).getId())).isActivo();
+            } catch (SQLException | ClassNotFoundException | IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (activo == false) {
+                listadoError.add(list.get(i).getDetalle());
+            }
+        }
+
+        if (listadoError.isEmpty()) {
+            listadoError.add("Productos Verificados Correctamente");
+            return listadoError;
+        } else {
+            return listadoError;
         }
     }
 

@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.CustomTables.CustomTableModelId;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import dao.implementaciones.ClienteDAO;
 import dominio.Cliente;
 
@@ -17,13 +17,13 @@ public class ClienteController {
 
     public String crear(String cuit, String nombre, String email, String telefono, boolean activo) {
 
-        if (!Validador.validarCUIT(cuit)) {
+        if (!Herramientas.validarCUIT(cuit)) {
             return "Error en el CUIT";
-        } else if (!Validador.validarLongitud(nombre)) {
+        } else if (!Herramientas.validarLongitud(nombre)) {
             return "Nombre demasiado largo";
-        } else if (!Validador.validarEmail(email)) {
+        } else if (!Herramientas.validarEmail(email)) {
             return "Error en E-Mail";
-        } else if (!Validador.esNumeroEntero(telefono)) {
+        } else if (!Herramientas.esNumeroEntero(telefono)) {
             return "Error en Teléfono";
         } else if (!activo) {
             return "El cliente debe estar activo";
@@ -40,7 +40,7 @@ public class ClienteController {
     public String[] consultar (String id) {
         Cliente cliente;
 
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return new String[]{"ID Invalido"};
         }
 
@@ -85,11 +85,11 @@ public class ClienteController {
 
         if (cliente.isActivo() == false) {
             return "El cliente a modificar no esta activo";
-        } else if (Validador.validarLongitud(nombre) != true) {
+        } else if (Herramientas.validarLongitud(nombre) != true) {
             return "Error en el nombre";
-        } else if (Validador.validarEmail(email) != true) {
+        } else if (Herramientas.validarEmail(email) != true) {
             return "Error en el mail";
-        } else if (Validador.esNumeroEntero(telefono) != true) {
+        } else if (Herramientas.esNumeroEntero(telefono) != true) {
             return "Error en el teléfono";
         }
 
@@ -130,7 +130,7 @@ public class ClienteController {
 
     public String eliminar (String id) {
         // Validar que el ID sea un número entero
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return "ID Invalido";
         }
 

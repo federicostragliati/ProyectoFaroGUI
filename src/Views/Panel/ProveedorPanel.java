@@ -113,6 +113,7 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
         dialog.setVisible(true);
 
 
+
     }
 
     // Modificar tamaño ShowGet
@@ -311,6 +312,7 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
 
             if (datos.length == 1) {
                 JOptionPane.showMessageDialog(null, datos[0]);
+                idField.setEditable(true);
             } else {
                 cuitField.setText(datos[0]);
                 razonField.setText(datos[1]);
@@ -318,8 +320,10 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
                 telefonoField.setText(datos[3]);
                 direccionField.setText(datos[4]);
                 checkBoxActivo.setSelected(Boolean.parseBoolean(datos[5]));
+                idField.setEditable(false);
+                checkBoxActivo.setEnabled(false);
             }
-            idField.setEditable(false);
+
         });
 
         acceptButton.addActionListener(e -> {

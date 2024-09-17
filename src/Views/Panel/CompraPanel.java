@@ -1,11 +1,8 @@
 package Views.Panel;
 
-import Controller.CompraController;
-import Controller.DetalleCompraController;
-import Controller.MetodoPagoController;
-import Controller.ProveedorController;
+import Controller.*;
 import Model.Auxiliares.ListadoProductos;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import Views.Dialog.DetalleCompraDialog;
 import Views.Dialog.DetalleVentaDialog;
 import Views.Interfaces.PanelInterface;
@@ -34,6 +31,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
     private MetodoPagoController metodoPagoController =new MetodoPagoController();
     private CompraController compraController = new CompraController();
     private DetalleCompraController detalleController = new DetalleCompraController();
+    private ProductoController productoController = new ProductoController();
 
     public CompraPanel(String boton1, String boton2, String boton3, String boton4, String boton5) {
         super(boton1, boton2, boton3, boton4, boton5);
@@ -63,7 +61,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         dialog.add(proveedorField);
 
         JComboBox proveedorBox = new JComboBox();
-        proveedorBox.setBounds(160, 40, 250, 25);
+        proveedorBox.setBounds(160, 10, 250, 25);
         proveedorBox.setVisible(false);
         dialog.add(proveedorBox);
 
@@ -77,7 +75,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                     proveedorBox.removeAllItems();
 
                     List<Proveedor> coincidencias = proveedorController.listado().stream()
-                            .filter(proveedor -> (proveedor.getCuit().toLowerCase().contains(busqueda)
+                            .filter(proveedor -> (String.valueOf(proveedor.getId()).toLowerCase().contains(busqueda)|| proveedor.getCuit().toLowerCase().contains(busqueda)
                                     || proveedor.getRazonSocial().toLowerCase().contains(busqueda))
                                     && proveedor.isActivo())
                             .collect(Collectors.toList());
@@ -108,7 +106,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         proveedorBox.addActionListener(e -> {
             if (!isAdjusting && proveedorBox.getSelectedItem() != null) {
                 String proveedorSeleccionado = (String) proveedorBox.getSelectedItem();
-                proveedorField.setText(proveedorSeleccionado.split(" - ")[1]);
+                proveedorField.setText(proveedorSeleccionado);
                 proveedorBox.setVisible(false);
             }
         });
@@ -225,9 +223,9 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         btnAceptar.setBounds(10, 400, 100, 30);
         dialog.add(btnAceptar);
 
-        JButton btnVerificar = new JButton("Verificar");
+        JButton btnVerificar = new JButton("Actualizar");
         btnVerificar.setBounds(120, 400, 100, 30);
-        dialog.add(btnVerificar);
+        //dialog.add(btnVerificar);
 
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(310, 400, 100, 30);
@@ -238,29 +236,47 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
             DetalleCompraDialog detalleDialog = new DetalleCompraDialog((Frame) SwingUtilities.getWindowAncestor(CompraPanel.this), listadoProductos);
             detalleDialog.setVisible(true);
             listadoProductos = detalleDialog.getListadoProductos();
+            montoTotalField.setText(detalleController.totalCompra(listadoProductos));
         });
 
         // Acción al presionar 'Aceptar'
         btnAceptar.addActionListener(e -> {
 
-            //Controlar que todos los productos aún sigan activos
-            String mensaje = compraController.crear(
-                    proveedorField.getText(),
-                    fechaField.getText(),
-                    metodoPrimBox.getSelectedItem().toString(),
-                    montoPrimField.getText(),
-                    metodoSecBox.getSelectedItem().toString(),
-                    montoSecField.getText(),
-                    montoTotalField.getText(),
-                    checkBoxPagada.isSelected(),
-                    checkBoxEntregada.isSelected());
+            List<String> listadoVerificado = productoController.checkActivos(listadoProductos);
 
-            JOptionPane.showMessageDialog(null, mensaje);
+            if (listadoVerificado.get(0).equalsIgnoreCase("Productos Verificados Correctamente")) {
 
-            if (mensaje.equalsIgnoreCase("Compra Generada")) {
-                detalleController.crear(listadoProductos, compraController.ultimaCompra());
-                listadoProductos.clear();
-                dialog.dispose();
+                String mensaje = compraController.crear(
+                        proveedorField.getText(),
+                        fechaField.getText(),
+                        metodoPrimBox.getSelectedItem().toString(),
+                        montoPrimField.getText(),
+                        metodoSecBox.getSelectedItem().toString(),
+                        montoSecField.getText(),
+                        montoTotalField.getText(),
+                        checkBoxPagada.isSelected(),
+                        checkBoxEntregada.isSelected());
+
+                if (checkBoxPagada.isSelected() && metodoPrimBox.getSelectedItem().toString().contains("Cheque")) {
+                    ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoPrimField.getText(),proveedorField.getText());
+
+                }
+                if (checkBoxPagada.isSelected() && metodoSecBox.getSelectedItem().toString().contains("Cheque")) {
+                    ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoSecField.getText(),proveedorField.getText());
+                }
+
+                if (mensaje.equalsIgnoreCase("Compra Generada")) {
+                    JOptionPane.showMessageDialog(null,mensaje + " ID Compra: " + compraController.ultimaCompra());
+                    detalleController.crear(listadoProductos, compraController.ultimaCompra());
+                    listadoProductos.clear();
+                    dialog.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null,mensaje );
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Productos no activos: " + listadoVerificado);
             }
         });
 
@@ -425,7 +441,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                 idField.setEditable(false);
                 proveedorField.setText(datos[1]);
                 proveedorField.setEditable(false);
-                fechaField.setText(Validador.convertirFecha(datos[2]));
+                fechaField.setText(Herramientas.convertirFecha(datos[2]));
                 fechaField.setEditable(false);
                 metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
                 metodoPrimBox.setEditable(false);
@@ -611,7 +627,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                 idField.setEditable(false);
                 proveedorField.setText(datos[1]);
                 proveedorField.setEditable(false);
-                fechaField.setText(Validador.convertirFecha(datos[2]));
+                fechaField.setText(Herramientas.convertirFecha(datos[2]));
                 metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[3]) - 1);
                 montoPrimField.setText(datos[4]);
                 metodoSecBox.setSelectedIndex(Integer.parseInt(datos[5]) - 1);

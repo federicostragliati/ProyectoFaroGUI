@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validador {
+public class Herramientas {
 
     public static boolean validarCUIT(String input) {
         // Expresión regular para el formato "2 dígitos-8 dígitos-1 dígitos"
@@ -63,7 +63,7 @@ public class Validador {
             return false;
         }
         try {
-            Integer.parseInt(valor);
+            Long.parseLong(valor);
             return true;
         } catch (NumberFormatException e) {
             return false;
@@ -109,19 +109,6 @@ public class Validador {
 
     }
 
-    public static String extraerCuit(String input) {
-        // Dividir el string por el carácter guion (-)
-        String[] partes = input.split(" - ");
-
-        if (partes.length >= 3) {
-            // Retornar la segunda parte (entre el primer y cuarto guion)
-            return partes[1];
-        } else {
-            // Retornar una cadena vacía si no tiene el formato esperado
-            return "";
-        }
-    }
-
     public static boolean sumaDeMontos(BigDecimal num1, BigDecimal num2, BigDecimal resultadoEsperado) {
         // Sumar los dos primeros BigDecimal
         BigDecimal suma = num1.add(num2);
@@ -146,5 +133,19 @@ public class Validador {
         }
     }
 
+    public static String[] dividirTexto(String input) {
+        // Dividir el string en tres partes usando " - " como separador
+        String[] partes = input.split(" - ");
 
+        // Crear un array de 3 posiciones, quitando espacios en cada parte
+        String[] resultado = new String[3];
+        if (partes.length == 3) {
+            resultado[0] = partes[0].trim();   // Parte antes del primer guion - ID
+            resultado[1] = partes[1].trim();   // Parte entre los guiones - Nombre
+            resultado[2] = partes[2].trim();   // Parte después del segundo guion - CUIT
+        }
+
+        return resultado;
+
+    }
 }

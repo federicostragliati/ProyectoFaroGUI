@@ -289,6 +289,7 @@ public class ProductoPanel extends GeneralPanel implements PanelInterface {
                 checkBoxActivo.setSelected(Boolean.parseBoolean(datos[4])); // Asume que datos[4] es un valor booleano como String
             }
             idField.setEditable(false);
+            checkBoxActivo.setEnabled(false);
         });
 
         acceptButton.addActionListener(e -> {

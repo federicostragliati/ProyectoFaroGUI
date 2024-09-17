@@ -30,7 +30,7 @@ public class DetalleVentaController {
         // Usar Controller Producto
         if (!idText.isEmpty()) {
             ProductoController productoController = new ProductoController();
-            String[] datos = productoController.consultarActivo(idText);
+            String[] datos = productoController.consultarActivos(idText);
 
             if (datos != null && datos.length > 2) { // Mas de dos datos para evitar problemas de indice
                 // Asignar valores a las columnas correspondientes

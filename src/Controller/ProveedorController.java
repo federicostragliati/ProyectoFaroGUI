@@ -1,9 +1,8 @@
 package Controller;
 
 import Model.CustomTables.CustomTableModelId;
-import Model.Validaciones.Validador;
+import Model.Validaciones.Herramientas;
 import dao.implementaciones.ProveedorDAO;
-import dominio.Cliente;
 import dominio.Proveedor;
 
 import javax.swing.table.DefaultTableModel;
@@ -18,17 +17,17 @@ public class ProveedorController {
 
     public String crear(String cuit, String razonSocial, String email, String telefono, String direccion, boolean activo) {
 
-        if (!Validador.validarCUIT(cuit)) {
+        if (!Herramientas.validarCUIT(cuit)) {
             return "Error en el CUIT";
-        } else if (!Validador.validarLongitud(razonSocial)) {
+        } else if (!Herramientas.validarLongitud(razonSocial)) {
             return "Nombre demasiado largo";
-        } else if (!Validador.validarEmail(email)) {
+        } else if (!Herramientas.validarEmail(email)) {
             return "Error en E-Mail";
-        } else if (!Validador.esNumeroEntero(telefono)) {
+        } else if (!Herramientas.esNumeroEntero(telefono)) {
             return "Error en Teléfono";
         } else if (!activo) {
             return "El cliente debe estar activo";
-        } else if (!Validador.validarLongitud(direccion)) {
+        } else if (!Herramientas.validarLongitud(direccion)) {
             return "Error en Dirección";
         }
 
@@ -43,7 +42,7 @@ public class ProveedorController {
     public String[] consultar (String id) {
         Proveedor proveedor;
 
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return new String[]{"ID Invalido"};
         }
 
@@ -88,14 +87,14 @@ public class ProveedorController {
 
         if (proveedor.isActivo() == false) {
             return "El proveedor a modificar no esta activo";
-        } else if (!Validador.validarLongitud(nombre)) {
+        } else if (!Herramientas.validarLongitud(nombre)) {
             return "Error en el nombre";
-        } else if (!Validador.validarEmail(email)) {
+        } else if (!Herramientas.validarEmail(email)) {
             return "Error en el mail";
-        } else if (!Validador.esNumeroEntero(telefono)) {
+        } else if (!Herramientas.esNumeroEntero(telefono)) {
             System.out.println(telefono);
             return "Error en el teléfono";
-        } else if (!Validador.validarLongitud(direccion)) {
+        } else if (!Herramientas.validarLongitud(direccion)) {
             return "Error en Dirección";
         }
 
@@ -138,7 +137,7 @@ public class ProveedorController {
 
     public String eliminar (String id) {
         // Validar que el ID sea un número entero
-        if (!Validador.esNumeroEntero(id)) {
+        if (!Herramientas.esNumeroEntero(id)) {
             return "ID Invalido";
         }
 
