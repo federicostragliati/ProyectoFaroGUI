@@ -273,6 +273,20 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                         checkBoxPagada.isSelected(),
                         checkBoxEntregada.isSelected());
 
+
+                //Si la venta esta pagada y el metodo de pago 1 es Cheque o E-Cheque, se crea el cheque
+                if (checkBoxPagada.isSelected() && metodoPrimBox.getSelectedItem().toString().contains("Cheque")) {
+                    ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                    contabilidadPanel.showCreateCheque(String.valueOf(ventaController.ultimaVenta()),clienteField.getText(),montoPrimField.getText(),"",true);
+
+                }
+
+                //Si la venta esta pagada y el metodo de pago 2 es Cheque o E-Cheque, se crea el cheque
+                if (checkBoxPagada.isSelected() && metodoSecBox.getSelectedItem().toString().contains("Cheque")) {
+                    ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                    contabilidadPanel.showCreateCheque(String.valueOf(ventaController.ultimaVenta()),clienteField.getText(),montoPrimField.getText(),"",true);
+                }
+
                 if (mensaje.equalsIgnoreCase("Venta Generada")) {
                     JOptionPane.showMessageDialog(null,mensaje + " ID Venta: " + ventaController.ultimaVenta());
                     detalleController.crear(listadoProductos,ventaController.ultimaVenta());
@@ -284,10 +298,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             } else {
                 JOptionPane.showMessageDialog(null, "Productos no activos: " + listadoVerificado);
             }
-
-
-
-
 
         });
 
@@ -623,7 +633,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         checkBoxEntregada.setBounds(10, 319, 97, 23);
         dialog.add(checkBoxEntregada);
 
-// Calcular la posición de los botones para que queden centrados
+        // Calcular la posición de los botones para que queden centrados
         int buttonWidth = 89;
         int spacing = (410 - 4 * buttonWidth) / 5;
         int yPosition = 358;
@@ -675,6 +685,19 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnAceptar.addActionListener(e -> {
 
             String datos [] = ventaController.consultar(idField.getText());
+
+            //Si la venta no estaba pagada y ahora esta pagada, creo cheque de metodo 1 (Si es que el metodo de pago es Cheque o E-Cheque)
+            if (!Boolean.parseBoolean(datos[8]) && checkBoxPagada.isSelected() && metodoPrimBox.getSelectedItem().toString().contains("Cheque")) {
+                ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                contabilidadPanel.showCreateCheque(String.valueOf(ventaController.ultimaVenta()),clienteField.getText(),montoPrimField.getText(),"",true);
+            }
+
+            //Si la venta no estaba pagada y ahora esta pagada, creo cheque de metodo 2 (Si es que el metodo de pago es Cheque o E-Cheque)
+            if (!Boolean.parseBoolean(datos[8]) && checkBoxPagada.isSelected() && metodoSecBox.getSelectedItem().toString().contains("Cheque")) {
+                ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                contabilidadPanel.showCreateCheque(String.valueOf(ventaController.ultimaVenta()),"",montoPrimField.getText(),"",true);
+            }
+
             JOptionPane.showMessageDialog(null,ventaController.modificar(idField.getText(),
                     fechaField.getText(),
                     descuentoField.getText(),

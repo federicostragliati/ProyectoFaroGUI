@@ -618,6 +618,8 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
             detalleDialog.setVisible(true);
         });
 
+
+
         // Acción al presionar 'Buscar'
         btnBuscar.addActionListener(e -> {
             String datos[] = compraController.consultar(idField.getText());
@@ -634,16 +636,37 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
                 montoSecField.setText(datos[6]);
                 montoTotalField.setText(datos[7]);
                 checkBoxPagada.setSelected(Boolean.parseBoolean(datos[8]));
+                if (Boolean.parseBoolean(datos[8])) {
+                    checkBoxPagada.setEnabled(false);
+                }
                 checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[9]));
+                if (Boolean.parseBoolean(datos[9])) {
+                    checkBoxEntregada.setEnabled(false);
+                }
                 checkBoxActivo.setSelected(Boolean.parseBoolean(datos[10]));
                 checkBoxActivo.setEnabled(false);
+
             }
 
         });
 
         // Acción al presionar 'Aceptar'
         btnAceptar.addActionListener(e -> {
+
             String datos[] = compraController.consultar(idField.getText());
+
+            //Si la compra no estaba pagada y ahora esta pagada, creo cheque de metodo 1 (Si es que el metodo de pago es Cheque o E-Cheque)
+            if (!Boolean.parseBoolean(datos[8]) && checkBoxPagada.isSelected() && metodoPrimBox.getSelectedItem().toString().contains("Cheque")) {
+                ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoPrimField.getText(),proveedorField.getText(),true);
+            }
+
+            //Si la compra no estaba pagada y ahora esta pagada, creo cheque de metodo 2 (Si es que el metodo de pago es Cheque o E-Cheque)
+            if (!Boolean.parseBoolean(datos[8]) && checkBoxPagada.isSelected() && metodoSecBox.getSelectedItem().toString().contains("Cheque")) {
+                ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+                contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoPrimField.getText(),proveedorField.getText(),true);
+            }
+
             JOptionPane.showMessageDialog(null, compraController.modificar(idField.getText(),
                     datos[0],
                     datos[1],
