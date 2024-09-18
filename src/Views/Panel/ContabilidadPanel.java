@@ -2,7 +2,6 @@ package Views.Panel;
 
 import Controller.ChequeController;
 import Controller.ProveedorController;
-import Model.Validaciones.Herramientas;
 import com.toedter.calendar.JDateChooser;
 import dominio.Proveedor;
 import dominio.enums.Destino;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 public class ContabilidadPanel extends JPanel {
 
     private boolean isAdjusting = false;
+    private boolean isAdjusting2 = false;
     private JButton createButtonC;
     private JButton consultButtonC;
     private JButton modifyButtonC;
@@ -35,10 +35,10 @@ public class ContabilidadPanel extends JPanel {
 
         setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Cheques");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblNewLabel.setBounds(76, 11, 126, 25);
-        add(lblNewLabel);
+        JLabel lblCheques = new JLabel("Cheques");
+        lblCheques.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblCheques.setBounds(76, 11, 126, 25);
+        add(lblCheques);
 
         createButtonC = new JButton("Crear Cheque");
         createButtonC.setBounds(76, 46, 151, 44);
@@ -60,7 +60,7 @@ public class ContabilidadPanel extends JPanel {
         deleteButtonC.setBounds(720, 46, 155, 44);
         add(deleteButtonC);
 
-        createButtonC.addActionListener(e -> showCreateCheque("","","", ""));// Paso vacios, en caso de que quiera crear de 0 (ver si existe el caso)
+        createButtonC.addActionListener(e -> showCreateCheque("","","", "", false));// Paso vacios, en caso de que quiera crear de 0 (ver si existe el caso)
         consultButtonC.addActionListener(e -> showConsultCheque());
         modifyButtonC.addActionListener(e -> showModifyCheque());
         listButtonC.addActionListener(e -> showListCheque());
@@ -94,7 +94,9 @@ public class ContabilidadPanel extends JPanel {
 
     }
 
-    public void showCreateCheque(String idTrans,String emisor, String monto, String destinatario) {
+    public void showCreateCheque(String idTrans,String emisor, String monto, String destinatario, boolean heredado) {
+
+
 
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Cheque", true);
         dialog.setBounds(100, 100, 434, 412);
@@ -163,7 +165,10 @@ public class ContabilidadPanel extends JPanel {
 
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(319, 329, 89, 23);
-        //dialog.add(btnCancelar);
+        if (!heredado) {
+            dialog.add(btnCancelar);
+        }
+
 
 
         JTextField emisorField = new JTextField(emisor);
@@ -229,7 +234,10 @@ public class ContabilidadPanel extends JPanel {
             }
         });
 
-        JTextField fechaRecepciónField = new JTextField();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+
+        JTextField fechaRecepciónField = new JTextField(dateFormat.format(date));
         fechaRecepciónField.setColumns(10);
         fechaRecepciónField.setBounds(121, 57, 287, 20);
         dialog.add(fechaRecepciónField);
@@ -250,6 +258,10 @@ public class ContabilidadPanel extends JPanel {
         nroChequeField.setColumns(10);
         nroChequeField.setBounds(121, 107, 287, 20);
         dialog.add(nroChequeField);
+
+        JLabel pesosLabel = new JLabel("$");
+        pesosLabel.setBounds(111,130,287,20);
+        dialog.add(pesosLabel);
 
         JTextField importeField = new JTextField(monto);
         importeField.setColumns(10);
@@ -285,13 +297,71 @@ public class ContabilidadPanel extends JPanel {
         destinatarioField.setBounds(121, 232, 287, 20);
         dialog.add(destinatarioField);
 
+        JComboBox destinatarioBox = new JComboBox();
+        destinatarioBox.setBounds(121, 232, 287, 20);
+        destinatarioBox.setVisible(false);
+        dialog.add(destinatarioBox);
+
+        // Listener para autocompletar proveedores
+        destinatarioField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (!isAdjusting2) {
+                    isAdjusting2 = true;
+                    String busqueda = destinatarioField.getText().toLowerCase();
+                    destinatarioBox.removeAllItems();
+
+                    List<Proveedor> coincidencias = proveedorController.listado().stream()
+                            .filter(proveedor -> ( String.valueOf(proveedor.getId()).contains(busqueda)|| proveedor.getCuit().toLowerCase().contains(busqueda)
+                                    || proveedor.getRazonSocial().toLowerCase().contains(busqueda))
+                                    && proveedor.isActivo())
+                            .collect(Collectors.toList());
+
+                    if (!coincidencias.isEmpty()) {
+                        for (Proveedor proveedor : coincidencias) {
+                            destinatarioBox.addItem(proveedor.getId() + " - " + proveedor.getRazonSocial() + " - " + proveedor.getCuit());
+                        }
+                        destinatarioBox.setVisible(true);
+                        destinatarioBox.showPopup();
+                    } else {
+                        destinatarioBox.setVisible(false);
+                    }
+
+                    isAdjusting2 = false;
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_ENTER && destinatarioBox.isVisible()) {
+                    if (destinatarioBox.getSelectedItem() != null) {
+                        String proveedorSeleccionado = (String) destinatarioBox.getSelectedItem();
+                        destinatarioField.setText(proveedorSeleccionado);
+                        destinatarioBox.setVisible(false);
+                    }
+                }
+            }
+        });
+
+        destinatarioBox.addActionListener(e -> {
+            if (!isAdjusting2 && destinatarioBox.getSelectedItem() != null) {
+                String proveedorSeleccionado = (String) destinatarioBox.getSelectedItem();
+                destinatarioField.setText(proveedorSeleccionado);
+                destinatarioBox.setVisible(false);
+            }
+        });
+
+        destinatarioField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                destinatarioBox.setVisible(false);
+            }
+        });
+
         JCheckBox chckbxEstado = new JCheckBox("");
         chckbxEstado.setBounds(117, 256, 97, 23);
         dialog.add(chckbxEstado);
 
         JCheckBox chckbxActivo = new JCheckBox("");
         chckbxActivo.setBounds(117, 281, 97, 23);
-        dialog.add(chckbxActivo);
+        //dialog.add(chckbxActivo);
 
         JComboBox<Destino> comboBoxDestino = new JComboBox<>(Destino.values());
         comboBoxDestino.setBounds(121, 206, 287, 22);
@@ -306,8 +376,6 @@ public class ContabilidadPanel extends JPanel {
         transField.setBounds(121, 8, 287, 20);
         dialog.add(transField);
 
-
-
         btnAceptar.addActionListener( e -> {
 
             String mensaje = chequeController.crear(Integer.parseInt(idTrans),fechaRecepciónField.getText(),emisorField.getText(),bancoField.getText(),nroChequeField.getText(),monto,fechaChequeField.getText(),fechaCobroField.getText(),comboBoxDestino.getSelectedItem().toString(),destinatarioField.getText(),chckbxEstado.isSelected());
@@ -319,8 +387,6 @@ public class ContabilidadPanel extends JPanel {
 
 
         });
-
-
 
         dialog.setVisible(true);
     }

@@ -259,12 +259,12 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
                 if (checkBoxPagada.isSelected() && metodoPrimBox.getSelectedItem().toString().contains("Cheque")) {
                     ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
-                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoPrimField.getText(),proveedorField.getText());
+                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoPrimField.getText(),proveedorField.getText(),true);
 
                 }
                 if (checkBoxPagada.isSelected() && metodoSecBox.getSelectedItem().toString().contains("Cheque")) {
                     ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
-                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoSecField.getText(),proveedorField.getText());
+                    contabilidadPanel.showCreateCheque(String.valueOf(compraController.ultimaCompra()),"",montoSecField.getText(),proveedorField.getText(),true);
                 }
 
                 if (mensaje.equalsIgnoreCase("Compra Generada")) {
