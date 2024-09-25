@@ -438,7 +438,6 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
             if(datos.length == 1 ) {
                 idField.setText(datos[0]);
             } else {
-                idField.setEditable(false);
                 proveedorField.setText(datos[1]);
                 proveedorField.setEditable(false);
                 fechaField.setText(Herramientas.convertirFecha(datos[2]));

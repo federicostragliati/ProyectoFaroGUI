@@ -390,8 +390,6 @@ public class ContabilidadPanel extends JPanel {
 
         dialog.setVisible(true);
     }
-
-
     public void showConsultCheque() {
 
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Cheque", true);
@@ -418,7 +416,7 @@ public class ContabilidadPanel extends JPanel {
         idTransField.setBounds(121, 32, 287, 20);
         dialog.add(idTransField);
 
-        // Desplazar todos los componentes 25px hacia abajo para dar espacio al nuevo campo
+
         JLabel lblEmisor = new JLabel("Emisor:");
         lblEmisor.setBounds(10, 60, 101, 14);
         dialog.add(lblEmisor);
@@ -511,17 +509,70 @@ public class ContabilidadPanel extends JPanel {
         chckbxActivo.setBounds(121, 306, 97, 23);
         dialog.add(chckbxActivo);
 
-        JButton btnAceptar = new JButton("Aceptar");
+        JButton btnAceptar = new JButton("Buscar");
         btnAceptar.setBounds(10, 340, 89, 23);
         dialog.add(btnAceptar);
 
-        JButton btnCancelar = new JButton("Cancelar");
+        JButton btnCancelar = new JButton("Salir");
         btnCancelar.setBounds(319, 340, 89, 23);
         dialog.add(btnCancelar);
 
-        // Listener para crear cheque
         btnAceptar.addActionListener(e -> {
-            // Acciones al presionar aceptar
+            String datos [] = chequeController.consultar(idField.getText());
+
+            if(datos.length == 1 ) {
+                idField.setText(datos[0]);
+                idTransField.setText("");
+                idTransField.setEditable(false);
+                fechaRecepciónField.setText("");
+                fechaRecepciónField.setEditable(false);
+                emisorField.setText("");
+                emisorField.setEditable(false);
+                bancoField.setText("");
+                bancoField.setEditable(false);
+                nroChequeField.setText("");
+                nroChequeField.setEditable(false);
+                importeField.setText("");
+                importeField.setEditable(false);
+                fechaChequeField.setText("");
+                fechaChequeField.setEditable(false);
+                fechaCobroField.setText("");
+                fechaCobroField.setEditable(false);
+                destinatarioField.setText("");
+                destinatarioField.setEditable(false);
+                chckbxEstado.setSelected(false);
+                chckbxEstado.setEnabled(false);
+                chckbxActivo.setSelected(false);
+                chckbxActivo.setEnabled(false);
+            } else {
+                idTransField.setText(datos[0]);
+                idTransField.setEditable(false);
+                fechaRecepciónField.setText(datos[1] );
+                fechaRecepciónField.setEditable(false);
+                emisorField.setText(datos[2] + " - " + datos [3]);
+                emisorField.setEditable(false);
+                bancoField.setText(datos[4]);
+                bancoField.setEditable(false);
+                nroChequeField.setText(datos[5]);
+                nroChequeField.setEditable(false);
+                importeField.setText(datos[6]);
+                importeField.setEditable(false);
+                fechaChequeField.setText(datos[7]);
+                fechaChequeField.setEditable(false);
+                fechaCobroField.setText(datos[8]);
+                fechaCobroField.setEditable(false);
+                comboBoxDestino.setSelectedItem(Destino.valueOf(datos[9]));
+                comboBoxDestino.setEditable(false);
+                destinatarioField.setText(datos[10]);
+                destinatarioField.setEditable(false);
+                chckbxEstado.setSelected(Boolean.parseBoolean(datos[11]));
+                chckbxEstado.setEnabled(false);
+                chckbxActivo.setSelected(Boolean.parseBoolean(datos[12]));
+                chckbxActivo.setEnabled(false);
+            }
+        });
+        btnCancelar.addActionListener(e -> {
+            dialog.dispose();
         });
 
         dialog.setVisible(true);
