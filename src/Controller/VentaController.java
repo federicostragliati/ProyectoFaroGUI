@@ -223,11 +223,7 @@ public class VentaController {
         try {
             ventaDAO.deleteVenta(Integer.parseInt(id));
             return "Venta Eliminada";
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
 

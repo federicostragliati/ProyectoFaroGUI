@@ -1,14 +1,17 @@
 package Controller;
 
+import Model.CustomTables.CustomTableModelId;
 import Model.Validaciones.Herramientas;
 import dao.implementaciones.ChequeDAO;
 import dominio.Cheque;
 import dominio.enums.Destino;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.Date;
 
 
 public class ChequeController {
@@ -72,6 +75,86 @@ public class ChequeController {
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException();
         }
+
+    }
+
+    public String modificar (String idCheque, String fechaRecepcion, String banco, String fechaCheque, String fechaCobro, boolean estado) {
+
+        Cheque cheque;
+
+        try {
+            cheque = chequeDAO.getCheque(Integer.parseInt(idCheque));
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (!cheque.isActivo()) {
+            return "El cheque no esta activo";
+        }
+
+        if (!Herramientas.validarLongitud(banco)) {
+            return "Error en el Banco";
+        }
+
+        Date fechaRecepcionDate = Herramientas.convertirStringADate(fechaRecepcion);
+        Date fechaChequeDate = Herramientas.convertirStringADate(fechaCheque);
+        Date fechaCobroDate = Herramientas.convertirStringADate(fechaCobro);
+
+        cheque.setFechaRecepcion(fechaRecepcionDate);
+        cheque.setFechaCheque(fechaChequeDate);
+        cheque.setFechaCobro(fechaCobroDate);
+        cheque.setBancoProcedencia(banco);
+        cheque.setEstado(estado);
+
+        try {
+            chequeDAO.updateCheque(cheque);
+            return "Cheque Actualizado";
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public DefaultTableModel listar() {
+        String[] columnNames = {"ID", "ID Transacción", "CUIT Emisor", "Nombre Emisor ", "Banco", "Nro Cheque", "Importe", "Fecha Cheque", "Fecha Cobro", "Destino", "CUIT Destino", "Estado", "Activo"};
+        DefaultTableModel tableModel = new CustomTableModelId(new Object[][]{}, columnNames);
+
+        try {
+            java.util.List<Cheque> Cheques = chequeDAO.getCheques();
+            for (Cheque cheque : Cheques) {
+                Object[] rowData = {
+                        cheque.getId(),
+                        cheque.getIdTransaccion(),
+                        cheque.getFechaRecepcion(),
+                        cheque.getCuitEmisor(),
+                        cheque.getNombreEmisor(),
+                        cheque.getBancoProcedencia(),
+                        cheque.getNroCheque(),
+                        cheque.getImporte(),
+                        cheque.getFechaCheque(),
+                        cheque.getFechaCobro(),
+                        cheque.getDestino(),
+                        cheque.getCuitDestino(),
+                        cheque.isEstado(),
+                        cheque.isActivo()
+                };
+                tableModel.addRow(rowData);
+            }
+            return tableModel;
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public String eliminar (String idCheque) {
+
+        try {
+            chequeDAO.deleteCheque(Integer.parseInt(idCheque));
+            return "Cheque Eliminado";
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }
