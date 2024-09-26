@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ChequeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ChequeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/CompraPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/CompraPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,7 +146,7 @@
       <workItem from="1727114438371" duration="1262000" />
       <workItem from="1727271248422" duration="2091000" />
       <workItem from="1727277174163" duration="2237000" />
-      <workItem from="1727279904158" duration="4648000" />
+      <workItem from="1727279904158" duration="4694000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -401,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727122808850</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management.">
+      <option name="closed" value="true" />
+      <created>1727294557030</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1727294557030</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
