@@ -400,7 +400,7 @@ public class ContabilidadPanel extends JPanel {
     }
     public void showConsultCheque() {
 
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Cheque", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Cheque", true);
         dialog.setBounds(100, 100, 434, 400);  // Aumenta el tamaño para acomodar todos los componentes
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(this);
@@ -795,7 +795,7 @@ public class ContabilidadPanel extends JPanel {
         dialog.setVisible(true);
     }
     public void showListCheque() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Ventas", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Cheques", true);
         dialog.setBounds(100, 100, 800, 600);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
@@ -1009,7 +1009,7 @@ public class ContabilidadPanel extends JPanel {
         dialog.setVisible(true);
     }
     public void showListMetodo () {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Ventas", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Métodos", true);
         dialog.setBounds(100, 100, 800, 600);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);

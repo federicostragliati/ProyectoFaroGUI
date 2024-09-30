@@ -311,7 +311,7 @@ public class ProductoPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showList() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Clientes", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Lista de Productos", true);
         dialog.setBounds(100, 100, 800, 600);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);

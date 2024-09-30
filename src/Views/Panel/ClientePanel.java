@@ -207,18 +207,18 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showModify() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Producto", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Cliente", true);
         dialog.setBounds(100, 100, 320, 210);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
 
-        JLabel idLabel = new JLabel("ID del Cliente a Modificar:");
+        JLabel idLabel = new JLabel("ID:");
         idLabel.setBounds(10, 11, 150, 14);
         dialog.add(idLabel);
 
         JTextField idField = new JTextField();
-        idField.setBounds(160, 8, 130, 20);
+        idField.setBounds(160, 8, 217, 20);
         dialog.add(idField);
 
         JLabel cuitLabel = new JLabel("CUIT:");
