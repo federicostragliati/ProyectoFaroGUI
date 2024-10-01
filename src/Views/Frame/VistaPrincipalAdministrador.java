@@ -57,6 +57,7 @@ public class VistaPrincipalAdministrador extends JFrame {
         VentaPanel ventaPanel = new VentaPanel("Nueva Venta", "Consultar Venta","Modificar Venta","Listar Ventas", "Baja Venta");
         CompraPanel compraPanel = new CompraPanel("Nueva Compra","Consultar Comprar","Modificar Compra","Listar Compras", "Baja Compra");
         ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
+        ReportesPanel reportesPanel = new ReportesPanel();
 
         mainPanel.add(productoPanel, "productosPanel");
         mainPanel.add(clientePanel, "clientePanel");
@@ -64,6 +65,7 @@ public class VistaPrincipalAdministrador extends JFrame {
         mainPanel.add(ventaPanel,"ventaPanel");
         mainPanel.add(compraPanel,"compraPanel");
         mainPanel.add(contabilidadPanel,"contabilidadPanel");
+        mainPanel.add(reportesPanel,"reportesPanel");
 
         // Agregar listeners para cambiar la vista cuando se hace clic en un botón
         botonProductos.addActionListener(e -> {
@@ -96,7 +98,11 @@ public class VistaPrincipalAdministrador extends JFrame {
             cl.show(mainPanel, "contabilidadPanel");
         });
 
-        // Agregar otros listeners para otros botones (aún no implementados)
+        botonReportes.addActionListener( e -> {
+            CardLayout cl = (CardLayout) (mainPanel.getLayout());
+            cl.show(mainPanel, "reportesPanel");
+        });
+
     }
 
     public static void main(String[] args) {

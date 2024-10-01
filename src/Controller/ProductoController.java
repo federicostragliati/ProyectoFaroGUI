@@ -125,6 +125,14 @@ public class ProductoController {
         }
     }
 
+    public List<Producto> listado() {
+        try {
+            return productoDAO.getProductos();
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String modificar(String id, String detalle, String cantidad, String precio, String unidad) {
 
         Producto producto;
