@@ -4,13 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="30/9 - 15.00">
-      <change afterPath="$PROJECT_DIR$/src/Controller/ReportesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/Panel/ReportesPanel.java" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="18/09 - 16:00">
+      <change afterPath="$PROJECT_DIR$/lib/SparseBitSet-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-anim-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-awt-util-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-bridge-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-codec-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-constants-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-css-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-dom-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-ext-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-gvt-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-i18n-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-parser-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-script-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-shared-resources-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-svg-dom-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-svggen-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-svgrasterizer-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-transcoder-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-util-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/batik-xml-1.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/bcpkix-jdk15on-1.70.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/bcprov-jdk15on-1.70.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/bcutil-jdk15on-1.70.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-codec-1.15.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-collections4-4.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-compress-1.21.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-io-2.11.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-logging-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-math3-3.6.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/curvesapi-1.07.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/fontbox-2.0.26.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/graphics2d-0.40.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jakarta.activation-2.0.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jakarta.xml.bind-api-3.0.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/log4j-api-2.18.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pdfbox-2.0.26.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-examples-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-excelant-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-javadoc-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-ooxml-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-ooxml-full-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-ooxml-lite-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-scratchpad-5.2.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/slf4j-api-1.7.36.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xml-apis-1.4.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xml-apis-ext-1.3.04.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xmlbeans-5.1.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xmlgraphics-commons-2.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xmlsec-3.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ReportesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ReportesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ReportesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ReportesPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +86,12 @@
     &quot;assignee&quot;: &quot;federicostragliati&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
-    &quot;accountId&quot;: &quot;a66264e6-2080-4fcc-9362-d07282d99d73&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/federicostragliati/ProyectoFaroGUI.git",
+    "accountId": "5333af24-202c-4fdd-bc44-4d8654c35e0d"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -47,46 +99,45 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2ksiiK1PaYmRl0rLbVo2KfppN0Z" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SistemaDeGestion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.VentanaPrincipal.executor&quot;: &quot;Run&quot;,
-    &quot;Application.VistaPrincipalAdministrador.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindow.CodeGPT.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaro/lib/xmlsec-3.0.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/Faro/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "Application.SistemaDeGestion.executor": "Run",
+    "Application.VentanaPrincipal.executor": "Run",
+    "Application.VistaPrincipalAdministrador.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow.CodeGPT.ShowToolbar": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/lib/xmlsec-3.0.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/Faro/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.qodana",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
     ]
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\stragliati\IdeaProjects\ProyectoFaroGUI\lib" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
     <configuration name="VistaPrincipalAdministrador" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Views.Frame.VistaPrincipalAdministrador" />
@@ -110,8 +161,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -155,19 +206,8 @@
       <workItem from="1726670255413" duration="2294000" />
       <workItem from="1726681840747" duration="4214000" />
       <workItem from="1727099909380" duration="6591000" />
-      <workItem from="1727114438371" duration="1262000" />
-      <workItem from="1727271248422" duration="2091000" />
-      <workItem from="1727277174163" duration="2237000" />
-      <workItem from="1727279904158" duration="4694000" />
-      <workItem from="1727360425551" duration="1462000" />
-      <workItem from="1727362594325" duration="16339000" />
-      <workItem from="1727383177885" duration="135000" />
-      <workItem from="1727383330202" duration="340000" />
-      <workItem from="1727383941041" duration="447000" />
-      <workItem from="1727437735505" duration="386000" />
-      <workItem from="1727713976389" duration="2874000" />
-      <workItem from="1727719900399" duration="6720000" />
-      <workItem from="1727787316499" duration="4943000" />
+      <workItem from="1727114438371" duration="1192000" />
+      <workItem from="1727875701435" duration="9207000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -409,55 +449,7 @@
       <option name="project" value="LOCAL" />
       <updated>1726686150905</updated>
     </task>
-    <task id="LOCAL-00031" summary="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management.">
-      <option name="closed" value="true" />
-      <created>1727122808850</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1727122808850</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management.">
-      <option name="closed" value="true" />
-      <created>1727294557030</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1727294557030</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management.">
-      <option name="closed" value="true" />
-      <created>1727360458288</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1727360458288</updated>
-    </task>
-    <task id="LOCAL-00034" summary="26/9 - 17.40">
-      <option name="closed" value="true" />
-      <created>1727383261402</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1727383261402</updated>
-    </task>
-    <task id="LOCAL-00035" summary="26/9 - 17.40">
-      <option name="closed" value="true" />
-      <created>1727383348864</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1727383348864</updated>
-    </task>
-    <task id="LOCAL-00036" summary="30/9 - 15.00">
-      <option name="closed" value="true" />
-      <created>1727718912264</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1727718912264</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -467,6 +459,7 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jfd" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="v1.0" />
     <MESSAGE value="22/08 - 17:06" />
     <MESSAGE value="26/08 - 9:32" />
@@ -484,10 +477,7 @@
     <MESSAGE value="17/09 - 18:00" />
     <MESSAGE value="18/09 - 14:00" />
     <MESSAGE value="18/09 - 16:00" />
-    <MESSAGE value="Add new dialog for cheque creation in ContabilidadPanel&#10;&#10;- Introduce a modal dialog to capture cheque details including ID, transaction ID, receiver, amounts, and dates.&#10;- Update XML configuration with various components and changes related to the new feature including data source and task updates.&#10;- Modify existing component states and comments for better tracking and management." />
-    <MESSAGE value="26/9 - 17.40" />
-    <MESSAGE value="30/9 - 15.00" />
-    <option name="LAST_COMMIT_MESSAGE" value="30/9 - 15.00" />
+    <option name="LAST_COMMIT_MESSAGE" value="18/09 - 16:00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
