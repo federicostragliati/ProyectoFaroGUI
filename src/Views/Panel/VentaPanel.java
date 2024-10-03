@@ -35,6 +35,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
     private ClienteController clienteController = new ClienteController();
     private VentaController ventaController = new VentaController();
     private ProductoController productoController = new ProductoController();
+    private ComprobantesController comprobantesController = new ComprobantesController();
     private boolean isAdjusting = false;
 
 
@@ -376,7 +377,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         dialog.add(fechaField);
 
         JLabel porcentajeLabel = new JLabel("%");
-        porcentajeLabel.setBounds(160,83,220,20);
+        porcentajeLabel.setBounds(160, 83, 220, 20);
         dialog.add(porcentajeLabel);
 
         JTextField descuentoField = new JTextField();
@@ -440,7 +441,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         dialog.add(checkBoxEntregada);
 
         JCheckBox checkBoxActivo = new JCheckBox("Activa");
-        checkBoxActivo.setBounds(10, 345,97,23);
+        checkBoxActivo.setBounds(10, 345, 97, 23);
         dialog.add(checkBoxActivo);
 
         int buttonWidth = 89;
@@ -449,7 +450,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         int yPosition = 358;
 
         // Centrar los botones 'Buscar' y 'Cancelar'
-        int totalButtonWidth = buttonWidth * 2 + 10; // 10 es el espacio entre los botones
+        int totalButtonWidth = buttonWidth * 4 + 30; // 30 es el espacio entre los botones
         int xStartPosition = (dialogWidth - totalButtonWidth) / 2;
 
         JButton btnBuscar = new JButton("Buscar");
@@ -460,16 +461,25 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnCancelar.setBounds(xStartPosition + buttonWidth + 10, yPosition, buttonWidth, buttonHeight);
         dialog.add(btnCancelar);
 
+        // Botón "Recibo"
+        JButton btnRecibo = new JButton("Recibo");
+        btnRecibo.setBounds(xStartPosition + (buttonWidth + 10) * 2, yPosition, buttonWidth, buttonHeight);
+        dialog.add(btnRecibo);
+
+        // Botón "Remito"
+        JButton btnRemito = new JButton("Remito");
+        btnRemito.setBounds(xStartPosition + (buttonWidth + 10) * 3, yPosition, buttonWidth, buttonHeight);
+        dialog.add(btnRemito);
+
         // Acción al presionar 'Productos'
         btnDetalleVenta.addActionListener(e -> {
             listadoProductos = detalleController.getlistado(idField.getText());
-            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this),"Consulta Detalle", listadoProductos);
+            DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(VentaPanel.this), "Consulta Detalle", listadoProductos);
             detalleDialog.setVisible(true);
-
         });
 
         btnBuscar.addActionListener(e -> {
-            String datos [] = ventaController.consultar(idField.getText());
+            String datos[] = ventaController.consultar(idField.getText());
             idField.setEditable(false);
             clienteField.setText(datos[1]);
             clienteField.setEditable(false);
@@ -495,12 +505,19 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             checkBoxActivo.setEnabled(false);
         });
 
-        btnCancelar.addActionListener( e -> {
-            dialog.dispose();
+        btnCancelar.addActionListener(e -> dialog.dispose());
+
+        btnRecibo.addActionListener(e -> {
+            comprobantesController.generarRecibo(idField.getText());
+        });
+
+        btnRemito.addActionListener(e -> {
+            comprobantesController.generarRemito(idField.getText());
         });
 
         dialog.setVisible(true);
     }
+
 
     @Override
     public void showModify() {
