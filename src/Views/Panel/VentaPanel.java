@@ -508,11 +508,12 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         btnCancelar.addActionListener(e -> dialog.dispose());
 
         btnRecibo.addActionListener(e -> {
-            comprobantesController.generarRecibo(idField.getText());
+            JOptionPane.showMessageDialog(null, comprobantesController.generarRecibo(idField.getText()));
         });
 
         btnRemito.addActionListener(e -> {
-            comprobantesController.generarRemito(idField.getText());
+            JOptionPane.showMessageDialog(null,comprobantesController.generarRemito(idField.getText()));
+
         });
 
         dialog.setVisible(true);
