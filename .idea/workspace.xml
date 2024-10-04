@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="3/10 - 15:30">
-      <change afterPath="$PROJECT_DIR$/src/Controller/UsuarioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5/storage_v2/_src_/schema/proyectofaro.vUbe6A.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5/storage_v2/_src_/schema/proyectofaro.vUbe6A.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ReciboFaro.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ReciboFaro.jrxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/RemitoFaro.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/RemitoFaro.jrxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ComprobantesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ComprobantesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +36,12 @@
     &quot;assignee&quot;: &quot;federicostragliati&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
-    &quot;accountId&quot;: &quot;5333af24-202c-4fdd-bc44-4d8654c35e0d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/federicostragliati/ProyectoFaroGUI.git",
+    "accountId": "a66264e6-2080-4fcc-9362-d07282d99d73"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -61,6 +59,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.LoginFrame.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.SistemaDeGestion.executor": "Run",
     "Application.VentanaPrincipal.executor": "Run",
@@ -119,8 +118,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -170,6 +169,7 @@
       <workItem from="1727963147454" duration="594000" />
       <workItem from="1727978242403" duration="1593000" />
       <workItem from="1728046928220" duration="7578000" />
+      <workItem from="1728058119991" duration="6902000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />

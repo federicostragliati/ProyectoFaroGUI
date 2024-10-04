@@ -1,5 +1,6 @@
 package Views.Frame;
 
+import Views.Dialog.UsuariosDialog;
 import Views.Panel.*;
 
 import javax.swing.*;
@@ -22,6 +23,8 @@ public class VistaPrincipalAdministrador extends JFrame {
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
 
+        UsuariosDialog usuariosDialog = new UsuariosDialog();
+
         JToolBar toolBar = new JToolBar();
         toolBar.setFloatable(false); // Para que la barra no sea movible
 
@@ -38,7 +41,7 @@ public class VistaPrincipalAdministrador extends JFrame {
         usuariosMenu.add(modificarUsuario);
         usuariosMenu.add(eliminarUsuario);
 
-        crearUsuario.addActionListener(e -> {});
+        crearUsuario.addActionListener(e -> {usuariosDialog.CrearUsuario(this);});
         modificarUsuario.addActionListener(e -> {});
         eliminarUsuario.addActionListener(e -> {});
 

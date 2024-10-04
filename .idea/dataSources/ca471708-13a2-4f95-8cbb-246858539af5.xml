@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.53">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -1148,61 +1148,61 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </table>
     <column id="312" parent="298" name="ID">
       <AutoIncrement>9</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="313" parent="298" name="IDTransaccion">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="314" parent="298" name="FechaRecepcion">
-      <DasType>date|0s</DasType>
       <Position>3</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="315" parent="298" name="CUITEmisor">
-      <DasType>varchar(13)|0s</DasType>
       <Position>4</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="316" parent="298" name="NombreEmisor">
-      <DasType>varchar(100)|0s</DasType>
       <Position>5</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="317" parent="298" name="BancoProcedencia">
-      <DasType>varchar(100)|0s</DasType>
       <Position>6</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="318" parent="298" name="NroCheque">
-      <DasType>varchar(100)|0s</DasType>
       <Position>7</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="319" parent="298" name="Importe">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>8</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="320" parent="298" name="FechaCheque">
-      <DasType>date|0s</DasType>
       <Position>9</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="321" parent="298" name="FechaCobro">
-      <DasType>date|0s</DasType>
       <Position>10</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="322" parent="298" name="Destino">
-      <DasType>enum(&apos;Propio&apos;, &apos;Tercero&apos;)|0e</DasType>
       <Position>11</Position>
+      <StoredType>enum(&apos;Propio&apos;, &apos;Tercero&apos;)|0e</StoredType>
     </column>
     <column id="323" parent="298" name="CUITDestino">
-      <DasType>varchar(13)|0s</DasType>
       <Position>12</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="324" parent="298" name="Estado">
-      <DasType>tinyint|0s</DasType>
       <Position>13</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <column id="325" parent="298" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>14</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="326" parent="298" name="ID Cheque_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1228,30 +1228,30 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="331" parent="299" name="ID">
       <AutoIncrement>10</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="332" parent="299" name="CUIT">
-      <DasType>varchar(13)|0s</DasType>
       <Position>2</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="333" parent="299" name="Nombre">
-      <DasType>varchar(100)|0s</DasType>
       <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="334" parent="299" name="Email">
-      <DasType>varchar(100)|0s</DasType>
       <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="335" parent="299" name="Telefono">
-      <DasType>varchar(100)|0s</DasType>
       <Position>5</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="336" parent="299" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="337" parent="299" name="ID Cliente_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1281,53 +1281,53 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="343" parent="300" name="ID">
       <AutoIncrement>46</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="344" parent="300" name="IDProveedor">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="345" parent="300" name="CUITProveedor">
-      <DasType>varchar(13)|0s</DasType>
       <Position>3</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="346" parent="300" name="FechaCompra">
-      <DasType>date|0s</DasType>
       <Position>4</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="347" parent="300" name="MetodoPagoPrimario">
-      <DasType>int|0s</DasType>
       <Position>5</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="348" parent="300" name="MontoPagoPrimario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>6</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="349" parent="300" name="MetodoPagoSecundario">
-      <DasType>int|0s</DasType>
       <Position>7</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="350" parent="300" name="MontoPagoSecundario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>8</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="351" parent="300" name="MontoFinal">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>9</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="352" parent="300" name="Pagado">
-      <DasType>tinyint|0s</DasType>
       <Position>10</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <column id="353" parent="300" name="Entregado">
-      <DasType>tinyint|0s</DasType>
       <Position>11</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <column id="354" parent="300" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>12</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="355" parent="300" name="ID Compra_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1359,37 +1359,37 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </trigger>
     <column id="361" parent="301" name="ID">
       <AutoIncrement>49</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="362" parent="301" name="IDCompra">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="363" parent="301" name="IDProducto">
-      <DasType>int|0s</DasType>
       <Position>3</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="364" parent="301" name="DetalleProducto">
-      <DasType>varchar(100)|0s</DasType>
       <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="365" parent="301" name="Unidad">
-      <DasType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</DasType>
       <Position>5</Position>
+      <StoredType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</StoredType>
     </column>
     <column id="366" parent="301" name="Cantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>6</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="367" parent="301" name="CostoUnitario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>7</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="368" parent="301" name="CostoPorCantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>8</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <index id="369" parent="301" name="ID DetalleCompra_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1424,37 +1424,37 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </trigger>
     <column id="376" parent="302" name="ID">
       <AutoIncrement>32</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="377" parent="302" name="IDVenta">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="378" parent="302" name="IDProducto">
-      <DasType>int|0s</DasType>
       <Position>3</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="379" parent="302" name="DetalleProducto">
-      <DasType>varchar(100)|0s</DasType>
       <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="380" parent="302" name="Unidad">
-      <DasType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</DasType>
       <Position>5</Position>
+      <StoredType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</StoredType>
     </column>
     <column id="381" parent="302" name="Cantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>6</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="382" parent="302" name="PrecioUnitario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>7</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="383" parent="302" name="PrecioPorCantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>8</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <index id="384" parent="302" name="ID DetalleVenta_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1494,9 +1494,9 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </trigger>
     <column id="392" parent="303" name="ID">
       <AutoIncrement>12</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <index id="393" parent="303" name="PRIMARY">
       <ColNames>ID</ColNames>
@@ -1510,19 +1510,19 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="395" parent="304" name="ID">
       <AutoIncrement>12</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="396" parent="304" name="Nombre">
-      <DasType>varchar(100)|0s</DasType>
       <Position>2</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="397" parent="304" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <DefaultExpression>1</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="398" parent="304" name="ID Metodo de Pago_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1544,30 +1544,30 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="402" parent="305" name="ID">
       <AutoIncrement>14</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="403" parent="305" name="Detalle">
-      <DasType>varchar(100)|0s</DasType>
       <Position>2</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="404" parent="305" name="Cantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>3</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="405" parent="305" name="PrecioUnitario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>4</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="406" parent="305" name="UnidadVenta">
-      <DasType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</DasType>
       <DefaultExpression>&apos;UN&apos;</DefaultExpression>
       <Position>5</Position>
+      <StoredType>enum(&apos;UN&apos;, &apos;KG&apos;)|0e</StoredType>
     </column>
     <column id="407" parent="305" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>6</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="408" parent="305" name="ID Producto_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1589,33 +1589,33 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="412" parent="306" name="ID">
       <AutoIncrement>100</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="413" parent="306" name="CUIT">
-      <DasType>varchar(13)|0s</DasType>
       <Position>2</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="414" parent="306" name="RazonSocial">
-      <DasType>varchar(100)|0s</DasType>
       <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="415" parent="306" name="Email">
-      <DasType>varchar(100)|0s</DasType>
       <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="416" parent="306" name="Telefono">
-      <DasType>varchar(100)|0s</DasType>
       <Position>5</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="417" parent="306" name="Direccion">
-      <DasType>varchar(100)|0s</DasType>
       <Position>6</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="418" parent="306" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>7</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="419" parent="306" name="ID Proveedor_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1644,53 +1644,53 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>CUIT_UNIQUE</UnderlyingIndexName>
     </key>
     <column id="425" parent="307" name="ID">
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="426" parent="307" name="IDVenta">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="427" parent="307" name="FechaRecibo">
-      <DasType>date|0s</DasType>
       <Position>3</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="428" parent="307" name="IDCliente">
-      <DasType>int|0s</DasType>
       <Position>4</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="429" parent="307" name="NombreCliente">
-      <DasType>varchar(100)|0s</DasType>
       <Position>5</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="430" parent="307" name="CUITCliente">
-      <DasType>varchar(13)|0s</DasType>
       <Position>6</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="431" parent="307" name="NroFactura">
-      <DasType>varchar(100)|0s</DasType>
       <Position>7</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="432" parent="307" name="DetalleMetodoPrimario">
-      <DasType>varchar(100)|0s</DasType>
       <Position>8</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="433" parent="307" name="MontodePagoPrimario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>9</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="434" parent="307" name="DetalleMetodoSecundario">
-      <DasType>varchar(100)|0s</DasType>
       <Position>10</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="435" parent="307" name="MontoPagoSecundario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>11</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="436" parent="307" name="MontoFinal">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>12</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <index id="437" parent="307" name="ID Recibo_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1712,41 +1712,41 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="441" parent="308" name="ID">
       <AutoIncrement>13</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="442" parent="308" name="Linea">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="443" parent="308" name="IDVenta">
-      <DasType>int|0s</DasType>
       <Position>3</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="444" parent="308" name="FechaEntrega">
-      <DasType>date|0s</DasType>
       <Position>4</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="445" parent="308" name="IDCliente">
-      <DasType>int|0s</DasType>
       <Position>5</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="446" parent="308" name="NombreCliente">
-      <DasType>varchar(100)|0s</DasType>
       <Position>6</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="447" parent="308" name="CUITCliente">
-      <DasType>varchar(13)|0s</DasType>
       <Position>7</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="448" parent="308" name="DetalleProducto">
-      <DasType>varchar(100)|0s</DasType>
       <Position>8</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="449" parent="308" name="Cantidad">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>9</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <index id="450" parent="308" name="ID Remito_UNIQUE">
       <ColNames>ID</ColNames>
@@ -1768,18 +1768,18 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="454" parent="309" name="id">
       <AutoIncrement>13</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="455" parent="309" name="mensaje">
-      <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
     </column>
     <column id="456" parent="309" name="fecha">
-      <DasType>timestamp|0s</DasType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <Position>3</Position>
+      <StoredType>timestamp|0s</StoredType>
     </column>
     <index id="457" parent="309" name="PRIMARY">
       <ColNames>id</ColNames>
@@ -1793,33 +1793,33 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="459" parent="310" name="idUsuarios">
       <AutoIncrement>1</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="460" parent="310" name="NombreUsuario">
-      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="461" parent="310" name="Nombre">
-      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="462" parent="310" name="Contraseña">
-      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
     <column id="463" parent="310" name="TipoUsuario">
-      <DasType>enum(&apos;Admin&apos;, &apos;Ventas&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
+      <StoredType>enum(&apos;Admin&apos;, &apos;Ventas&apos;)|0e</StoredType>
     </column>
     <column id="464" parent="310" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>6</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <index id="465" parent="310" name="PRIMARY">
       <ColNames>idUsuarios</ColNames>
@@ -1849,62 +1849,62 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </key>
     <column id="471" parent="311" name="ID">
       <AutoIncrement>13</AutoIncrement>
-      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="472" parent="311" name="IDCliente">
-      <DasType>int|0s</DasType>
       <Position>2</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="473" parent="311" name="CUITCliente">
-      <DasType>varchar(13)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
+      <StoredType>varchar(13)|0s</StoredType>
     </column>
     <column id="474" parent="311" name="FechaVenta">
-      <DasType>date|0s</DasType>
       <Position>4</Position>
+      <StoredType>date|0s</StoredType>
     </column>
     <column id="475" parent="311" name="Descuentos">
-      <DasType>int|0s</DasType>
       <Position>5</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="476" parent="311" name="MetodoPagoPrimario">
-      <DasType>int|0s</DasType>
       <Position>6</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="477" parent="311" name="MontoPagoPrimario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>7</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="478" parent="311" name="MetodoPagoSecundario">
-      <DasType>int|0s</DasType>
       <Position>8</Position>
+      <StoredType>int|0s</StoredType>
     </column>
     <column id="479" parent="311" name="MontoPagoSecundario">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>9</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="480" parent="311" name="MontoFinal">
-      <DasType>decimal(65,2 digit)|0s</DasType>
       <Position>10</Position>
+      <StoredType>decimal(65,2 digit)|0s</StoredType>
     </column>
     <column id="481" parent="311" name="Pagado">
-      <DasType>tinyint|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>11</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <column id="482" parent="311" name="Entregada">
-      <DasType>tinyint|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>12</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <column id="483" parent="311" name="Activo">
-      <DasType>tinyint|0s</DasType>
       <Position>13</Position>
+      <StoredType>tinyint|0s</StoredType>
     </column>
     <foreign-key id="484" parent="311" name="ID Cliente">
       <ColNames>IDCliente</ColNames>
