@@ -1,6 +1,7 @@
 package Views.Dialog;
 import Controller.UsuarioController;
-import Views.Frame.VistaPrincipalAdministrador;
+import Views.Frame.AdministradorFrame;
+import Views.Frame.VendedorFrame;
 import dominio.Usuario;
 import dominio.enums.TipoUsuario;
 
@@ -69,6 +70,19 @@ public class LoginDialog extends JDialog {
             usuario = usuarioController.autenticar(usuarioField.getText(), Arrays.toString(passwordField.getPassword()));
             if (usuario == null) {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
+            } else {
+                dispose();
+                if (usuario != null && usuario.getTipoUsuario().equals(TipoUsuario.Administrador)) {
+                    SwingUtilities.invokeLater(() -> {
+                        AdministradorFrame administradorFrame = new AdministradorFrame();
+                        administradorFrame.setVisible(true);
+                    });
+                } else if (usuario != null && usuario.getTipoUsuario().equals(TipoUsuario.Vendedor)) {
+                    SwingUtilities.invokeLater(() -> {
+                        VendedorFrame vendedorFrame = new VendedorFrame();
+                        vendedorFrame.setVisible(true);
+                    });
+                }
             }
         });
 
@@ -76,12 +90,6 @@ public class LoginDialog extends JDialog {
             dispose();
         });
 
-        if (usuario != null && usuario.getTipoUsuario().equals(TipoUsuario.Administrador)) {
-            SwingUtilities.invokeLater(() -> {
-                VistaPrincipalAdministrador vistaPrincipalAdministrador = new VistaPrincipalAdministrador();
-                vistaPrincipalAdministrador.setVisible(true);
-            });
-        }
     }
 
 }

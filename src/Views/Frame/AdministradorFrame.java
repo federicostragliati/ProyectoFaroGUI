@@ -6,13 +6,12 @@ import Views.Panel.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
-public class VistaPrincipalAdministrador extends JFrame {
+public class AdministradorFrame extends JFrame {
 
     private JPanel mainPanel;
 
-    public VistaPrincipalAdministrador() {
+    public AdministradorFrame() {
         setTitle("Sistema de Gestión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1100, 600);
