@@ -76,19 +76,12 @@ public class LoginDialog extends JDialog {
             dispose();
         });
 
-        if (usuario.getTipoUsuario().equals(TipoUsuario.Administrador)) {
+        if (usuario != null && usuario.getTipoUsuario().equals(TipoUsuario.Administrador)) {
             SwingUtilities.invokeLater(() -> {
                 VistaPrincipalAdministrador vistaPrincipalAdministrador = new VistaPrincipalAdministrador();
                 vistaPrincipalAdministrador.setVisible(true);
             });
-        } else if (usuario.getTipoUsuario().equals(TipoUsuario.Vendedor)) {
-            SwingUtilities.invokeLater(() -> {
-                //VistaPrincipalVendedor vistaPrincipalVendedor = new VistaPrincipalVendedor();
-                //vistaPrincipalVendedor.setVisible(true);
-            });
         }
-
-
     }
 
 }

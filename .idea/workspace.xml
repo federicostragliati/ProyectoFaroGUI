@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="3/10 - 15:30">
-      <change afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ca471708-13a2-4f95-8cbb-246858539af5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 15:30">
+      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +162,7 @@
       <workItem from="1727963147454" duration="594000" />
       <workItem from="1727978242403" duration="1593000" />
       <workItem from="1728046928220" duration="7578000" />
-      <workItem from="1728058119991" duration="6902000" />
+      <workItem from="1728058119991" duration="7207000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -443,7 +436,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727979835029</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="4/10 - 15:30">
+      <option name="closed" value="true" />
+      <created>1728065633758</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1728065633758</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +474,8 @@
     <MESSAGE value="18/09 - 16:00" />
     <MESSAGE value="2/10 - 21:00" />
     <MESSAGE value="3/10 - 15:30" />
-    <option name="LAST_COMMIT_MESSAGE" value="3/10 - 15:30" />
+    <MESSAGE value="4/10 - 15:30" />
+    <option name="LAST_COMMIT_MESSAGE" value="4/10 - 15:30" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
