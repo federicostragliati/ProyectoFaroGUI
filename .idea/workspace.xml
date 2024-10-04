@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 15:30">
-      <change afterPath="$PROJECT_DIR$/src/Views/Frame/VendedorFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/UsuariosDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +166,7 @@
       <workItem from="1727963147454" duration="594000" />
       <workItem from="1727978242403" duration="1593000" />
       <workItem from="1728046928220" duration="7578000" />
-      <workItem from="1728058119991" duration="7878000" />
+      <workItem from="1728058119991" duration="13604000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -455,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728065921620</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="4/10 - 15:30">
+      <option name="closed" value="true" />
+      <created>1728066710783</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1728066710783</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

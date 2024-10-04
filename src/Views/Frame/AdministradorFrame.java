@@ -41,8 +41,8 @@ public class AdministradorFrame extends JFrame {
         usuariosMenu.add(eliminarUsuario);
 
         crearUsuario.addActionListener(e -> {usuariosDialog.CrearUsuario(this);});
-        modificarUsuario.addActionListener(e -> {});
-        eliminarUsuario.addActionListener(e -> {});
+        modificarUsuario.addActionListener(e -> {usuariosDialog.ModificarUsuario(this);});
+        eliminarUsuario.addActionListener(e -> {usuariosDialog.EliminarUsuario(this);});
 
         // Crear una barra de menú y agregarle el menú "Usuarios"
         JMenuBar menuBar = new JMenuBar();
