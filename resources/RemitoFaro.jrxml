@@ -146,11 +146,6 @@ INICIO ACTIV: 31/05/2005]]></text>
 				<textFieldExpression><![CDATA[$F{FechaEntrega}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="430" y="61" width="134" height="19" uuid="a43f4fd6-214f-4fa5-a340-deb10b6be21f"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[N° Factura:]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="-10" y="10" width="81" height="61" uuid="7c7b4c66-2fc0-424e-881b-02fdbb6f5a5d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="19"/>
@@ -218,28 +213,28 @@ INICIO ACTIV: 31/05/2005]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<rectangle>
-				<reportElement x="130" y="0" width="443" height="50" uuid="791e380a-4cda-41dc-95fa-d16affbcd198"/>
+				<reportElement x="130" y="0" width="443" height="30" uuid="791e380a-4cda-41dc-95fa-d16affbcd198"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="-20" y="0" width="139" height="50" uuid="7a7c1541-8a7d-4937-a0c5-9c12b572fd05"/>
+				<reportElement x="-20" y="0" width="139" height="30" uuid="7a7c1541-8a7d-4937-a0c5-9c12b572fd05"/>
 			</rectangle>
 			<textField>
-				<reportElement x="-20" y="0" width="139" height="50" uuid="df968bc5-0549-421b-8c02-ca81510ced46">
+				<reportElement x="-20" y="0" width="139" height="30" uuid="df968bc5-0549-421b-8c02-ca81510ced46">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="01d9e6aa-55fd-4cea-846a-f0f5ac3cf118"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="0" width="443" height="50" uuid="48238147-9dcc-44e4-8c6d-a3fdfc9831d0">
+				<reportElement x="130" y="0" width="443" height="30" uuid="48238147-9dcc-44e4-8c6d-a3fdfc9831d0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e1334744-527c-443a-b2fa-a5b3c0a57b7e"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DetalleProducto}]]></textFieldExpression>
 			</textField>

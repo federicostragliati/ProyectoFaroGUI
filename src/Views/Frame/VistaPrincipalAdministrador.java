@@ -5,6 +5,7 @@ import Views.Panel.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VistaPrincipalAdministrador extends JFrame {
 
@@ -20,6 +21,36 @@ public class VistaPrincipalAdministrador extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false); // Para que la barra no sea movible
+
+        // Crear el botón de menú "Usuarios" y agregarlo a la barra de herramientas
+        JMenu usuariosMenu = new JMenu("Usuarios");
+
+        // Crear las opciones del menú de "Usuarios"
+        JMenuItem crearUsuario = new JMenuItem("Crear Usuario");
+        JMenuItem modificarUsuario = new JMenuItem("Modificar Usuario");
+        JMenuItem eliminarUsuario = new JMenuItem("Eliminar Usuario");
+
+        // Agregar opciones al menú "Usuarios"
+        usuariosMenu.add(crearUsuario);
+        usuariosMenu.add(modificarUsuario);
+        usuariosMenu.add(eliminarUsuario);
+
+        crearUsuario.addActionListener(e -> {});
+        modificarUsuario.addActionListener(e -> {});
+        eliminarUsuario.addActionListener(e -> {});
+
+        // Crear una barra de menú y agregarle el menú "Usuarios"
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(usuariosMenu);
+
+        // Agregar la barra de menú a la barra de herramientas
+        toolBar.add(menuBar);
+
+        // Agregar la barra de herramientas en la parte superior
+        contentPane.add(toolBar, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(7, 1, 5, 5)); // Organizar botones en una columna
@@ -105,10 +136,5 @@ public class VistaPrincipalAdministrador extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            VistaPrincipalAdministrador vistaPrincipalAdministrador = new VistaPrincipalAdministrador();
-            vistaPrincipalAdministrador.setVisible(true);
-        });
-    }
+
 }

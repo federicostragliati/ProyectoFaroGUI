@@ -320,7 +320,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
     @Override
     public void showGet() {
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Venta", true);
-        dialog.setBounds(100, 100, 410, 420);
+        dialog.setBounds(100, 100, 410, 450);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
@@ -447,7 +447,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         int buttonWidth = 89;
         int dialogWidth = dialog.getWidth();
         int buttonHeight = 23;
-        int yPosition = 358;
+        int yPosition = 375;
 
         // Centrar los botones 'Buscar' y 'Cancelar'
         int totalButtonWidth = buttonWidth * 4 + 30; // 30 es el espacio entre los botones
@@ -480,38 +480,50 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
 
         btnBuscar.addActionListener(e -> {
             String datos[] = ventaController.consultar(idField.getText());
-            idField.setEditable(false);
-            clienteField.setText(datos[1]);
-            clienteField.setEditable(false);
-            fechaField.setText(Herramientas.convertirFecha(datos[2]));
-            fechaField.setEditable(false);
-            descuentoField.setText(datos[3]);
-            descuentoField.setEditable(false);
-            metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
-            metodoPrimBox.setEditable(false);
-            montoPrimField.setText(datos[5]);
-            montoPrimField.setEditable(false);
-            metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
-            metodoSecBox.setEditable(false);
-            montoSecField.setText(datos[7]);
-            montoSecField.setEditable(false);
-            montoTotalField.setText(datos[8]);
-            montoTotalField.setEditable(false);
-            checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
-            checkBoxPagada.setEnabled(false);
-            checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
-            checkBoxEntregada.setEnabled(false);
-            checkBoxActivo.setSelected(Boolean.parseBoolean(datos[11]));
-            checkBoxActivo.setEnabled(false);
+            if (datos.length == 1) {
+                idField.setText(datos[0]);
+            } else {
+                //idField.setEditable(false);
+                clienteField.setText(datos[1]);
+                clienteField.setEditable(false);
+                fechaField.setText(Herramientas.convertirFecha(datos[2]));
+                fechaField.setEditable(false);
+                descuentoField.setText(datos[3]);
+                descuentoField.setEditable(false);
+                metodoPrimBox.setSelectedIndex(Integer.parseInt(datos[4]) - 1);
+                metodoPrimBox.setEditable(false);
+                montoPrimField.setText(datos[5]);
+                montoPrimField.setEditable(false);
+                metodoSecBox.setSelectedIndex(Integer.parseInt(datos[6]) - 1);
+                metodoSecBox.setEditable(false);
+                montoSecField.setText(datos[7]);
+                montoSecField.setEditable(false);
+                montoTotalField.setText(datos[8]);
+                montoTotalField.setEditable(false);
+                checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
+                checkBoxPagada.setEnabled(false);
+                checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
+                checkBoxEntregada.setEnabled(false);
+                checkBoxActivo.setSelected(Boolean.parseBoolean(datos[11]));
+                checkBoxActivo.setEnabled(false);
+            }
         });
 
         btnCancelar.addActionListener(e -> dialog.dispose());
 
         btnRecibo.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, comprobantesController.generarRecibo(idField.getText()));
+            String factura = obtenerNroFactura();
+            if (factura.isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Por favor Ingrese Nro Factura");
+            } else {
+                comprobantesController.UpdateRecibo(idField.getText(), factura);
+                JOptionPane.showMessageDialog(null, comprobantesController.generarRecibo(idField.getText()));
+            }
+
         });
 
         btnRemito.addActionListener(e -> {
+            comprobantesController.updateRemito(idField.getText());
             JOptionPane.showMessageDialog(null,comprobantesController.generarRemito(idField.getText()));
 
         });
@@ -862,6 +874,38 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
             fechaField.setText(dateFormat.format(dateChooser.getDate()));
         }
     }
+
+    private String obtenerNroFactura() {
+        // Crear un JTextField para ingresar el número de factura
+        JTextField facturaField = new JTextField();
+        facturaField.setPreferredSize(new Dimension(150, 30)); // Ajustar tamaño del campo
+
+        // Crear un JPanel para contener el JTextField
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Número de Factura:"));
+        panel.add(facturaField);
+
+        // Mostrar el JOptionPane con el JPanel
+        int option = JOptionPane.showOptionDialog(
+                this,
+                panel,
+                "Ingresar Número de Factura",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                null
+        );
+
+        // Verificar si se presionó OK y devolver el valor ingresado
+        if (option == JOptionPane.OK_OPTION && !facturaField.getText().trim().isEmpty()) {
+            return facturaField.getText().trim();
+        }
+
+        // Retornar null si se cancela o no se ingresa nada
+        return null;
+    }
+
 
 
 

@@ -39,11 +39,6 @@
 		<property name="com.jaspersoft.studio.field.label" value="CUITCliente"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 	</field>
-	<field name="FechadePago" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="FechadePago"/>
-		<property name="com.jaspersoft.studio.field.label" value="FechadePago"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
-	</field>
 	<field name="NroFactura" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="NroFactura"/>
 		<property name="com.jaspersoft.studio.field.label" value="NroFactura"/>
@@ -74,11 +69,8 @@
 		<property name="com.jaspersoft.studio.field.label" value="MontoFinal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="recibos"/>
 	</field>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
-		<band height="83" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<rectangle>
 				<reportElement x="-20" y="0" width="279" height="80" uuid="402836f4-f267-4877-b21d-8a29b547593a"/>
 			</rectangle>
@@ -159,7 +151,7 @@ INICIO ACTIV: 31/05/2005]]></text>
 				<textFieldExpression><![CDATA[$F{FechaRecibo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="430" y="61" width="134" height="19" uuid="a43f4fd6-214f-4fa5-a340-deb10b6be21f"/>
+				<reportElement x="430" y="60" width="60" height="20" uuid="a43f4fd6-214f-4fa5-a340-deb10b6be21f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<text><![CDATA[N° Factura:]]></text>
 			</staticText>
@@ -170,10 +162,15 @@ INICIO ACTIV: 31/05/2005]]></text>
 				</textElement>
 				<text><![CDATA[Faro Servicios]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="490" y="60" width="74" height="20" uuid="65a13036-0fbf-450a-9f7e-71fb2362f025"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NroFactura}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="43" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<rectangle>
 				<reportElement x="-20" y="0" width="279" height="37" uuid="548f67d1-6243-4275-96e5-bc8ec48656c5"/>
 			</rectangle>
@@ -223,24 +220,6 @@ INICIO ACTIV: 31/05/2005]]></text>
 				<text><![CDATA[Método de Pago]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-20" y="4" width="138" height="16" uuid="fe18c388-659d-4089-8115-ccb0a5e587ca">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e1334744-527c-443a-b2fa-a5b3c0a57b7e"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[Se Recibio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="420" y="4" width="90" height="16" uuid="93d46c0f-f794-4791-8009-0079a7ed3b84">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e1334744-527c-443a-b2fa-a5b3c0a57b7e"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[Fecha de Pago:]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="130" y="28" width="443" height="16" uuid="3675cc6f-b902-4925-9bff-6e72b5e246c1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e1334744-527c-443a-b2fa-a5b3c0a57b7e"/>
 				</reportElement>
@@ -248,6 +227,11 @@ INICIO ACTIV: 31/05/2005]]></text>
 					<font size="11"/>
 				</textElement>
 				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="5" width="590" height="15" uuid="b3f77412-c102-41e4-865d-459409abb9c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[LIQUIDACIÓN]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -298,15 +282,6 @@ INICIO ACTIV: 31/05/2005]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DetalleMetodoSecundario}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="130" y="40" width="444" height="30" uuid="5fa3d080-44e4-4ea7-bf4d-998a0e048d44">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82f46545-af17-4764-8e6c-3c38917d4c24"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{MontoPagoSecundario}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="-20" y="80" width="139" height="30" uuid="9b92841d-6571-430c-acea-5df2ec2d069a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -323,6 +298,15 @@ INICIO ACTIV: 31/05/2005]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{MontoFinal}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="130" y="39" width="444" height="30" uuid="5fa3d080-44e4-4ea7-bf4d-998a0e048d44">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82f46545-af17-4764-8e6c-3c38917d4c24"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MontoPagoSecundario}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>
@@ -331,12 +315,12 @@ INICIO ACTIV: 31/05/2005]]></text>
 				<reportElement x="-20" y="10" width="595" height="50" uuid="ec11adc6-23cb-4936-bfd1-529a0e27fb98"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="350" y="10" width="224" height="30" uuid="ec76a63d-f8db-4614-b506-8be66c8ad89a"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="310" y="10" width="264" height="30" uuid="ec76a63d-f8db-4614-b506-8be66c8ad89a"/>
+				<textElement verticalAlignment="Bottom"/>
 				<text><![CDATA[Recibí conforme..............................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="40" width="230" height="20" uuid="5e9b534d-a5d6-496c-b72c-13a514136727"/>
+				<reportElement x="350" y="40" width="222" height="20" uuid="5e9b534d-a5d6-496c-b72c-13a514136727"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="6"/>
 				</textElement>
