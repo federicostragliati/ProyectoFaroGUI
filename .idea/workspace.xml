@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 15:30">
-      <change afterPath="$PROJECT_DIR$/lib/ProyectoFaro.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ProyectoFaroGUI_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
-    </list>
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="8/10 - 01:00" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +68,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/Faro/src/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "settings.qodana",
@@ -456,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728065921620</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="8/10 - 01:00">
+      <option name="closed" value="true" />
+      <created>1728361685452</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1728361685452</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +490,8 @@
     <MESSAGE value="2/10 - 21:00" />
     <MESSAGE value="3/10 - 15:30" />
     <MESSAGE value="4/10 - 15:30" />
-    <option name="LAST_COMMIT_MESSAGE" value="4/10 - 15:30" />
+    <MESSAGE value="8/10 - 01:00" />
+    <option name="LAST_COMMIT_MESSAGE" value="8/10 - 01:00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
