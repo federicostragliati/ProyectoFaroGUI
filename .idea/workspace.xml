@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 15:30">
-      <change afterPath="$PROJECT_DIR$/src/Views/Frame/VendedorFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ProyectoFaro.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ProyectoFaroGUI_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProyectoFaroGUI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProyectoFaroGUI.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +32,12 @@
     &quot;assignee&quot;: &quot;federicostragliati&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/federicostragliati/ProyectoFaroGUI.git",
-    "accountId": "a66264e6-2080-4fcc-9362-d07282d99d73"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
+    &quot;accountId&quot;: &quot;a66264e6-2080-4fcc-9362-d07282d99d73&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -66,7 +66,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/resources",
+    "last_opened_file_path": "C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/lib",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,6 +88,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\FTTx\IdeaProjects\ProyectoFaroGUI\lib" />
       <recent name="C:\Users\FTTx\IdeaProjects\ProyectoFaroGUI\resources" />
     </key>
   </component>

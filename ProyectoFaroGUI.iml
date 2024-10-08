@@ -20,11 +20,9 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../ProyectoFaro/out/artifacts/ProyectoFaro_jar/ProyectoFaro.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/ProyectoFaro.jar!/" />
         </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/../ProyectoFaro/out/artifacts/ProyectoFaro_jar/ProyectoFaro.jar!/" />
-        </JAVADOC>
+        <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
