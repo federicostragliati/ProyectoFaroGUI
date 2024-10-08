@@ -531,7 +531,6 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
         dialog.setVisible(true);
     }
 
-
     @Override
     public void showModify() {
 
