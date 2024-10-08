@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Validaciones.Herramientas;
 import dao.implementaciones.UsuarioDAO;
+import dominio.Cliente;
 import dominio.Usuario;
 import dominio.enums.TipoUsuario;
 

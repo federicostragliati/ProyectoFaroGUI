@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="ProyectoFaroGUI:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="8/10 - 01:00">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 15:30">
+      <change afterPath="$PROJECT_DIR$/src/Views/Frame/VendedorFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Frame/VistaPrincipalAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +32,12 @@
     &quot;assignee&quot;: &quot;federicostragliati&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
-    &quot;accountId&quot;: &quot;5333af24-202c-4fdd-bc44-4d8654c35e0d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/federicostragliati/ProyectoFaroGUI.git",
+    "accountId": "a66264e6-2080-4fcc-9362-d07282d99d73"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -54,43 +52,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SistemaDeGestion.executor&quot;: &quot;Run&quot;,
-    &quot;Application.VentanaPrincipal.executor&quot;: &quot;Run&quot;,
-    &quot;Application.VistaPrincipalAdministrador.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindow.CodeGPT.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/FTTx/IdeaProjects/ProyectoFaro/out/artifacts/ProyectoFaro_jar/ProyectoFaro.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/Faro/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.qodana&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.LoginFrame.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.SistemaDeGestion.executor": "Run",
+    "Application.VentanaPrincipal.executor": "Run",
+    "Application.VistaPrincipalAdministrador.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow.CodeGPT.ShowToolbar": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/stragliati/IdeaProjects/ProyectoFaroGUI/Faro/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "settings.qodana",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\FTTx\IdeaProjects\ProyectoFaroGUI\lib" />
       <recent name="C:\Users\FTTx\IdeaProjects\ProyectoFaroGUI\resources" />
     </key>
   </component>
@@ -117,8 +114,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -168,18 +165,7 @@
       <workItem from="1727963147454" duration="594000" />
       <workItem from="1727978242403" duration="1593000" />
       <workItem from="1728046928220" duration="7578000" />
-      <workItem from="1728097310285" duration="710000" />
-      <workItem from="1728099315123" duration="1574000" />
-      <workItem from="1728101337072" duration="54000" />
-      <workItem from="1728353532890" duration="2339000" />
-      <workItem from="1728355928175" duration="586000" />
-      <workItem from="1728356718147" duration="105000" />
-      <workItem from="1728356883123" duration="1299000" />
-      <workItem from="1728358206179" duration="503000" />
-      <workItem from="1728359329005" duration="720000" />
-      <workItem from="1728360092816" duration="99000" />
-      <workItem from="1728360201769" duration="449000" />
-      <workItem from="1728360778870" duration="34000" />
+      <workItem from="1728058119991" duration="7878000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -453,71 +439,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727979835029</updated>
     </task>
-    <task id="LOCAL-00035" summary="8/10 - 00:00">
+    <task id="LOCAL-00035" summary="4/10 - 15:30">
       <option name="closed" value="true" />
-      <created>1728357844168</created>
+      <created>1728065633758</created>
       <option name="number" value="00035" />
       <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1728357844168</updated>
+      <updated>1728065633758</updated>
     </task>
-    <task id="LOCAL-00036" summary="8/10 - 00:00">
+    <task id="LOCAL-00036" summary="4/10 - 15:30">
       <option name="closed" value="true" />
-      <created>1728357938766</created>
+      <created>1728065921620</created>
       <option name="number" value="00036" />
       <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1728357938766</updated>
+      <updated>1728065921620</updated>
     </task>
-    <task id="LOCAL-00037" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728359534534</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1728359534534</updated>
-    </task>
-    <task id="LOCAL-00038" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728359953074</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1728359953074</updated>
-    </task>
-    <task id="LOCAL-00039" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728360000289</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1728360000289</updated>
-    </task>
-    <task id="LOCAL-00040" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728360129563</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1728360129563</updated>
-    </task>
-    <task id="LOCAL-00041" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728360461234</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1728360461234</updated>
-    </task>
-    <task id="LOCAL-00042" summary="8/10 - 01:00">
-      <option name="closed" value="true" />
-      <created>1728360577544</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1728360577544</updated>
-    </task>
-    <option name="localTasksCounter" value="43" />
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,17 +463,6 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jfd" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -558,9 +485,8 @@
     <MESSAGE value="18/09 - 16:00" />
     <MESSAGE value="2/10 - 21:00" />
     <MESSAGE value="3/10 - 15:30" />
-    <MESSAGE value="8/10 - 00:00" />
-    <MESSAGE value="8/10 - 01:00" />
-    <option name="LAST_COMMIT_MESSAGE" value="8/10 - 01:00" />
+    <MESSAGE value="4/10 - 15:30" />
+    <option name="LAST_COMMIT_MESSAGE" value="4/10 - 15:30" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -570,20 +496,11 @@
           <line>11</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <breakpoint type="java-exception">
-          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
-          <option name="timeStamp" value="4" />
-        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ProyectoFaroGUI$Main.ic" NAME="Main Coverage Results" MODIFIED="1728356259523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>Model.CustomTables.*</FILTER>
-    </SUITE>
   </component>
 </project>
