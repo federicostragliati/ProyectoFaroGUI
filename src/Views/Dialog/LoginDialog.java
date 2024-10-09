@@ -29,19 +29,19 @@ public class LoginDialog extends JDialog {
 
         setTitle("Login Sistema de Gestión Faro");
         setResizable(false);
-        setBounds(100, 100, 257, 149);
+        setBounds(100, 100, 260, 149);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
 
         JLabel lblUsuario = new JLabel("Usuario:");
-        lblUsuario.setBounds(10, 14, 46, 14);
+        lblUsuario.setBounds(10, 14, 69, 14);
         contentPanel.add(lblUsuario);
 
 
         JTextField usuarioField = new JTextField();
-        usuarioField.setBounds(76, 11, 145, 20);
+        usuarioField.setBounds(85, 11, 145, 20);
         contentPanel.add(usuarioField);
         usuarioField.setColumns(10);
 
@@ -52,7 +52,7 @@ public class LoginDialog extends JDialog {
 
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(76, 39, 145, 20);
+        passwordField.setBounds(85, 39, 145, 20);
         contentPanel.add(passwordField);
 
 
