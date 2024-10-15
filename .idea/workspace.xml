@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="8/10 - 01:00">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_10_2024_18_35_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_10_2024_18_35__Changes_.xml" beforeDir="false" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="9/10 - 15:00">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/LoginDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +35,12 @@
     &quot;assignee&quot;: &quot;federicostragliati&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/federicostragliati/ProyectoFaroGUI.git",
-    "accountId": "5333af24-202c-4fdd-bc44-4d8654c35e0d"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/federicostragliati/ProyectoFaroGUI.git&quot;,
+    &quot;accountId&quot;: &quot;5333af24-202c-4fdd-bc44-4d8654c35e0d&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -172,7 +170,9 @@
       <workItem from="1727978242403" duration="1593000" />
       <workItem from="1728046928220" duration="7578000" />
       <workItem from="1728058119991" duration="7878000" />
-      <workItem from="1728494618338" duration="851000" />
+      <workItem from="1728494618338" duration="1111000" />
+      <workItem from="1728581895543" duration="643000" />
+      <workItem from="1728612589215" duration="126000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -478,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728361830863</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="9/10 - 15:00">
+      <option name="closed" value="true" />
+      <created>1728495722640</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1728495722640</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,7 +518,8 @@
     <MESSAGE value="3/10 - 15:30" />
     <MESSAGE value="4/10 - 15:30" />
     <MESSAGE value="8/10 - 01:00" />
-    <option name="LAST_COMMIT_MESSAGE" value="8/10 - 01:00" />
+    <MESSAGE value="9/10 - 15:00" />
+    <option name="LAST_COMMIT_MESSAGE" value="9/10 - 15:00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
