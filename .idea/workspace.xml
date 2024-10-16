@@ -9,10 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="9/10 - 15:00">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="15/10 - 15:00" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,6 +170,7 @@
       <workItem from="1728494618338" duration="1111000" />
       <workItem from="1728581895543" duration="643000" />
       <workItem from="1728612589215" duration="126000" />
+      <workItem from="1729015107567" duration="82000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -486,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728495722640</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="15/10 - 15:00">
+      <option name="closed" value="true" />
+      <created>1729015141143</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1729015141143</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +525,8 @@
     <MESSAGE value="4/10 - 15:30" />
     <MESSAGE value="8/10 - 01:00" />
     <MESSAGE value="9/10 - 15:00" />
-    <option name="LAST_COMMIT_MESSAGE" value="9/10 - 15:00" />
+    <MESSAGE value="15/10 - 15:00" />
+    <option name="LAST_COMMIT_MESSAGE" value="15/10 - 15:00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
