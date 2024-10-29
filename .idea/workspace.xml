@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="15/10 - 15:00">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ProyectoFaro.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ProyectoFaro.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ComprobantesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ComprobantesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/VentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VentaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Validaciones/Herramientas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Validaciones/Herramientas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ContabilidadPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ReportesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ReportesPanel.java" afterDir="false" />
-    </list>
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="29/10 - 12:00" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +176,7 @@
       <workItem from="1729609748865" duration="2486000" />
       <workItem from="1729697508247" duration="22000" />
       <workItem from="1729718647003" duration="640000" />
-      <workItem from="1730210311594" duration="987000" />
+      <workItem from="1730210311594" duration="1832000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -514,7 +506,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729111457988</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="29/10 - 12:00">
+      <option name="closed" value="true" />
+      <created>1730211498788</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1730211498788</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +548,8 @@
     <MESSAGE value="8/10 - 01:00" />
     <MESSAGE value="9/10 - 15:00" />
     <MESSAGE value="15/10 - 15:00" />
-    <option name="LAST_COMMIT_MESSAGE" value="15/10 - 15:00" />
+    <MESSAGE value="29/10 - 12:00" />
+    <option name="LAST_COMMIT_MESSAGE" value="29/10 - 12:00" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
