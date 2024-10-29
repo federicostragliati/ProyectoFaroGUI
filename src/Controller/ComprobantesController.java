@@ -2,6 +2,10 @@ package Controller;
 
 import dao.implementaciones.ReciboDAO;
 import dao.implementaciones.RemitoDAO;
+import dao.implementaciones.VentaDAO;
+import dominio.Recibo;
+import dominio.Remito;
+import dominio.Venta;
 
 import java.io.IOException;
 import java.sql.SQLException;

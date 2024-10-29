@@ -257,94 +257,58 @@ public class ReportesPanel extends JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
 
-        // Etiqueta de proveedor
-        JLabel lblProducto = new JLabel("Producto:");
-        lblProducto.setBounds(10, 10, 80, 25); // Ajustar tamaño de la etiqueta
-        dialog.add(lblProducto);
+        JLabel idLabel_1 = new JLabel("Fecha Inicio:");
+        idLabel_1.setBounds(10, 20, 100, 20);
+        dialog.add(idLabel_1);
 
-        // Campo de texto para autocompletar
-        JTextField productoField = new JTextField();
-        productoField.setBounds(90, 10, 180, 25); // Mantener tamaño del campo de texto
-        dialog.add(productoField);
+        JTextField inicioField = new JTextField();
+        inicioField.setBounds(89, 20, 186, 20);
+        dialog.add(inicioField);
 
-        // ComboBox para mostrar coincidencias
-        JComboBox productoBox = new JComboBox();
-        productoBox.setBounds(90, 10, 180, 25); // Alinear el JComboBox con el campo de texto
-        productoBox.setVisible(false);
-        dialog.add(productoBox);
-
-        // Listener para autocompletar productos
-        productoField.addKeyListener(new KeyAdapter() {
+        inicioField.addMouseListener(new MouseAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) {
-                if (!isAdjusting) {
-                    isAdjusting = true;
-                    String busqueda = productoField.getText().toLowerCase();
-                    productoBox.removeAllItems();
-
-                    List<Producto> coincidencias = productoController.listado().stream()
-                            .filter(producto -> ((String.valueOf(producto.getId()).toLowerCase().contains(busqueda)|| producto.getDetalle().toLowerCase().contains(busqueda))
-                                    && producto.isActivo())).collect(Collectors.toList());
-
-                    if (!coincidencias.isEmpty()) {
-                        for (Producto producto : coincidencias) {
-                            productoBox.addItem(producto.getId() + " - " + producto.getDetalle());
-                        }
-                        productoBox.setVisible(true);
-                        productoBox.showPopup();
-                    } else {
-                        productoBox.setVisible(false);
-                    }
-
-                    isAdjusting = false;
-                }
-
-                if (e.getKeyCode() == KeyEvent.VK_ENTER && productoBox.isVisible()) {
-                    if (productoBox.getSelectedItem() != null) {
-                        String proveedorSeleccionado = (String) productoBox.getSelectedItem();
-                        productoField.setText(proveedorSeleccionado);
-                        productoBox.setVisible(false);
-                    }
-                }
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(inicioField);
             }
         });
 
-        // Acción para seleccionar un producto del ComboBox
-        productoBox.addActionListener(e -> {
-            if (!isAdjusting && productoBox.getSelectedItem() != null) {
-                String productoSeleccionado = (String) productoBox.getSelectedItem();
-                productoField.setText(productoSeleccionado);
-                productoBox.setVisible(false);
-            }
-        });
+        JLabel idLabel = new JLabel("Fecha Fin:");
+        idLabel.setBounds(10, 67, 100, 20);
+        dialog.add(idLabel);
 
-        // Ocultar ComboBox cuando se pierde el foco
-        productoField.addFocusListener(new FocusAdapter() {
+        JTextField finField = new JTextField();
+        finField.setBounds(89, 67, 186, 20);
+        dialog.add(finField);
+
+        finField.addMouseListener(new MouseAdapter() {
             @Override
-            public void focusLost(FocusEvent e) {
-                productoBox.setVisible(false);
+            public void mouseClicked(MouseEvent e) {
+                showDateChooserDialog(finField);
             }
         });
 
-        // Botón Aceptar
         JButton btnAceptar = new JButton("Aceptar");
-        btnAceptar.setBounds(50, 100, 80, 30); // Ajustar posición de Aceptar
+        btnAceptar.setBounds(10, 98, 100, 30);
         dialog.add(btnAceptar);
 
-        // Acción para mostrar mensaje con la selección del producto
-        btnAceptar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, reportesController.getStockProducto(productoField.getText()));
-        });
-
-        // Botón Cancelar
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(160, 100, 80, 30); // Ajustar posición de Cancelar
+        btnCancelar.setBounds(175, 98, 100, 30);
         dialog.add(btnCancelar);
 
-        // Acción para cerrar el diálogo al hacer clic en Cancelar
-        btnCancelar.addActionListener(e -> dialog.dispose());
+        btnAceptar.addActionListener( e -> {
+            String mensaje = reportesController.getVentaEnFechas(inicioField.getText(), finField.getText());
+            if (mensaje.contains("Generado")) {
+                JOptionPane.showMessageDialog(null, mensaje);
+                dialog.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+        });
 
-        // Mostrar el diálogo
+        btnCancelar.addActionListener( e -> {
+            dialog.dispose();
+        });
+
         dialog.setVisible(true);
 
     }

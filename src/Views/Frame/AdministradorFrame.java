@@ -136,6 +136,9 @@ public class AdministradorFrame extends JFrame {
             cl.show(mainPanel, "reportesPanel");
         });
 
+        setLocationRelativeTo(null);
+
+
     }
 
 

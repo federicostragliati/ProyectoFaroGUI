@@ -148,4 +148,18 @@ public class Herramientas {
         return resultado;
 
     }
+
+    public static boolean esHoyOAnterior(Date fecha) {
+        // Define el formato esperado de la fecha
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            // Obtiene la fecha actual y formatea para tener solo dd/MM/yyyy
+            Date fechaActual = sdf.parse(sdf.format(new Date()));
+            // Compara la fecha dada con la fecha actual
+            return !fecha.after(fechaActual); // Retorna true si es hoy o anterior
+        } catch (ParseException ignored) {
+        }
+        return false;
+    }
 }

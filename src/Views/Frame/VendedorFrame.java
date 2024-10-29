@@ -66,5 +66,7 @@ public class VendedorFrame extends JFrame {
             cl.show(mainPanel, "reportesPanel");
         });
 
+        setLocationRelativeTo(null);
+
     }
 }
