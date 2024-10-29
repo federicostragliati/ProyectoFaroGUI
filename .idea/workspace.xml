@@ -9,7 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="29/10 - 12:00" />
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="29/10 - 12:00">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ChequeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ChequeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/VentaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VentaController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +70,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/lib/ProyectoFaro.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/FTTx/IdeaProjects/ProyectoFaroGUI/lib&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -176,7 +180,8 @@
       <workItem from="1729609748865" duration="2486000" />
       <workItem from="1729697508247" duration="22000" />
       <workItem from="1729718647003" duration="640000" />
-      <workItem from="1730210311594" duration="1832000" />
+      <workItem from="1730210311594" duration="2070000" />
+      <workItem from="1730214076697" duration="894000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -514,7 +519,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730211498788</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="29/10 - 12:00">
+      <option name="closed" value="true" />
+      <created>1730212898173</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1730212898173</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

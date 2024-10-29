@@ -116,7 +116,7 @@ public class ChequeController {
     }
 
     public DefaultTableModel listar() {
-        String[] columnNames = {"ID", "ID Transacción", "CUIT Emisor", "Nombre Emisor ", "Banco", "Nro Cheque", "Importe", "Fecha Cheque", "Fecha Cobro", "Destino", "CUIT Destino", "Estado", "Activo"};
+        String[] columnNames = {"ID", "ID Transacción","Fecha Recepción", "CUIT Emisor", "Nombre Emisor ", "Banco", "Nro Cheque", "Importe", "Fecha Cheque", "Fecha Cobro", "Destino", "CUIT Destino", "Estado", "Activo"};
         DefaultTableModel tableModel = new CustomTableModelId(new Object[][]{}, columnNames);
 
         try {

@@ -45,8 +45,10 @@ public class VentaController {
         }
 
 
-        if (Herramientas.esNumeroEntero(descuentos)) {
+        if (Herramientas.esNumeroEntero(descuentos) && !descuentos.isEmpty()) {
             desc = Integer.parseInt(descuentos);
+        } else if (descuentos.isEmpty()) {
+            desc = 0;
         } else {
             return "Descuento no valido";
         }
