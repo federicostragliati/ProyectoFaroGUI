@@ -45,8 +45,10 @@ public class VentaController {
         }
 
 
-        if (Herramientas.esNumeroEntero(descuentos)) {
+        if (Herramientas.esNumeroEntero(descuentos) && !descuentos.isEmpty()) {
             desc = Integer.parseInt(descuentos);
+        } else if (descuentos.isEmpty()) {
+            desc = 0;
         } else {
             return "Descuento no valido";
         }
@@ -67,6 +69,10 @@ public class VentaController {
 
         if (Herramientas.esFormatoFechaValido(fechaVenta)) {
             fechaFinal = Herramientas.convertirStringADate(fechaVenta);
+            if  (!Herramientas.esHoyOAnterior(fechaFinal)) {
+                return "La Fecha no puede ser posterior al día de hoy";
+            }
+
         } else {
             return "Error en la fecha";
         }
@@ -187,7 +193,7 @@ public class VentaController {
     }
 
     public DefaultTableModel listar() {
-        String[] columnNames = {"ID", "ID Cliente", "CUIT", "Fecha Venta", "Descuentos", "Metodo Primario", "Monto Primario", "Metodo Secundario", "Monto Secundario", "Monto Final", "Pagada", "Completa", "Entregada", "Activa"};
+        String[] columnNames = {"ID", "ID Cliente", "CUIT", "Fecha Venta", "Descuentos", "Metodo Primario", "Monto Primario", "Metodo Secundario", "Monto Secundario", "Monto Final", "Pagada", "Entregada", "Activa"};
         DefaultTableModel tableModel = new CustomTableModelId(new Object[][]{}, columnNames);
 
         try {

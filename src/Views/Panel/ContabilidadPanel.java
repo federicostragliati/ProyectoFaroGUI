@@ -47,27 +47,27 @@ public class ContabilidadPanel extends JPanel {
         lblCheques.setBounds(76, 11, 126, 25);
         add(lblCheques);
 
-        createButtonC = new JButton("Crear Cheque");
-        createButtonC.setBounds(76, 46, 151, 44);
-        add(createButtonC);
+        //createButtonC = new JButton("Crear Cheque");
+        //createButtonC.setBounds(76, 46, 151, 44);
+        //add(createButtonC);
 
         consultButtonC = new JButton("Consultar Cheque");
-        consultButtonC.setBounds(237, 46, 151, 44);
+        consultButtonC.setBounds(76, 46, 151, 44);
         add(consultButtonC);
 
         modifyButtonC = new JButton("Modificar Cheque");
-        modifyButtonC.setBounds(398, 46, 151, 44);
+        modifyButtonC.setBounds(237, 46, 151, 44);
         add(modifyButtonC);
 
         listButtonC = new JButton("Listar Cheques");
-        listButtonC.setBounds(559, 46, 151, 44);
+        listButtonC.setBounds(398, 46, 151, 44);
         add(listButtonC);
 
         deleteButtonC = new JButton("Eliminar Cheque");
-        deleteButtonC.setBounds(720, 46, 155, 44);
+        deleteButtonC.setBounds(559, 46, 151, 44);
         add(deleteButtonC);
 
-        createButtonC.addActionListener(e -> showCreateCheque("","","", "", false));// Paso vacios, en caso de que quiera crear de 0 (ver si existe el caso)
+        //createButtonC.addActionListener(e -> showCreateCheque("","","", "", false));// Paso vacios, en caso de que quiera crear de 0 (ver si existe el caso)
         consultButtonC.addActionListener(e -> showConsultCheque());
         modifyButtonC.addActionListener(e -> showModifyCheque());
         listButtonC.addActionListener(e -> showListCheque());

@@ -90,6 +90,9 @@ public class LoginDialog extends JDialog {
             dispose();
         });
 
+        setLocationRelativeTo(null);
+
+
     }
 
 }
