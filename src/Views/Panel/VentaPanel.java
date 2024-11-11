@@ -31,7 +31,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
     private JTextField montoTotalField;
     private JTextField montoSecField;
     private DetalleVentaController detalleController = new DetalleVentaController();
-    private MetodoPagoController metodoPagoController = new MetodoPagoController();
+    private MetodoController metodoPagoController = new MetodoController();
     private ClienteController clienteController = new ClienteController();
     private VentaController ventaController = new VentaController();
     private ProductoController productoController = new ProductoController();

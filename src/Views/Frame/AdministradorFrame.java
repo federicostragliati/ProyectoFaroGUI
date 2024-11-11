@@ -88,7 +88,7 @@ public class AdministradorFrame extends JFrame {
         ClientePanel clientePanel = new ClientePanel("Crear Cliente","Consultar Cliente", "Modificar Cliente", "Listar Clientes", "Baja Clientes");
         ProveedorPanel proveedorPanel = new ProveedorPanel("Crear Proveedor", "Consultar Proveedor", "Modificar Proveedor", "Listar Proveedores", "Baja Proveedor");
         VentaPanel ventaPanel = new VentaPanel("Nueva Venta", "Consultar Venta","Modificar Venta","Listar Ventas", "Baja Venta");
-        CompraPanel compraPanel = new CompraPanel("Nueva Compra","Consultar Comprar","Modificar Compra","Listar Compras", "Baja Compra");
+        CompraPanel compraPanel = new CompraPanel("Nueva Compra","Consultar Compra","Modificar Compra","Listar Compras", "Baja Compra");
         ContabilidadPanel contabilidadPanel = new ContabilidadPanel();
         ReportesPanel reportesPanel = new ReportesPanel();
 

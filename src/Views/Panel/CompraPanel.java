@@ -28,7 +28,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
     private boolean isAdjusting = false;
     private List<ListadoProductos> listadoProductos = new ArrayList<>();
     private ProveedorController proveedorController = new ProveedorController();
-    private MetodoPagoController metodoPagoController =new MetodoPagoController();
+    private MetodoController metodoPagoController =new MetodoController();
     private CompraController compraController = new CompraController();
     private DetalleCompraController detalleController = new DetalleCompraController();
     private ProductoController productoController = new ProductoController();
@@ -193,9 +193,9 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         dialog.add(montoSecField);
 
         // Botón para productos
-        JButton btnDetalleVenta = new JButton("Productos");
-        btnDetalleVenta.setBounds(10, 270, 150, 30);
-        dialog.add(btnDetalleVenta);
+        JButton btnDetalleCompra = new JButton("Productos");
+        btnDetalleCompra.setBounds(10, 270, 150, 30);
+        dialog.add(btnDetalleCompra);
 
         // Monto total
         JLabel lblMontoTotal = new JLabel("Monto Total:");
@@ -232,7 +232,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
         dialog.add(btnCancelar);
 
         // Acción al presionar 'Productos'
-        btnDetalleVenta.addActionListener(e -> {
+        btnDetalleCompra.addActionListener(e -> {
             DetalleCompraDialog detalleDialog = new DetalleCompraDialog((Frame) SwingUtilities.getWindowAncestor(CompraPanel.this), listadoProductos);
             detalleDialog.setVisible(true);
             listadoProductos = detalleDialog.getListadoProductos();
@@ -296,7 +296,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showGet() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Venta", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Compra", true);
         dialog.setBounds(100, 100, 410, 420);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
@@ -427,7 +427,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         // Acción al presionar 'Productos'
         btnDetalleVenta.addActionListener(e -> {
-            listadoProductos = detalleController.getlistado(idField.getText());
+            listadoProductos = detalleController.getlistadoList(idField.getText());
             DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(CompraPanel.this),"Consulta Detalle", listadoProductos);
             detalleDialog.setVisible(true);
 
@@ -612,7 +612,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
         // Acción al presionar 'Productos'
         btnDetalleVenta.addActionListener(e -> {
-            listadoProductos = detalleController.getlistado(idField.getText());
+            listadoProductos = detalleController.getlistadoList(idField.getText());
             DetalleVentaDialog detalleDialog = new DetalleVentaDialog((Frame) SwingUtilities.getWindowAncestor(CompraPanel.this), "Consulta Detalle", listadoProductos);
             detalleDialog.setVisible(true);
         });

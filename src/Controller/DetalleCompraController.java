@@ -98,14 +98,14 @@ public class DetalleCompraController {
         }
     }
 
-    public List<ListadoProductos> getlistado(String id){
+    public List<ListadoProductos> getlistadoList(String id){
 
         try {
             List<DetalleCompra> detalleVentas = detalleCompraDAO.getDetalleCompras();
             return detalleVentas.stream()
                     .filter(detalle -> detalle.getIdCompra() == Integer.parseInt(id))  // Filtra por idVenta
                     .map(detalle -> new ListadoProductos(
-                            String.valueOf(detalle.getId()),
+                            String.valueOf(detalle.getIdProducto()),
                             detalle.getDetalle(),
                             detalle.getUnidad().toString(),
                             detalle.getCantidad().toString(),

@@ -15,7 +15,7 @@ public class ClienteController {
 
     private final ClienteDAO clienteDAO = new ClienteDAO();
 
-    public String crear(String cuit, String nombre, String email, String telefono, boolean activo) {
+    public String crear(String cuit, String nombre, String email, String telefono) {
 
         if (!Herramientas.validarCUIT(cuit)) {
             return "Error en el CUIT";
@@ -25,12 +25,10 @@ public class ClienteController {
             return "Error en E-Mail";
         } else if (!Herramientas.esNumeroEntero(telefono)) {
             return "Error en Teléfono";
-        } else if (!activo) {
-            return "El cliente debe estar activo";
         }
 
         try {
-            clienteDAO.addCliente(new Cliente(cuit, nombre, email, telefono, activo));
+            clienteDAO.addCliente(new Cliente(cuit, nombre, email, telefono, true));
             return "Creacion Correcta";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);

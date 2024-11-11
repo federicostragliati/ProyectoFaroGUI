@@ -15,7 +15,7 @@ public class ProveedorController {
 
     private final ProveedorDAO proveedorDAO = new ProveedorDAO();
 
-    public String crear(String cuit, String razonSocial, String email, String telefono, String direccion, boolean activo) {
+    public String crear(String cuit, String razonSocial, String email, String telefono, String direccion) {
 
         if (!Herramientas.validarCUIT(cuit)) {
             return "Error en el CUIT";
@@ -25,14 +25,12 @@ public class ProveedorController {
             return "Error en E-Mail";
         } else if (!Herramientas.esNumeroEntero(telefono)) {
             return "Error en Teléfono";
-        } else if (!activo) {
-            return "El cliente debe estar activo";
         } else if (!Herramientas.validarLongitud(direccion)) {
             return "Error en Dirección";
         }
 
         try {
-            proveedorDAO.createProveedor(new Proveedor(cuit, razonSocial, email, telefono, direccion, activo));
+            proveedorDAO.createProveedor(new Proveedor(cuit, razonSocial, email, telefono, direccion, true));
             return "Creacion Correcta";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
@@ -101,7 +99,7 @@ public class ProveedorController {
 
         try {
             proveedorDAO.updateProveedor(new Proveedor(Integer.parseInt(id),cuit,nombre,email,telefono,direccion,true));
-            return "Cliente Modificado";
+            return "Proveedor Modificado";
         } catch (SQLException | IOException | ClassNotFoundException e) {
             return "Error al modificar";
             // throw new RuntimeException(e);

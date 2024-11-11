@@ -124,7 +124,7 @@ public class DetalleVentaController {
             return detalleVentas.stream()
                     .filter(detalle -> detalle.getIdVenta() == Integer.parseInt(id))  // Filtra por idVenta
                     .map(detalle -> new ListadoProductos(
-                            String.valueOf(detalle.getId()),
+                            String.valueOf(detalle.getIdProducto()),
                             detalle.getDetalle(),
                             detalle.getUnidad().toString(),
                             detalle.getCantidad().toString(),

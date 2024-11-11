@@ -69,11 +69,11 @@ public class ProductoPanel extends GeneralPanel implements PanelInterface {
 
         JLabel activoLabel = new JLabel("Activo:");
         activoLabel.setBounds(10, 111, 80, 14);
-        dialog.add(activoLabel);
+        //dialog.add(activoLabel);
 
         JCheckBox checkBoxActivo = new JCheckBox();
         checkBoxActivo.setBounds(100, 107, 20, 20);
-        dialog.add(checkBoxActivo);
+        //dialog.add(checkBoxActivo);
 
         // Crear un panel para los botones y configurar su posición
         JPanel buttonPanel = new JPanel();
@@ -98,8 +98,7 @@ public class ProductoPanel extends GeneralPanel implements PanelInterface {
                     campoDetalle.getText(),
                     campoCantidad.getText(),
                     campoPrecio.getText(),
-                    unidadSeleccionada.name(),
-                    checkBoxActivo.isSelected()));
+                    unidadSeleccionada.name()));
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo

@@ -104,7 +104,7 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
         contentPanel.add(cancelButton);
 
         acceptButton.addActionListener( e -> {
-            JOptionPane.showMessageDialog(null, clienteController.crear(campoCuit.getText(), campoNombre.getText(), campoEmail.getText(),campoTelefono.getText(),checkBoxActivo.isSelected()));
+            JOptionPane.showMessageDialog(null, clienteController.crear(campoCuit.getText(), campoNombre.getText(), campoEmail.getText(),campoTelefono.getText()));
         });
 
         cancelButton.addActionListener(e -> contentPanel.dispose()); // Cierra el diálogo
@@ -218,7 +218,7 @@ public class ClientePanel extends GeneralPanel implements PanelInterface {
         dialog.add(idLabel);
 
         JTextField idField = new JTextField();
-        idField.setBounds(160, 8, 217, 20);
+        idField.setBounds(76, 8, 217, 20);
         dialog.add(idField);
 
         JLabel cuitLabel = new JLabel("CUIT:");

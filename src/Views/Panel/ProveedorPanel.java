@@ -77,11 +77,11 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
 
         JLabel activoLabel = new JLabel("Activo:");
         activoLabel.setBounds(10,136,100,14);
-        dialog.add(activoLabel);
+        //dialog.add(activoLabel);
 
         JCheckBox checkBoxActivo = new JCheckBox();
         checkBoxActivo.setBounds(95, 132, 20, 20);
-        dialog.add(checkBoxActivo);
+        //dialog.add(checkBoxActivo);
 
         // Crear un panel para los botones y configurar su posición
         JPanel buttonPanel = new JPanel();
@@ -104,8 +104,7 @@ public class ProveedorPanel extends GeneralPanel implements PanelInterface {
                     campoRazon.getText(),
                     campoEmail.getText(),
                     campoTelefono.getText(),
-                    campoDireccion.getText(),
-                    checkBoxActivo.isSelected()));
+                    campoDireccion.getText()));
         });
 
         cancelButton.addActionListener(e -> dialog.dispose()); // Cierra el diálogo

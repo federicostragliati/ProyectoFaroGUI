@@ -23,7 +23,7 @@ public class DetalleCompraDialog extends JDialog{
     private List<ListadoProductos> listadoProductos = new ArrayList<>();
 
     public DetalleCompraDialog(Frame owner, List<ListadoProductos> listadoProductos) {
-        super(owner, "Detalle de Venta", true);
+        super(owner, "Detalle de Compra", true);
 
         // Configurar el JDialog
         setSize(600, 400);

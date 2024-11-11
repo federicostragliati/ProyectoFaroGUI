@@ -19,7 +19,7 @@ public class ProductoController {
 
     private final ProductoDAO productoDAO = new ProductoDAO();
 
-    public String crear(String detalle, String cantidad, String precio, String unidad, boolean activo) {
+    public String crear(String detalle, String cantidad, String precio, String unidad) {
 
         if (Herramientas.validarLongitud(detalle) != true) {
           return "Error en el detalle";
@@ -33,7 +33,7 @@ public class ProductoController {
         BigDecimal precioDef = new BigDecimal(precio);
 
         try {
-            productoDAO.createProducto(new Producto(detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), activo));
+            productoDAO.createProducto(new Producto(detalle, cantidadDef, precioDef, Unidad.valueOf(unidad), true));
             return "Creación Correcta";
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
