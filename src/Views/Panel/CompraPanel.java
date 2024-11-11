@@ -470,7 +470,7 @@ public class CompraPanel extends GeneralPanel implements PanelInterface {
 
     @Override
     public void showModify() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Consultar Venta", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Compra", true);
         dialog.setBounds(100, 100, 450, 460); // Ajusté el tamaño para mayor espacio
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);

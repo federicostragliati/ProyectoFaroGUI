@@ -226,6 +226,7 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                 metodoSecBox.addItem(metodoDePago.getId() + " - " + metodoDePago.getMetodo());
             }
         }
+        metodoSecBox.setSelectedIndex(5);
         dialog.add(metodoSecBox);
 
 

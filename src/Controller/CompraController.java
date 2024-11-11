@@ -161,7 +161,7 @@ public class CompraController {
     }
 
     public DefaultTableModel listar() {
-        String[] columnNames = {"ID", "ID Proveedor", "CUIT", "Fecha Compra", "Metodo Primario", "Monto Primario", "Metodo Secundario", "Monto Secundario", "Monto Final", "Pagada", "Entregada", "Activa"};
+        String[] columnNames = {"ID", "ID Proveedor", "CUIT", "Fecha Compra", "Metodo Primario", "Monto Primario", "Metodo Secundario", "Monto Secundario", "Monto Final", "Pagada", "Recibida", "Activa"};
         DefaultTableModel tableModel = new CustomTableModelId(new Object[][]{}, columnNames);
 
         try {
@@ -195,7 +195,7 @@ public class CompraController {
     public String eliminar (String id) {
         try {
             compraDAO.deleteCompra(Integer.parseInt(id));
-            return "Venta Eliminada";
+            return "Compra Eliminada";
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

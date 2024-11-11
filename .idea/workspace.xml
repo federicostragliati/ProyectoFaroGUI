@@ -9,20 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="4/10 - 17.45">
+    <list default="true" id="53e3e6fe-37af-49fc-8186-a2c0dbf679e2" name="Changes" comment="11/11 - 15.45">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DetalleCompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DetalleCompraController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MetodoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MetodoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MetodoPagoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProveedorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProveedorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Dialog/DetalleCompraDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Dialog/DetalleCompraDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Frame/AdministradorFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ClientePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ClientePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CompraController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CompraController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Panel/CompraPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/CompraPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ProductoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ProductoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Panel/ProveedorPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/ProveedorPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Panel/VentaPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +172,7 @@
       <workItem from="1728046928220" duration="7578000" />
       <workItem from="1728058119991" duration="13905000" />
       <workItem from="1728920588717" duration="333000" />
-      <workItem from="1731329526952" duration="7051000" />
+      <workItem from="1731329526952" duration="11157000" />
     </task>
     <task id="LOCAL-00001" summary="v1.0">
       <option name="closed" value="true" />
@@ -488,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728074615467</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="11/11 - 15.45">
+      <option name="closed" value="true" />
+      <created>1731350768671</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1731350768672</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -520,7 +518,8 @@
     <MESSAGE value="3/10 - 15:30" />
     <MESSAGE value="4/10 - 15:30" />
     <MESSAGE value="4/10 - 17.45" />
-    <option name="LAST_COMMIT_MESSAGE" value="4/10 - 17.45" />
+    <MESSAGE value="11/11 - 15.45" />
+    <option name="LAST_COMMIT_MESSAGE" value="11/11 - 15.45" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
