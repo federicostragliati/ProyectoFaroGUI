@@ -708,7 +708,13 @@ public class VentaPanel extends GeneralPanel implements PanelInterface {
                 montoSecField.setText(datos[7]);
                 montoTotalField.setText(datos[8]);
                 checkBoxPagada.setSelected(Boolean.parseBoolean(datos[9]));
+                if (Boolean.parseBoolean(datos[9])) {
+                    checkBoxPagada.setEnabled(false);
+                }
                 checkBoxEntregada.setSelected(Boolean.parseBoolean(datos[10]));
+                if (Boolean.parseBoolean(datos[10])) {
+                    checkBoxEntregada.setEnabled(false);
+                }
             }
         });
 
