@@ -586,7 +586,7 @@ public class ContabilidadPanel extends JPanel {
         dialog.setVisible(true);
     }
     public void showModifyCheque() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Crear Cheque", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Modificar Cheque", true);
         dialog.setBounds(100, 100, 434, 400);  // Aumenta el tamaño para acomodar todos los componentes
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(this);
@@ -853,7 +853,7 @@ public class ContabilidadPanel extends JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
 
-        JLabel idLabel = new JLabel("ID Venta:");
+        JLabel idLabel = new JLabel("ID Cheque:");
         idLabel.setBounds(10, 20, 150, 20);
         dialog.add(idLabel);
 
@@ -1061,13 +1061,13 @@ public class ContabilidadPanel extends JPanel {
         dialog.setVisible(true);
     }
     public void showDeleteMetodo () {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Venta", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Baja Método", true);
         dialog.setBounds(100, 100, 267, 144);
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
 
-        JLabel idLabel = new JLabel("ID Venta:");
+        JLabel idLabel = new JLabel("ID Método:");
         idLabel.setBounds(10, 20, 150, 20);
         dialog.add(idLabel);
 

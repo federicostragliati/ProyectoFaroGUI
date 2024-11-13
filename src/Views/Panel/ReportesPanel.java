@@ -319,7 +319,7 @@ public class ReportesPanel extends JPanel {
 
     public void ventasAbiertasXCliente() {
 
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Seleccionar Producto", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Seleccionar Cliente", true);
         dialog.setBounds(100, 100, 380, 180); // Ajustar tamaño del diálogo
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
@@ -430,7 +430,7 @@ public class ReportesPanel extends JPanel {
     }
 
     public void ventasAbiertasXClienteEntreFechas() {
-        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Seleccionar Producto", true);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Seleccionar Datos", true);
         dialog.setBounds(100, 100, 380, 180); // Ajustar tamaño del diálogo
         dialog.setLayout(null);
         dialog.setLocationRelativeTo(null);
